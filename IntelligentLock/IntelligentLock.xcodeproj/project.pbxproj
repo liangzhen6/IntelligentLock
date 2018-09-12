@@ -19,6 +19,9 @@
 		92E3B3087760D8C6FC66638F /* libPods-IntelligentLockTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B3750CA7991774773210F8 /* libPods-IntelligentLockTests.a */; };
 		AC9203D2B8E81BAFBF6D77E8 /* libPods-IntelligentLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C1CE2BD8DDAB9007823250 /* libPods-IntelligentLock.a */; };
 		D0799940E91850189764C7D7 /* libPods-IntelligentLockUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636D75322C6E658DD8BF8B6C /* libPods-IntelligentLockUITests.a */; };
+		FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0721463CE9002337D4 /* MesModel.m */; };
+		FA2A7A0A2146412E002337D4 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A092146412D002337D4 /* NullSafe.m */; };
+		FA2A7A0D21466835002337D4 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0C21466835002337D4 /* Tools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,13 @@
 		8AB2E0EAC3D8E284AE4703C0 /* Pods-IntelligentLockTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockTests/Pods-IntelligentLockTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4DC28726938D26B52F7E993 /* Pods-IntelligentLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock.debug.xcconfig"; sourceTree = "<group>"; };
 		EA57DCC44EF8447CA37A2AE8 /* Pods-IntelligentLockUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockUITests/Pods-IntelligentLockUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA2A7A0621463CE9002337D4 /* MesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MesModel.h; sourceTree = "<group>"; };
+		FA2A7A0721463CE9002337D4 /* MesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MesModel.m; sourceTree = "<group>"; };
+		FA2A7A092146412D002337D4 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
+		FA2A7A0B21466835002337D4 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		FA2A7A0C21466835002337D4 /* Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		FAE1CA552149223E002B1788 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		FAE1CA5721492396002B1788 /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +133,10 @@
 			children = (
 				32C21ACB21454F28002643BD /* AppDelegate.h */,
 				32C21ACC21454F28002643BD /* AppDelegate.m */,
+				FA2A7A0621463CE9002337D4 /* MesModel.h */,
+				FA2A7A0721463CE9002337D4 /* MesModel.m */,
+				FA2A7A0B21466835002337D4 /* Tools.h */,
+				FA2A7A0C21466835002337D4 /* Tools.m */,
 				32C21AFD21455179002643BD /* Library */,
 				32C21ACE21454F28002643BD /* ViewController.h */,
 				32C21ACF21454F28002643BD /* ViewController.m */,
@@ -130,6 +144,8 @@
 				32C21AD421454F29002643BD /* Assets.xcassets */,
 				32C21AD621454F29002643BD /* LaunchScreen.storyboard */,
 				32C21AD921454F29002643BD /* Info.plist */,
+				FAE1CA552149223E002B1788 /* PrefixHeader.pch */,
+				FAE1CA5721492396002B1788 /* EnumHeader.h */,
 				32C21ADA21454F29002643BD /* main.m */,
 			);
 			path = IntelligentLock;
@@ -156,6 +172,7 @@
 		32C21AFD21455179002643BD /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				FA2A7A092146412D002337D4 /* NullSafe.m */,
 				32C21AFF2145519B002643BD /* Socket.h */,
 				32C21AFE2145519B002643BD /* Socket.m */,
 			);
@@ -196,8 +213,6 @@
 				32C21AC421454F28002643BD /* Sources */,
 				32C21AC521454F28002643BD /* Frameworks */,
 				32C21AC621454F28002643BD /* Resources */,
-				E5B52428D97249A203299AD9 /* [CP] Embed Pods Frameworks */,
-				C66E0B8C0E3977F15547FC15 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -216,8 +231,6 @@
 				32C21ADC21454F29002643BD /* Sources */,
 				32C21ADD21454F29002643BD /* Frameworks */,
 				32C21ADE21454F29002643BD /* Resources */,
-				BA2CC3321AE1F8D5B4536FCC /* [CP] Embed Pods Frameworks */,
-				517B1D8696107596004C3A8F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -237,8 +250,6 @@
 				32C21AE721454F29002643BD /* Sources */,
 				32C21AE821454F29002643BD /* Frameworks */,
 				32C21AE921454F29002643BD /* Resources */,
-				7714ECEC65B4666ADCE88A1B /* [CP] Embed Pods Frameworks */,
-				A39EB03ABF08FA079146F960 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -356,21 +367,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		517B1D8696107596004C3A8F /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntelligentLockTests/Pods-IntelligentLockTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5AEA5C8B573C87281D431F3A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -389,81 +385,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7714ECEC65B4666ADCE88A1B /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntelligentLockUITests/Pods-IntelligentLockUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A39EB03ABF08FA079146F960 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntelligentLockUITests/Pods-IntelligentLockUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BA2CC3321AE1F8D5B4536FCC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntelligentLockTests/Pods-IntelligentLockTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C66E0B8C0E3977F15547FC15 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E5B52428D97249A203299AD9 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -471,10 +392,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA2A7A0D21466835002337D4 /* Tools.m in Sources */,
 				32C21B002145519B002643BD /* Socket.m in Sources */,
 				32C21AD021454F28002643BD /* ViewController.m in Sources */,
 				32C21ADB21454F29002643BD /* main.m in Sources */,
 				32C21ACD21454F28002643BD /* AppDelegate.m in Sources */,
+				FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */,
+				FA2A7A0A2146412E002337D4 /* NullSafe.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,12 +570,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/IntelligentLock/PrefixHeader.pch";
 				INFOPLIST_FILE = IntelligentLock/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -665,12 +587,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/IntelligentLock/PrefixHeader.pch";
 				INFOPLIST_FILE = IntelligentLock/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -685,11 +605,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
 				INFOPLIST_FILE = IntelligentLockTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -705,11 +621,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
 				INFOPLIST_FILE = IntelligentLockTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -724,11 +636,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
 				INFOPLIST_FILE = IntelligentLockUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -743,11 +651,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
 				INFOPLIST_FILE = IntelligentLockUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
