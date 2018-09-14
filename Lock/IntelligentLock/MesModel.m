@@ -23,4 +23,7 @@
     return model;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"--%lu--%@--%@--%@---",(unsigned long)_type ,_mes, _lockLink, _lockState];
+}
 @end

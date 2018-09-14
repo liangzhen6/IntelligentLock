@@ -33,10 +33,14 @@
 
 - (void)initSocket {
     __weak typeof (self)ws = self;
-    [Socket shareSocketWithHost:@"192.168.1.104" port:8000 messageBlack:^(NSString *message) {
+    [Socket shareSocketWithHost:@"192.168.1.104" port:8008 messageBlack:^(NSDictionary *message) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSString * log = [NSString stringWithFormat:@"%@\n%@",message,ws.logTextView.text];
-            ws.logTextView.text = log;
+            NSString * mesStr = message[@"Mes"];
+            if ([mesStr length]) {
+                NSString * log = [NSString stringWithFormat:@"%@--%@\n%@",mesStr, message[@"lockState"],ws.logTextView.text];
+                ws.logTextView.text = log;
+            }
+            NSLog(@"%@",message);
         });
     }];
     
@@ -50,7 +54,7 @@
 
 - (void)sendMessage {
     if (_sendText.text.length) {
-        MesModel *model = [MesModel mesModelType:commandMType message:_sendText.text];
+        MesModel *model = [MesModel mesModelType:commandMType message:_sendText.text lockLink:nil lockState:nil];
         [[Socket shareSocket] sentMessage:model progress:nil];
         _sendText.text = @"";
     }
@@ -60,7 +64,7 @@
     NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:15.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
         UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
         NSString * heartStr = [NSString stringWithFormat:@"%llu", recordTime];
-        MesModel * model = [MesModel mesModelType:heartMType message:heartStr];
+        MesModel * model = [MesModel mesModelType:heartMType message:heartStr lockLink:nil lockState:nil];
         [[Socket shareSocket] sentMessage:model progress:nil];
     }];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];

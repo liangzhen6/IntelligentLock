@@ -39,7 +39,7 @@ while True:
 	print('等待接收数据')
 	# 接受数据
 	sock, addr = sk.accept()
-	message = '链接成功'
+	message = '链接成功' + str(addr)
 	sendMessage('commamd', message)
 	while True:
 		# 获取从客户端发来的数据

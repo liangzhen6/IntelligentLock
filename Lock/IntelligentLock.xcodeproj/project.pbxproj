@@ -1,0 +1,704 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		32C21ACD21454F28002643BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C21ACC21454F28002643BD /* AppDelegate.m */; };
+		32C21AD021454F28002643BD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C21ACF21454F28002643BD /* ViewController.m */; };
+		32C21AD321454F28002643BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32C21AD121454F28002643BD /* Main.storyboard */; };
+		32C21AD521454F29002643BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32C21AD421454F29002643BD /* Assets.xcassets */; };
+		32C21AD821454F29002643BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32C21AD621454F29002643BD /* LaunchScreen.storyboard */; };
+		32C21ADB21454F29002643BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C21ADA21454F29002643BD /* main.m */; };
+		32C21AE521454F29002643BD /* IntelligentLockTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C21AE421454F29002643BD /* IntelligentLockTests.m */; };
+		32C21AF021454F29002643BD /* IntelligentLockUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C21AEF21454F29002643BD /* IntelligentLockUITests.m */; };
+		32C21B002145519B002643BD /* Socket.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C21AFE2145519B002643BD /* Socket.m */; };
+		92E3B3087760D8C6FC66638F /* libPods-IntelligentLockTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B3750CA7991774773210F8 /* libPods-IntelligentLockTests.a */; };
+		AC9203D2B8E81BAFBF6D77E8 /* libPods-IntelligentLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C1CE2BD8DDAB9007823250 /* libPods-IntelligentLock.a */; };
+		D0799940E91850189764C7D7 /* libPods-IntelligentLockUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636D75322C6E658DD8BF8B6C /* libPods-IntelligentLockUITests.a */; };
+		FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0721463CE9002337D4 /* MesModel.m */; };
+		FA2A7A0A2146412E002337D4 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A092146412D002337D4 /* NullSafe.m */; };
+		FA2A7A0D21466835002337D4 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0C21466835002337D4 /* Tools.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		32C21AE121454F29002643BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 32C21AC021454F28002643BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32C21AC721454F28002643BD;
+			remoteInfo = IntelligentLock;
+		};
+		32C21AEC21454F29002643BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 32C21AC021454F28002643BD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 32C21AC721454F28002643BD;
+			remoteInfo = IntelligentLock;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01A310639104A13C7098CD5A /* Pods-IntelligentLockUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockUITests/Pods-IntelligentLockUITests.release.xcconfig"; sourceTree = "<group>"; };
+		14C1CE2BD8DDAB9007823250 /* libPods-IntelligentLock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligentLock.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		26EA6259D453EE058C542E70 /* Pods-IntelligentLockTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockTests/Pods-IntelligentLockTests.debug.xcconfig"; sourceTree = "<group>"; };
+		32C21AC821454F28002643BD /* IntelligentLock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntelligentLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		32C21ACB21454F28002643BD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		32C21ACC21454F28002643BD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		32C21ACE21454F28002643BD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		32C21ACF21454F28002643BD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		32C21AD221454F28002643BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		32C21AD421454F29002643BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		32C21AD721454F29002643BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		32C21AD921454F29002643BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32C21ADA21454F29002643BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32C21AE021454F29002643BD /* IntelligentLockTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelligentLockTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		32C21AE421454F29002643BD /* IntelligentLockTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntelligentLockTests.m; sourceTree = "<group>"; };
+		32C21AE621454F29002643BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32C21AEB21454F29002643BD /* IntelligentLockUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IntelligentLockUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		32C21AEF21454F29002643BD /* IntelligentLockUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntelligentLockUITests.m; sourceTree = "<group>"; };
+		32C21AF121454F29002643BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32C21AFE2145519B002643BD /* Socket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Socket.m; sourceTree = "<group>"; };
+		32C21AFF2145519B002643BD /* Socket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Socket.h; sourceTree = "<group>"; };
+		57B3750CA7991774773210F8 /* libPods-IntelligentLockTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligentLockTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		636D75322C6E658DD8BF8B6C /* libPods-IntelligentLockUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligentLockUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6DF4EE8CE444A93562115613 /* Pods-IntelligentLock.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLock.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock.release.xcconfig"; sourceTree = "<group>"; };
+		8AB2E0EAC3D8E284AE4703C0 /* Pods-IntelligentLockTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockTests/Pods-IntelligentLockTests.release.xcconfig"; sourceTree = "<group>"; };
+		E4DC28726938D26B52F7E993 /* Pods-IntelligentLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock.debug.xcconfig"; sourceTree = "<group>"; };
+		EA57DCC44EF8447CA37A2AE8 /* Pods-IntelligentLockUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockUITests/Pods-IntelligentLockUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA2A7A0621463CE9002337D4 /* MesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MesModel.h; sourceTree = "<group>"; };
+		FA2A7A0721463CE9002337D4 /* MesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MesModel.m; sourceTree = "<group>"; };
+		FA2A7A092146412D002337D4 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
+		FA2A7A0B21466835002337D4 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		FA2A7A0C21466835002337D4 /* Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		FAE1CA552149223E002B1788 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		FAE1CA5721492396002B1788 /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		32C21AC521454F28002643BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC9203D2B8E81BAFBF6D77E8 /* libPods-IntelligentLock.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32C21ADD21454F29002643BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92E3B3087760D8C6FC66638F /* libPods-IntelligentLockTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32C21AE821454F29002643BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D0799940E91850189764C7D7 /* libPods-IntelligentLockUITests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		32C21ABF21454F28002643BD = {
+			isa = PBXGroup;
+			children = (
+				32C21ACA21454F28002643BD /* IntelligentLock */,
+				32C21AE321454F29002643BD /* IntelligentLockTests */,
+				32C21AEE21454F29002643BD /* IntelligentLockUITests */,
+				32C21AC921454F28002643BD /* Products */,
+				81C13EFB69BA6EC0647F3973 /* Pods */,
+				5167AF301E89B33613C7379B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		32C21AC921454F28002643BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				32C21AC821454F28002643BD /* IntelligentLock.app */,
+				32C21AE021454F29002643BD /* IntelligentLockTests.xctest */,
+				32C21AEB21454F29002643BD /* IntelligentLockUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		32C21ACA21454F28002643BD /* IntelligentLock */ = {
+			isa = PBXGroup;
+			children = (
+				32C21ACB21454F28002643BD /* AppDelegate.h */,
+				32C21ACC21454F28002643BD /* AppDelegate.m */,
+				FA2A7A0621463CE9002337D4 /* MesModel.h */,
+				FA2A7A0721463CE9002337D4 /* MesModel.m */,
+				FA2A7A0B21466835002337D4 /* Tools.h */,
+				FA2A7A0C21466835002337D4 /* Tools.m */,
+				32C21AFD21455179002643BD /* Library */,
+				32C21ACE21454F28002643BD /* ViewController.h */,
+				32C21ACF21454F28002643BD /* ViewController.m */,
+				32C21AD121454F28002643BD /* Main.storyboard */,
+				32C21AD421454F29002643BD /* Assets.xcassets */,
+				32C21AD621454F29002643BD /* LaunchScreen.storyboard */,
+				32C21AD921454F29002643BD /* Info.plist */,
+				FAE1CA552149223E002B1788 /* PrefixHeader.pch */,
+				FAE1CA5721492396002B1788 /* EnumHeader.h */,
+				32C21ADA21454F29002643BD /* main.m */,
+			);
+			path = IntelligentLock;
+			sourceTree = "<group>";
+		};
+		32C21AE321454F29002643BD /* IntelligentLockTests */ = {
+			isa = PBXGroup;
+			children = (
+				32C21AE421454F29002643BD /* IntelligentLockTests.m */,
+				32C21AE621454F29002643BD /* Info.plist */,
+			);
+			path = IntelligentLockTests;
+			sourceTree = "<group>";
+		};
+		32C21AEE21454F29002643BD /* IntelligentLockUITests */ = {
+			isa = PBXGroup;
+			children = (
+				32C21AEF21454F29002643BD /* IntelligentLockUITests.m */,
+				32C21AF121454F29002643BD /* Info.plist */,
+			);
+			path = IntelligentLockUITests;
+			sourceTree = "<group>";
+		};
+		32C21AFD21455179002643BD /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				FA2A7A092146412D002337D4 /* NullSafe.m */,
+				32C21AFF2145519B002643BD /* Socket.h */,
+				32C21AFE2145519B002643BD /* Socket.m */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		5167AF301E89B33613C7379B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14C1CE2BD8DDAB9007823250 /* libPods-IntelligentLock.a */,
+				57B3750CA7991774773210F8 /* libPods-IntelligentLockTests.a */,
+				636D75322C6E658DD8BF8B6C /* libPods-IntelligentLockUITests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		81C13EFB69BA6EC0647F3973 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E4DC28726938D26B52F7E993 /* Pods-IntelligentLock.debug.xcconfig */,
+				6DF4EE8CE444A93562115613 /* Pods-IntelligentLock.release.xcconfig */,
+				26EA6259D453EE058C542E70 /* Pods-IntelligentLockTests.debug.xcconfig */,
+				8AB2E0EAC3D8E284AE4703C0 /* Pods-IntelligentLockTests.release.xcconfig */,
+				EA57DCC44EF8447CA37A2AE8 /* Pods-IntelligentLockUITests.debug.xcconfig */,
+				01A310639104A13C7098CD5A /* Pods-IntelligentLockUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		32C21AC721454F28002643BD /* IntelligentLock */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32C21AF421454F29002643BD /* Build configuration list for PBXNativeTarget "IntelligentLock" */;
+			buildPhases = (
+				396BC5FCBAA81FD6169A24DA /* [CP] Check Pods Manifest.lock */,
+				32C21AC421454F28002643BD /* Sources */,
+				32C21AC521454F28002643BD /* Frameworks */,
+				32C21AC621454F28002643BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IntelligentLock;
+			productName = IntelligentLock;
+			productReference = 32C21AC821454F28002643BD /* IntelligentLock.app */;
+			productType = "com.apple.product-type.application";
+		};
+		32C21ADF21454F29002643BD /* IntelligentLockTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32C21AF721454F29002643BD /* Build configuration list for PBXNativeTarget "IntelligentLockTests" */;
+			buildPhases = (
+				1B0A0A079325FBB3446A2DE3 /* [CP] Check Pods Manifest.lock */,
+				32C21ADC21454F29002643BD /* Sources */,
+				32C21ADD21454F29002643BD /* Frameworks */,
+				32C21ADE21454F29002643BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				32C21AE221454F29002643BD /* PBXTargetDependency */,
+			);
+			name = IntelligentLockTests;
+			productName = IntelligentLockTests;
+			productReference = 32C21AE021454F29002643BD /* IntelligentLockTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		32C21AEA21454F29002643BD /* IntelligentLockUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32C21AFA21454F29002643BD /* Build configuration list for PBXNativeTarget "IntelligentLockUITests" */;
+			buildPhases = (
+				5AEA5C8B573C87281D431F3A /* [CP] Check Pods Manifest.lock */,
+				32C21AE721454F29002643BD /* Sources */,
+				32C21AE821454F29002643BD /* Frameworks */,
+				32C21AE921454F29002643BD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				32C21AED21454F29002643BD /* PBXTargetDependency */,
+			);
+			name = IntelligentLockUITests;
+			productName = IntelligentLockUITests;
+			productReference = 32C21AEB21454F29002643BD /* IntelligentLockUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		32C21AC021454F28002643BD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = liangzhen;
+				TargetAttributes = {
+					32C21AC721454F28002643BD = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					32C21ADF21454F29002643BD = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 32C21AC721454F28002643BD;
+					};
+					32C21AEA21454F29002643BD = {
+						CreatedOnToolsVersion = 9.4.1;
+						TestTargetID = 32C21AC721454F28002643BD;
+					};
+				};
+			};
+			buildConfigurationList = 32C21AC321454F28002643BD /* Build configuration list for PBXProject "IntelligentLock" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 32C21ABF21454F28002643BD;
+			productRefGroup = 32C21AC921454F28002643BD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				32C21AC721454F28002643BD /* IntelligentLock */,
+				32C21ADF21454F29002643BD /* IntelligentLockTests */,
+				32C21AEA21454F29002643BD /* IntelligentLockUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		32C21AC621454F28002643BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32C21AD821454F29002643BD /* LaunchScreen.storyboard in Resources */,
+				32C21AD521454F29002643BD /* Assets.xcassets in Resources */,
+				32C21AD321454F28002643BD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32C21ADE21454F29002643BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32C21AE921454F29002643BD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1B0A0A079325FBB3446A2DE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IntelligentLockTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		396BC5FCBAA81FD6169A24DA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IntelligentLock-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5AEA5C8B573C87281D431F3A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IntelligentLockUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32C21AC421454F28002643BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FA2A7A0D21466835002337D4 /* Tools.m in Sources */,
+				32C21B002145519B002643BD /* Socket.m in Sources */,
+				32C21AD021454F28002643BD /* ViewController.m in Sources */,
+				32C21ADB21454F29002643BD /* main.m in Sources */,
+				32C21ACD21454F28002643BD /* AppDelegate.m in Sources */,
+				FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */,
+				FA2A7A0A2146412E002337D4 /* NullSafe.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32C21ADC21454F29002643BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32C21AE521454F29002643BD /* IntelligentLockTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		32C21AE721454F29002643BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				32C21AF021454F29002643BD /* IntelligentLockUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		32C21AE221454F29002643BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 32C21AC721454F28002643BD /* IntelligentLock */;
+			targetProxy = 32C21AE121454F29002643BD /* PBXContainerItemProxy */;
+		};
+		32C21AED21454F29002643BD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 32C21AC721454F28002643BD /* IntelligentLock */;
+			targetProxy = 32C21AEC21454F29002643BD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		32C21AD121454F28002643BD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32C21AD221454F28002643BD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		32C21AD621454F29002643BD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				32C21AD721454F29002643BD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		32C21AF221454F29002643BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		32C21AF321454F29002643BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		32C21AF521454F29002643BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E4DC28726938D26B52F7E993 /* Pods-IntelligentLock.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4E6298X77;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/IntelligentLock/PrefixHeader.pch";
+				INFOPLIST_FILE = IntelligentLock/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLock;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		32C21AF621454F29002643BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DF4EE8CE444A93562115613 /* Pods-IntelligentLock.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4E6298X77;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/IntelligentLock/PrefixHeader.pch";
+				INFOPLIST_FILE = IntelligentLock/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLock;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		32C21AF821454F29002643BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 26EA6259D453EE058C542E70 /* Pods-IntelligentLockTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4E6298X77;
+				INFOPLIST_FILE = IntelligentLockTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IntelligentLock.app/IntelligentLock";
+			};
+			name = Debug;
+		};
+		32C21AF921454F29002643BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AB2E0EAC3D8E284AE4703C0 /* Pods-IntelligentLockTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4E6298X77;
+				INFOPLIST_FILE = IntelligentLockTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IntelligentLock.app/IntelligentLock";
+			};
+			name = Release;
+		};
+		32C21AFB21454F29002643BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EA57DCC44EF8447CA37A2AE8 /* Pods-IntelligentLockUITests.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4E6298X77;
+				INFOPLIST_FILE = IntelligentLockUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = IntelligentLock;
+			};
+			name = Debug;
+		};
+		32C21AFC21454F29002643BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 01A310639104A13C7098CD5A /* Pods-IntelligentLockUITests.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = G4E6298X77;
+				INFOPLIST_FILE = IntelligentLockUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = IntelligentLock;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		32C21AC321454F28002643BD /* Build configuration list for PBXProject "IntelligentLock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32C21AF221454F29002643BD /* Debug */,
+				32C21AF321454F29002643BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32C21AF421454F29002643BD /* Build configuration list for PBXNativeTarget "IntelligentLock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32C21AF521454F29002643BD /* Debug */,
+				32C21AF621454F29002643BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32C21AF721454F29002643BD /* Build configuration list for PBXNativeTarget "IntelligentLockTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32C21AF821454F29002643BD /* Debug */,
+				32C21AF921454F29002643BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32C21AFA21454F29002643BD /* Build configuration list for PBXNativeTarget "IntelligentLockUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32C21AFB21454F29002643BD /* Debug */,
+				32C21AFC21454F29002643BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 32C21AC021454F28002643BD /* Project object */;
+}

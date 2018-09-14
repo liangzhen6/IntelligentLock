@@ -53,7 +53,7 @@ static Socket * _socket = nil;
     if (_host.length && _port > 0) {
         if (_socketConnectType == unConnectConnectType) {
             NSError *error = nil;
-            _socketConnectType = connectingConnectType;
+            self.socketConnectType = connectingConnectType;
             [_asyncSocket connectToHost:_host onPort:_port withTimeout:5.0 error:&error];
             if (error) {
                 NSLog(@"%@",error);
@@ -88,15 +88,23 @@ static Socket * _socket = nil;
             default:
                 break;
         }
-        [sendDict setObject:model.mes forKey:@"Mes"];
+        if ([model.mes length]) {
+            [sendDict setObject:model.mes forKey:@"Mes"];
+        }
+        
+        if ([model.lockLink length]) {
+            [sendDict setObject:model.lockLink forKey:@"lockLink"];
+        }
+        if ([model.lockState length]) {
+            [sendDict setObject:model.lockState forKey:@"lockState"];
+        }
         
         NSData *mData = [NSJSONSerialization dataWithJSONObject:sendDict options:NSJSONWritingPrettyPrinted error:nil];
         NSString * jsonStr = [[NSString alloc] initWithData:mData encoding:NSUTF8StringEncoding];
-        
-        //压缩数据
+        //压缩数据量
         jsonStr = [jsonStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         jsonStr = [jsonStr stringByReplacingOccurrencesOfString:@" " withString:@""];
-
+        
         NSData * base64Data = [[Tools shareTools] encryptData:jsonStr];
         [_asyncSocket writeData:base64Data withTimeout:-1 tag:(long)recordTime];
     }
@@ -107,7 +115,7 @@ static Socket * _socket = nil;
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     NSLog(@"已经连接到host=%@=========port=%d",host,port);
     //更改连接状态
-    _socketConnectType = connectedConnectType;
+    self.socketConnectType = connectedConnectType;
     // 开始准备接收消息
     [_asyncSocket readDataWithTimeout:-1 tag:100];
     // 初始化 重新连接的时间
@@ -138,7 +146,7 @@ static Socket * _socket = nil;
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(nullable NSError *)err {
     NSLog(@"socket:%@已经断开连接，错误:%@",sock,err);
-    _socketConnectType = unConnectConnectType;
+    self.socketConnectType = unConnectConnectType;
     if (_appIsAction) {
         //处理 重连问题
         [self handleReConnect];
