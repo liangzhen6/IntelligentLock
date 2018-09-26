@@ -8,11 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NS_ENUM(NSUInteger, MType) {
-    heartMType = 0, ///< 心跳包
-    commandMType    ///< 指令
-};
-
 @interface MesModel : NSObject
 @property(nonatomic,assign)MType type;   ///< 消息类型
 @property(nonatomic,copy)NSString * mes; ///< 携带的信息

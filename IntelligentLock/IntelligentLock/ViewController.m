@@ -9,6 +9,8 @@
 #import "ViewController.h"
 #import "Socket.h"
 #import "MesModel.h"
+#import "LockConnectManger.h"
+#import "BluetoothCenter.h"
 
 @interface ViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sendText;
@@ -20,7 +22,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initSocket];
+//    [self initSocket];
+    [[LockConnectManger shareLockConnectManger] connect];
     [self initView];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -40,7 +43,7 @@
                 NSString * log = [NSString stringWithFormat:@"%@--%@\n%@",mesStr, message[@"lockState"],ws.logTextView.text];
                 ws.logTextView.text = log;
             }
-            NSLog(@"%@",message);
+            MPNLog(@"%@",message);
         });
     }];
     
@@ -78,6 +81,15 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
+    [[BluetoothCenter shareBluetoothCenter] sendCommandState:YES completion:^(BluetoothLockState state) {
+        NSLog(@"%lu",(unsigned long)state);
+    }];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [[BluetoothCenter shareBluetoothCenter] sendCommandState:NO completion:^(BluetoothLockState state) {
+            NSLog(@"%lu",(unsigned long)state);
+        }];
+    });
 }
 
 - (void)didReceiveMemoryWarning {

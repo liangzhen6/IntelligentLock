@@ -17,6 +17,8 @@
 @property(nonatomic,assign)int port;
 @property(nonatomic,assign)NSInteger afterTimeConnect;
 //@property(nonatomic,strong)NSMutableArray * allSendMessage;
+@property(nonatomic,copy)SocketConnectStateBlock connectStateBlock;
+
 @end
 static Socket * _socket = nil;
 
@@ -41,6 +43,15 @@ static Socket * _socket = nil;
     [socket connectServer];
     return socket;
 }
+
++ (id)shareSocketWithHost:(NSString *)host port:(int)port {
+    Socket * socket = [Socket shareSocket];
+    socket.host = host;
+    socket.port = port;
+    socket.afterTimeConnect = 0;
+    return socket;
+}
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -51,26 +62,44 @@ static Socket * _socket = nil;
 
 - (void)connectServer {
     if (_host.length && _port > 0) {
-        if (_socketConnectType == unConnectConnectType) {
+        if (_socketConnectState == SocketConnectStateUnConnect) {
             NSError *error = nil;
-            _socketConnectType = connectingConnectType;
+            _socketConnectState = SocketConnectStateConnecting;
             [_asyncSocket connectToHost:_host onPort:_port withTimeout:5.0 error:&error];
             if (error) {
-                NSLog(@"%@",error);
+                MPNLog(@"%@",error);
             }
         }
     }
 }
 
+- (void)connectServerWithCompletion:(SocketConnectStateBlock)connectBlock {
+    self.connectStateBlock = connectBlock;
+    if (_canConnect) {
+        if (_host.length && _port > 0) {
+            if (_socketConnectState == SocketConnectStateUnConnect) {
+                NSError *error = nil;
+                _socketConnectState = SocketConnectStateConnecting;
+                [_asyncSocket connectToHost:_host onPort:_port withTimeout:5.0 error:&error];
+                if (error) {
+                    MPNLog(@"%@",error);
+                }
+            }
+        }
+    } else {
+        MPNLog(@"");
+    }
+}
+
 - (void)closeConnectServer {
-    if (_socketConnectType == connectedConnectType) {
+    if (_socketConnectState == SocketConnectStateConnected) {
         MesModel *model = [MesModel mesModelType:commandMType message:@"exit" lockLink:nil lockState:nil];
         [self sentMessage:model progress:nil];
     }
 }
 
 - (void)sentMessage:(MesModel *)model progress:(void(^)(float progress))progressBlock {
-    if (_socketConnectType == connectedConnectType) {
+    if (_socketConnectState == SocketConnectStateConnected) {
         //是链接状态才会发送心跳包
         NSMutableDictionary * sendDict = [[NSMutableDictionary alloc] init];
         UInt64 recordTime = [[NSDate date] timeIntervalSince1970]*1000;
@@ -105,9 +134,9 @@ static Socket * _socket = nil;
 
 #pragma mark =============GCDAsyncSocket delegate=================
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
-    NSLog(@"已经连接到host=%@=========port=%d",host,port);
+    MPNLog(@"已经连接到host=%@=========port=%d",host,port);
     //更改连接状态
-    _socketConnectType = connectedConnectType;
+    _socketConnectState = SocketConnectStateConnected;
     // 开始准备接收消息
     [_asyncSocket readDataWithTimeout:-1 tag:100];
     // 初始化 重新连接的时间
@@ -133,13 +162,13 @@ static Socket * _socket = nil;
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
-    NSLog(@"%@----已经发送消息---%@",sock,_asyncSocket);
+    MPNLog(@"%@----已经发送消息---%@",sock,_asyncSocket);
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(nullable NSError *)err {
-    NSLog(@"socket:%@已经断开连接，错误:%@",sock,err);
-    _socketConnectType = unConnectConnectType;
-    if (_appIsAction) {
+    MPNLog(@"socket:%@已经断开连接，错误:%@",sock,err);
+    _socketConnectState = SocketConnectStateUnConnect;
+    if (_canConnect) {
         //处理 重连问题
         [self handleReConnect];
     }
@@ -147,7 +176,7 @@ static Socket * _socket = nil;
 //处理 重新链接机制
 - (void)handleReConnect {
     _afterTimeConnect = _afterTimeConnect + 2;
-    NSLog(@"%ld：秒后发起重连！",(long)_afterTimeConnect);
+    MPNLog(@"%ld：秒后发起重连！",(long)_afterTimeConnect);
     __weak typeof (self) ws = self;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(_afterTimeConnect * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         //重新连接操作

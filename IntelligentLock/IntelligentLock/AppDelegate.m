@@ -7,8 +7,8 @@
 //
 
 #import "AppDelegate.h"
-#import "Socket.h"
-#import <AFNetworking.h>
+#import "LockConnectManger.h"
+
 @interface AppDelegate ()
 
 @end
@@ -17,25 +17,14 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        if (status == AFNetworkReachabilityStatusReachableViaWWAN || status == AFNetworkReachabilityStatusReachableViaWiFi) {
-            //网络状态 改变 重新连接
-            if ([[Socket shareSocket] socketConnectType] == connectingConnectType) {
-                [[Socket shareSocket] setSocketConnectType:unConnectConnectType];
-            }
-            [[Socket shareSocket] connectServer];
-        }
-    }];
-    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    [[LockConnectManger shareLockConnectManger] observeReachabilityStatus];
     // Override point for customization after application launch.
     return YES;
 }
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
-    [[Socket shareSocket] setAppIsAction:NO];
-    //断开连接
-    [[Socket shareSocket] closeConnectServer];
+    [[LockConnectManger shareLockConnectManger] willResignActive];
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
 }
@@ -53,9 +42,7 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    [[Socket shareSocket] setAppIsAction:YES];
-    //连接服务器
-    [[Socket shareSocket] connectServer];
+    [[LockConnectManger shareLockConnectManger] didBecomeActive];
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 

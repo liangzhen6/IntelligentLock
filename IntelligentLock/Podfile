@@ -8,6 +8,7 @@ target 'IntelligentLock' do
   # Pods for IntelligentLock
   pod 'CocoaAsyncSocket', '~> 7.6.3'
   pod 'AFNetworking', '~> 3.2.1'
+  pod 'NullSafe', '~> 1.2.3'
 
   target 'IntelligentLockTests' do
     inherit! :search_paths

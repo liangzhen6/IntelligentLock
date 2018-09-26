@@ -18,4 +18,7 @@
 // ase 解码
 - (NSData *)decryptData:(NSData *)rawData;
 
+// 将字符串转化为Hex(16进制) NSData
+- (NSData *)convertHexStrToData:(NSString *)str;
+
 @end

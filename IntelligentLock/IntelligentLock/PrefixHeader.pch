@@ -10,6 +10,31 @@
 #define PrefixHeader_pch
 #import "EnumHeader.h"
 
+/* 自定义log */
+#ifdef DEBUG
+#define MPNLog(...) NSLog(__VA_ARGS__)
+#define MPNLogFunc MPNLog(@"%s", __func__)
+#else
+#define MPNLog(...)
+#define MPNLogFunc
+#endif
+
+/* 常用的宏 */
+#define IOS_VERSION      [[[UIDevice currentDevice] systemVersion] floatValue]
+#define Screen_Frame     [[UIScreen mainScreen] bounds]
+#define Screen_Width     [[UIScreen mainScreen] bounds].size.width
+#define Screen_Height    [[UIScreen mainScreen] bounds].size.height
+#define KeyWindow [[[UIApplication sharedApplication] delegate] window]
+#define RGBColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+//88
+#define NavBarHeight (iPhoneX ? 88.0 : 64.0)
+#define NavBar_SafeArea 44.0
+//83 49
+#define TabBarHeight (iPhoneX ? 83.0 : 49.0)
+#define TabBar_SafeArea 34.0
+//判断iphonex
+#define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125.0,2436.0), [[UIScreen mainScreen] currentMode].size) : NO)
+
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 

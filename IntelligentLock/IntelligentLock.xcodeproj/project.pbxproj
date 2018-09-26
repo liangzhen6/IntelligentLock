@@ -19,8 +19,10 @@
 		92E3B3087760D8C6FC66638F /* libPods-IntelligentLockTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B3750CA7991774773210F8 /* libPods-IntelligentLockTests.a */; };
 		AC9203D2B8E81BAFBF6D77E8 /* libPods-IntelligentLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C1CE2BD8DDAB9007823250 /* libPods-IntelligentLock.a */; };
 		D0799940E91850189764C7D7 /* libPods-IntelligentLockUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636D75322C6E658DD8BF8B6C /* libPods-IntelligentLockUITests.a */; };
+		FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */; };
+		FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */; };
+		FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79F215B8520001A4BE4 /* LockConnectManger.m */; };
 		FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0721463CE9002337D4 /* MesModel.m */; };
-		FA2A7A0A2146412E002337D4 /* NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A092146412D002337D4 /* NullSafe.m */; };
 		FA2A7A0D21466835002337D4 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0C21466835002337D4 /* Tools.m */; };
 /* End PBXBuildFile section */
 
@@ -69,9 +71,14 @@
 		8AB2E0EAC3D8E284AE4703C0 /* Pods-IntelligentLockTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockTests/Pods-IntelligentLockTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4DC28726938D26B52F7E993 /* Pods-IntelligentLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock.debug.xcconfig"; sourceTree = "<group>"; };
 		EA57DCC44EF8447CA37A2AE8 /* Pods-IntelligentLockUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockUITests/Pods-IntelligentLockUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA17D798215B7BFD001A4BE4 /* BluetoothCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothCenter.h; sourceTree = "<group>"; };
+		FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothCenter.m; sourceTree = "<group>"; };
+		FA17D79B215B7D61001A4BE4 /* AlertConreoller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertConreoller.h; sourceTree = "<group>"; };
+		FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertConreoller.m; sourceTree = "<group>"; };
+		FA17D79E215B8520001A4BE4 /* LockConnectManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockConnectManger.h; sourceTree = "<group>"; };
+		FA17D79F215B8520001A4BE4 /* LockConnectManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockConnectManger.m; sourceTree = "<group>"; };
 		FA2A7A0621463CE9002337D4 /* MesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MesModel.h; sourceTree = "<group>"; };
 		FA2A7A0721463CE9002337D4 /* MesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MesModel.m; sourceTree = "<group>"; };
-		FA2A7A092146412D002337D4 /* NullSafe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullSafe.m; sourceTree = "<group>"; };
 		FA2A7A0B21466835002337D4 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		FA2A7A0C21466835002337D4 /* Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		FAE1CA552149223E002B1788 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -133,11 +140,11 @@
 			children = (
 				32C21ACB21454F28002643BD /* AppDelegate.h */,
 				32C21ACC21454F28002643BD /* AppDelegate.m */,
+				32C21AFD21455179002643BD /* Library */,
 				FA2A7A0621463CE9002337D4 /* MesModel.h */,
 				FA2A7A0721463CE9002337D4 /* MesModel.m */,
 				FA2A7A0B21466835002337D4 /* Tools.h */,
 				FA2A7A0C21466835002337D4 /* Tools.m */,
-				32C21AFD21455179002643BD /* Library */,
 				32C21ACE21454F28002643BD /* ViewController.h */,
 				32C21ACF21454F28002643BD /* ViewController.m */,
 				32C21AD121454F28002643BD /* Main.storyboard */,
@@ -172,9 +179,14 @@
 		32C21AFD21455179002643BD /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				FA2A7A092146412D002337D4 /* NullSafe.m */,
 				32C21AFF2145519B002643BD /* Socket.h */,
 				32C21AFE2145519B002643BD /* Socket.m */,
+				FA17D798215B7BFD001A4BE4 /* BluetoothCenter.h */,
+				FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */,
+				FA17D79B215B7D61001A4BE4 /* AlertConreoller.h */,
+				FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */,
+				FA17D79E215B8520001A4BE4 /* LockConnectManger.h */,
+				FA17D79F215B8520001A4BE4 /* LockConnectManger.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -393,12 +405,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA2A7A0D21466835002337D4 /* Tools.m in Sources */,
+				FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */,
 				32C21B002145519B002643BD /* Socket.m in Sources */,
 				32C21AD021454F28002643BD /* ViewController.m in Sources */,
+				FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */,
 				32C21ADB21454F29002643BD /* main.m in Sources */,
+				FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */,
 				32C21ACD21454F28002643BD /* AppDelegate.m in Sources */,
 				FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */,
-				FA2A7A0A2146412E002337D4 /* NullSafe.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,7 +518,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -556,7 +570,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -573,7 +587,10 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IntelligentLock/PrefixHeader.pch";
 				INFOPLIST_FILE = IntelligentLock/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -590,7 +607,10 @@
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IntelligentLock/PrefixHeader.pch";
 				INFOPLIST_FILE = IntelligentLock/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -605,7 +625,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
 				INFOPLIST_FILE = IntelligentLockTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -621,7 +645,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
 				INFOPLIST_FILE = IntelligentLockTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -636,7 +664,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
 				INFOPLIST_FILE = IntelligentLockUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -651,7 +683,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4E6298X77;
 				INFOPLIST_FILE = IntelligentLockUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLockUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
