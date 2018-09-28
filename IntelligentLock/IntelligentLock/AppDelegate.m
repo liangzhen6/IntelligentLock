@@ -8,16 +8,25 @@
 
 #import "AppDelegate.h"
 #import "LockConnectManger.h"
-
+#import "StartView.h"
+#import "MainNavViewController.h"
+#import "ViewController.h"
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
-
+/*
+ 启动的时候加一个自定义动画
+ 
+ 开门的效果 如 http://www.demodashi.com/demo/11612.html
+ */
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[LockConnectManger shareLockConnectManger] observeReachabilityStatus];
+    self.window = [[UIWindow alloc] initWithFrame:Screen_Frame];
+    self.window.rootViewController = [[MainNavViewController alloc] initWithRootViewController:[[ViewController alloc] init]];
+    [self.window makeKeyAndVisible];
     // Override point for customization after application launch.
     return YES;
 }

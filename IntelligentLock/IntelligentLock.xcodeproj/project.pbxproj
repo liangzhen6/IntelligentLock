@@ -24,6 +24,10 @@
 		FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79F215B8520001A4BE4 /* LockConnectManger.m */; };
 		FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0721463CE9002337D4 /* MesModel.m */; };
 		FA2A7A0D21466835002337D4 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0C21466835002337D4 /* Tools.m */; };
+		FA828827215E2311003C64C0 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA828826215E2311003C64C0 /* StartView.m */; };
+		FA828829215E231B003C64C0 /* StartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA828828215E231B003C64C0 /* StartView.xib */; };
+		FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82882B215E49E8003C64C0 /* StartAnimationManger.m */; };
+		FA82882F215E4EFF003C64C0 /* MainNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82882E215E4EFF003C64C0 /* MainNavViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +85,13 @@
 		FA2A7A0721463CE9002337D4 /* MesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MesModel.m; sourceTree = "<group>"; };
 		FA2A7A0B21466835002337D4 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		FA2A7A0C21466835002337D4 /* Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		FA828825215E2311003C64C0 /* StartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
+		FA828826215E2311003C64C0 /* StartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
+		FA828828215E231B003C64C0 /* StartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartView.xib; sourceTree = "<group>"; };
+		FA82882A215E49E8003C64C0 /* StartAnimationManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartAnimationManger.h; sourceTree = "<group>"; };
+		FA82882B215E49E8003C64C0 /* StartAnimationManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartAnimationManger.m; sourceTree = "<group>"; };
+		FA82882D215E4EFF003C64C0 /* MainNavViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainNavViewController.h; sourceTree = "<group>"; };
+		FA82882E215E4EFF003C64C0 /* MainNavViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainNavViewController.m; sourceTree = "<group>"; };
 		FAE1CA552149223E002B1788 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		FAE1CA5721492396002B1788 /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,8 +154,15 @@
 				32C21AFD21455179002643BD /* Library */,
 				FA2A7A0621463CE9002337D4 /* MesModel.h */,
 				FA2A7A0721463CE9002337D4 /* MesModel.m */,
+				FA82882D215E4EFF003C64C0 /* MainNavViewController.h */,
+				FA82882E215E4EFF003C64C0 /* MainNavViewController.m */,
 				FA2A7A0B21466835002337D4 /* Tools.h */,
 				FA2A7A0C21466835002337D4 /* Tools.m */,
+				FA82882A215E49E8003C64C0 /* StartAnimationManger.h */,
+				FA82882B215E49E8003C64C0 /* StartAnimationManger.m */,
+				FA828825215E2311003C64C0 /* StartView.h */,
+				FA828826215E2311003C64C0 /* StartView.m */,
+				FA828828215E231B003C64C0 /* StartView.xib */,
 				32C21ACE21454F28002643BD /* ViewController.h */,
 				32C21ACF21454F28002643BD /* ViewController.m */,
 				32C21AD121454F28002643BD /* Main.storyboard */,
@@ -323,6 +341,7 @@
 				32C21AD821454F29002643BD /* LaunchScreen.storyboard in Resources */,
 				32C21AD521454F29002643BD /* Assets.xcassets in Resources */,
 				32C21AD321454F28002643BD /* Main.storyboard in Resources */,
+				FA828829215E231B003C64C0 /* StartView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,12 +426,15 @@
 				FA2A7A0D21466835002337D4 /* Tools.m in Sources */,
 				FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */,
 				32C21B002145519B002643BD /* Socket.m in Sources */,
+				FA82882F215E4EFF003C64C0 /* MainNavViewController.m in Sources */,
 				32C21AD021454F28002643BD /* ViewController.m in Sources */,
 				FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */,
 				32C21ADB21454F29002643BD /* main.m in Sources */,
 				FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */,
 				32C21ACD21454F28002643BD /* AppDelegate.m in Sources */,
 				FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */,
+				FA828827215E2311003C64C0 /* StartView.m in Sources */,
+				FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

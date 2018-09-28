@@ -11,7 +11,8 @@
 #import "MesModel.h"
 #import "LockConnectManger.h"
 #import "BluetoothCenter.h"
-
+#import "StartView.h"
+#import "StartAnimationManger.h"
 @interface ViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *sendText;
 @property (weak, nonatomic) IBOutlet UITextView *logTextView;
@@ -23,15 +24,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self initSocket];
+    self.view.backgroundColor = [UIColor whiteColor];
     [[LockConnectManger shareLockConnectManger] connect];
     [self initView];
     // Do any additional setup after loading the view, typically from a nib.
 }
-
+//- (BOOL)prefersStatusBarHidden
+//{
+//    return YES;//隐藏为YES，显示为NO
+//}
 - (void)initView {
     _sendText.delegate = self;
     _sendText.returnKeyType = UIReturnKeySend;
     _sendText.enablesReturnKeyAutomatically = YES;
+    
+    StartView *start = [StartView shareStartView];
+    [KeyWindow addSubview:start];
 }
 
 - (void)initSocket {
