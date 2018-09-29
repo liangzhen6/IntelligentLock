@@ -8,9 +8,11 @@
 
 #import "AppDelegate.h"
 #import "LockConnectManger.h"
-#import "StartView.h"
 #import "MainNavViewController.h"
-#import "ViewController.h"
+#import "MainViewController.h"
+#import "MangerViewController.h"
+#import "LeftMenuViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -24,13 +26,23 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[LockConnectManger shareLockConnectManger] observeReachabilityStatus];
-    self.window = [[UIWindow alloc] initWithFrame:Screen_Frame];
-    self.window.rootViewController = [[MainNavViewController alloc] initWithRootViewController:[[ViewController alloc] init]];
-    [self.window makeKeyAndVisible];
+    
+    [self initWindow];
     // Override point for customization after application launch.
     return YES;
 }
-
+- (void)initWindow {
+    self.window = [[UIWindow alloc] initWithFrame:Screen_Frame];
+    MangerViewController * mangerVC = [MangerViewController shareMangerViewController];
+    LeftMenuViewController * leftVC = [[LeftMenuViewController alloc] init];
+    
+    MainViewController * mainVC = [[MainViewController alloc] init];
+    MainNavViewController * mainNav = [[MainNavViewController alloc] initWithRootViewController:mainVC];
+    
+    [mangerVC setLeftViewController:leftVC mainViewController:mainNav];
+    self.window.rootViewController = mangerVC;
+    [self.window makeKeyAndVisible];
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     [[LockConnectManger shareLockConnectManger] willResignActive];

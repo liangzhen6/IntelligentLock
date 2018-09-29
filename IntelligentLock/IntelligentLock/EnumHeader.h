@@ -54,5 +54,16 @@ typedef NS_ENUM(NSUInteger, MType) {
     commandMType,   ///< 指令
 };
 
+// 用户使用touch ID 触发的事件
+typedef NS_ENUM(NSUInteger, TouchIdReply) {
+    TouchIdReplyCancel = 0, ///< 用户点了取消
+    TouchIdReplyPasswordLogin, ///< 用户点了使用密码登录
+};
+
+// startbtn 的事件类型
+typedef NS_ENUM(NSUInteger, StartBtnActionType) {
+    StartBtnActionTypeTap = 0,  ///< 点击事件
+    StartBtnActionTypeLongPress, ///< 长按事件
+};
 
 #endif /* EnumHeader_h */

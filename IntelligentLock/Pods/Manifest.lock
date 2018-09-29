@@ -16,23 +16,27 @@ PODS:
     - AFNetworking/NSURLSession
   - CocoaAsyncSocket (7.6.3)
   - NullSafe (1.2.3)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.2.1)
   - CocoaAsyncSocket (~> 7.6.3)
   - NullSafe (~> 1.2.3)
+  - SVProgressHUD (~> 2.2.5)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - CocoaAsyncSocket
     - NullSafe
+    - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   CocoaAsyncSocket: eafaa68a7e0ec99ead0a7b35015e0bf25d2c8987
   NullSafe: c5dde0d07fe0136a8194d6af9e285b0322b6c068
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: db15afb9652955f25eb8d7c1627ae273c93a4bd7
+PODFILE CHECKSUM: 93f35991dc4fb92811e9a768b4564a21239af583
 
 COCOAPODS: 1.5.0

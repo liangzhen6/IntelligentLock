@@ -7,7 +7,6 @@
 //
 
 #import "StartView.h"
-#import "StartAnimationManger.h"
 
 @interface StartView ()
 @property (weak, nonatomic) IBOutlet UIButton *startBtn;
@@ -29,14 +28,12 @@ static StartView * _startView = nil;
     NSString * className = NSStringFromClass([self class]);
     UINib * nib = [UINib nibWithNibName:className bundle:nil];
     StartView * start = [nib instantiateWithOwner:nil options:nil].firstObject;
-    [start initAnimation];
+//    [start initAnimation];
     start.frame = Screen_Frame;
     return start;
 }
 
 - (void)initAnimation {
-    _welcomeTitle.text = @"欢迎回来~";
-    
     CABasicAnimation * rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotation.fromValue = [NSNumber numberWithFloat:0.0];
     rotation.toValue = [NSNumber numberWithFloat:M_PI*2];
@@ -67,25 +64,58 @@ static StartView * _startView = nil;
 
 - (void)setStartRevolve:(BOOL)revolve {
     if (revolve) {
+//        _welcomeTitle.text = @"欢迎回来~";
+        [self initAnimation];
         [self resumeLayer:_startBtn.layer];
-        // 旋转的时候隐藏 welcomeTitle
-        [UIView animateWithDuration:1.0 animations:^{
-            self.welcomeTitle.alpha = 0.0;
-        }];
+        //设置按钮 交互失效
+        self.startBtn.userInteractionEnabled = NO;
+//        // 旋转的时候隐藏 welcomeTitle
+//        [UIView animateWithDuration:1.0 animations:^{
+//            self.welcomeTitle.alpha = 0.0;
+//        }];
     } else {
+        _welcomeTitle.text = @"欢迎回来~";
         [self pauseLayer:_startBtn.layer];
         // 暂停的时候展示 welcomeTitle
         [UIView animateWithDuration:1.0 animations:^{
             self.welcomeTitle.alpha = 1.0;
-        } completion:^(BOOL finished) {
-            [[StartAnimationManger shareStartAnimationManger] startAnimationWithBackMainView:KeyWindow.rootViewController.view startView:_startView];
         }];
     }
 }
+// 设置提示语句
+- (void)alertTitle:(NSString *)title {
+    _welcomeTitle.text = title;
+    // 设置呼吸灯效果 opacity
+    CABasicAnimation * opacity = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    opacity.fromValue = [NSNumber numberWithFloat:0.0];
+    opacity.toValue = [NSNumber numberWithFloat:1.0];
+    opacity.duration = 1.5;
+    // 执行可逆动画
+    opacity.autoreverses = YES;
+    // 设置永远执行动画
+    opacity.repeatCount = MAXFLOAT;
+    [_welcomeTitle.layer addAnimation:opacity forKey:@"opacity"];
+
+}
 
 - (IBAction)startBtnAction:(UIButton *)sender {
-    sender.selected = !sender.selected;
-    [self setStartRevolve:sender.selected];
+    // 点击 按钮的事件
+    //1.先停掉动画
+    [_welcomeTitle.layer removeAllAnimations];
+    //2. block 通知其他页面处理
+    if (self.startBtnBlock) {
+        self.startBtnBlock(StartBtnActionTypeTap);
+    }
+    
+}
+- (IBAction)btnLongPressAction:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        [_welcomeTitle.layer removeAllAnimations];
+        // 开始的时候执行，防止多次触发
+        if (self.startBtnBlock) {
+            self.startBtnBlock(StartBtnActionTypeLongPress);
+        }
+    }
 }
 
 /*

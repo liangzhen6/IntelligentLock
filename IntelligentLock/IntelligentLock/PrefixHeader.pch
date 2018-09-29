@@ -26,6 +26,10 @@
 #define Screen_Height    [[UIScreen mainScreen] bounds].size.height
 #define KeyWindow [[[UIApplication sharedApplication] delegate] window]
 #define RGBColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+
+#define MaginWidth 300.0f //左侧菜单栏的偏移量
+#define LeftViewAlpha 0.5f // mianView 的最大透明度
+
 //88
 #define NavBarHeight (iPhoneX ? 88.0 : 64.0)
 #define NavBar_SafeArea 44.0

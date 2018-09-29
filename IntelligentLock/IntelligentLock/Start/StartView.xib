@@ -20,7 +20,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3BO-Z7-rcr">
-                    <rect key="frame" x="147.5" y="303.5" width="80" height="80"/>
+                    <rect key="frame" x="147.5" y="294.5" width="80" height="80"/>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="Scb-gO-cmd"/>
                         <constraint firstAttribute="width" constant="80" id="qxu-q2-3rn"/>
@@ -28,14 +29,15 @@
                     <state key="normal" image="start_btn"/>
                     <connections>
                         <action selector="startBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="NUo-pU-Yf6"/>
+                        <outletCollection property="gestureRecognizers" destination="RVR-ZB-lNE" appends="YES" id="Gyq-1K-NXX"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYM-Vl-bOV">
-                    <rect key="frame" x="0.0" y="93.5" width="375" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rYM-Vl-bOV">
+                    <rect key="frame" x="0.0" y="74.5" width="375" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="WDL-LN-hFM"/>
+                        <constraint firstAttribute="height" constant="40" id="WDL-LN-hFM"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -45,7 +47,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rYM-Vl-bOV" secondAttribute="trailing" id="2t1-tl-U0F"/>
                 <constraint firstAttribute="trailing" secondItem="5Nj-XZ-VW8" secondAttribute="trailing" id="3MT-gh-bhW"/>
                 <constraint firstItem="3BO-Z7-rcr" firstAttribute="top" secondItem="rYM-Vl-bOV" secondAttribute="bottom" constant="180" id="Ceh-np-isL"/>
-                <constraint firstItem="3BO-Z7-rcr" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="KET-KY-ctP"/>
+                <constraint firstItem="3BO-Z7-rcr" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="-9" id="KET-KY-ctP"/>
                 <constraint firstItem="5Nj-XZ-VW8" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="NFw-g9-yhq"/>
                 <constraint firstAttribute="bottom" secondItem="5Nj-XZ-VW8" secondAttribute="bottom" id="byk-H0-LtD"/>
                 <constraint firstItem="rYM-Vl-bOV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="d8J-xH-QOz"/>
@@ -58,6 +60,11 @@
                 <outlet property="welcomeTitle" destination="rYM-Vl-bOV" id="lgc-mb-ZP9"/>
             </connections>
         </view>
+        <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="1" id="RVR-ZB-lNE">
+            <connections>
+                <action selector="btnLongPressAction:" destination="iN0-l3-epB" id="rjk-bQ-vjL"/>
+            </connections>
+        </pongPressGestureRecognizer>
     </objects>
     <resources>
         <image name="page_4" width="303" height="451"/>

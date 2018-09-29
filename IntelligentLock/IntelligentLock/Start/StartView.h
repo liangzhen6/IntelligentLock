@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef void(^StartBtnBlock)(StartBtnActionType btnActionType);
 @interface StartView : UIView
+@property(nonatomic,copy)StartBtnBlock startBtnBlock;
 + (id)shareStartView;
 - (void)setStartRevolve:(BOOL)revolve;
-
+- (void)alertTitle:(NSString *)title;
 @end

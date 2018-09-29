@@ -1,18 +1,18 @@
 //
-//  MainNavViewController.m
+//  RootViewController.m
 //  IntelligentLock
 //
-//  Created by shenzhenshihua on 2018/9/28.
+//  Created by shenzhenshihua on 2018/9/29.
 //  Copyright © 2018年 liangzhen. All rights reserved.
 //
 
-#import "MainNavViewController.h"
+#import "RootViewController.h"
 
-@interface MainNavViewController ()
+@interface RootViewController ()
 
 @end
 
-@implementation MainNavViewController
+@implementation RootViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

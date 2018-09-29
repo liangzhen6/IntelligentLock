@@ -19,6 +19,14 @@
 		92E3B3087760D8C6FC66638F /* libPods-IntelligentLockTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57B3750CA7991774773210F8 /* libPods-IntelligentLockTests.a */; };
 		AC9203D2B8E81BAFBF6D77E8 /* libPods-IntelligentLock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C1CE2BD8DDAB9007823250 /* libPods-IntelligentLock.a */; };
 		D0799940E91850189764C7D7 /* libPods-IntelligentLockUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636D75322C6E658DD8BF8B6C /* libPods-IntelligentLockUITests.a */; };
+		FA0A8989215F732000473305 /* MangerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A8988215F732000473305 /* MangerViewController.m */; };
+		FA0A898D215F73DD00473305 /* LeftMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A898B215F73DD00473305 /* LeftMenuViewController.m */; };
+		FA0A898E215F73DD00473305 /* LeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0A898C215F73DD00473305 /* LeftMenuViewController.xib */; };
+		FA0A8991215F743600473305 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A8990215F743600473305 /* RootViewController.m */; };
+		FA0A8995215F744F00473305 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A8993215F744F00473305 /* MainViewController.m */; };
+		FA0A8996215F744F00473305 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0A8994215F744F00473305 /* MainViewController.xib */; };
+		FA0A899A215F890400473305 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A8998215F890400473305 /* LoginViewController.m */; };
+		FA0A899B215F890400473305 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0A8999215F890400473305 /* LoginViewController.xib */; };
 		FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */; };
 		FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */; };
 		FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79F215B8520001A4BE4 /* LockConnectManger.m */; };
@@ -75,6 +83,19 @@
 		8AB2E0EAC3D8E284AE4703C0 /* Pods-IntelligentLockTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockTests/Pods-IntelligentLockTests.release.xcconfig"; sourceTree = "<group>"; };
 		E4DC28726938D26B52F7E993 /* Pods-IntelligentLock.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLock.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock.debug.xcconfig"; sourceTree = "<group>"; };
 		EA57DCC44EF8447CA37A2AE8 /* Pods-IntelligentLockUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockUITests/Pods-IntelligentLockUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA0A8987215F732000473305 /* MangerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MangerViewController.h; sourceTree = "<group>"; };
+		FA0A8988215F732000473305 /* MangerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MangerViewController.m; sourceTree = "<group>"; };
+		FA0A898A215F73DD00473305 /* LeftMenuViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewController.h; sourceTree = "<group>"; };
+		FA0A898B215F73DD00473305 /* LeftMenuViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
+		FA0A898C215F73DD00473305 /* LeftMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftMenuViewController.xib; sourceTree = "<group>"; };
+		FA0A898F215F743600473305 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		FA0A8990215F743600473305 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		FA0A8992215F744F00473305 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		FA0A8993215F744F00473305 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		FA0A8994215F744F00473305 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		FA0A8997215F890400473305 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		FA0A8998215F890400473305 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FA0A8999215F890400473305 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		FA17D798215B7BFD001A4BE4 /* BluetoothCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothCenter.h; sourceTree = "<group>"; };
 		FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothCenter.m; sourceTree = "<group>"; };
 		FA17D79B215B7D61001A4BE4 /* AlertConreoller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertConreoller.h; sourceTree = "<group>"; };
@@ -152,17 +173,11 @@
 				32C21ACB21454F28002643BD /* AppDelegate.h */,
 				32C21ACC21454F28002643BD /* AppDelegate.m */,
 				32C21AFD21455179002643BD /* Library */,
+				FA0A8986215F729000473305 /* Tools */,
 				FA2A7A0621463CE9002337D4 /* MesModel.h */,
 				FA2A7A0721463CE9002337D4 /* MesModel.m */,
-				FA82882D215E4EFF003C64C0 /* MainNavViewController.h */,
-				FA82882E215E4EFF003C64C0 /* MainNavViewController.m */,
-				FA2A7A0B21466835002337D4 /* Tools.h */,
-				FA2A7A0C21466835002337D4 /* Tools.m */,
-				FA82882A215E49E8003C64C0 /* StartAnimationManger.h */,
-				FA82882B215E49E8003C64C0 /* StartAnimationManger.m */,
-				FA828825215E2311003C64C0 /* StartView.h */,
-				FA828826215E2311003C64C0 /* StartView.m */,
-				FA828828215E231B003C64C0 /* StartView.xib */,
+				FA0A8984215F723600473305 /* MianViewController */,
+				FA0A8985215F726900473305 /* Start */,
 				32C21ACE21454F28002643BD /* ViewController.h */,
 				32C21ACF21454F28002643BD /* ViewController.m */,
 				32C21AD121454F28002643BD /* Main.storyboard */,
@@ -232,6 +247,49 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FA0A8984215F723600473305 /* MianViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A8987215F732000473305 /* MangerViewController.h */,
+				FA0A8988215F732000473305 /* MangerViewController.m */,
+				FA82882D215E4EFF003C64C0 /* MainNavViewController.h */,
+				FA82882E215E4EFF003C64C0 /* MainNavViewController.m */,
+				FA0A898A215F73DD00473305 /* LeftMenuViewController.h */,
+				FA0A898B215F73DD00473305 /* LeftMenuViewController.m */,
+				FA0A898C215F73DD00473305 /* LeftMenuViewController.xib */,
+				FA0A8997215F890400473305 /* LoginViewController.h */,
+				FA0A8998215F890400473305 /* LoginViewController.m */,
+				FA0A8999215F890400473305 /* LoginViewController.xib */,
+				FA0A898F215F743600473305 /* RootViewController.h */,
+				FA0A8990215F743600473305 /* RootViewController.m */,
+				FA0A8992215F744F00473305 /* MainViewController.h */,
+				FA0A8993215F744F00473305 /* MainViewController.m */,
+				FA0A8994215F744F00473305 /* MainViewController.xib */,
+			);
+			path = MianViewController;
+			sourceTree = "<group>";
+		};
+		FA0A8985215F726900473305 /* Start */ = {
+			isa = PBXGroup;
+			children = (
+				FA82882A215E49E8003C64C0 /* StartAnimationManger.h */,
+				FA82882B215E49E8003C64C0 /* StartAnimationManger.m */,
+				FA828825215E2311003C64C0 /* StartView.h */,
+				FA828826215E2311003C64C0 /* StartView.m */,
+				FA828828215E231B003C64C0 /* StartView.xib */,
+			);
+			path = Start;
+			sourceTree = "<group>";
+		};
+		FA0A8986215F729000473305 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				FA2A7A0B21466835002337D4 /* Tools.h */,
+				FA2A7A0C21466835002337D4 /* Tools.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -243,6 +301,7 @@
 				32C21AC421454F28002643BD /* Sources */,
 				32C21AC521454F28002643BD /* Frameworks */,
 				32C21AC621454F28002643BD /* Resources */,
+				7D298CEE6BF197FF60F8EBA2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -339,8 +398,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				32C21AD821454F29002643BD /* LaunchScreen.storyboard in Resources */,
+				FA0A8996215F744F00473305 /* MainViewController.xib in Resources */,
 				32C21AD521454F29002643BD /* Assets.xcassets in Resources */,
 				32C21AD321454F28002643BD /* Main.storyboard in Resources */,
+				FA0A898E215F73DD00473305 /* LeftMenuViewController.xib in Resources */,
+				FA0A899B215F890400473305 /* LoginViewController.xib in Resources */,
 				FA828829215E231B003C64C0 /* StartView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,6 +478,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7D298CEE6BF197FF60F8EBA2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-IntelligentLock/Pods-IntelligentLock-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -426,15 +506,20 @@
 				FA2A7A0D21466835002337D4 /* Tools.m in Sources */,
 				FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */,
 				32C21B002145519B002643BD /* Socket.m in Sources */,
+				FA0A8995215F744F00473305 /* MainViewController.m in Sources */,
 				FA82882F215E4EFF003C64C0 /* MainNavViewController.m in Sources */,
+				FA0A898D215F73DD00473305 /* LeftMenuViewController.m in Sources */,
 				32C21AD021454F28002643BD /* ViewController.m in Sources */,
+				FA0A899A215F890400473305 /* LoginViewController.m in Sources */,
 				FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */,
+				FA0A8989215F732000473305 /* MangerViewController.m in Sources */,
 				32C21ADB21454F29002643BD /* main.m in Sources */,
 				FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */,
 				32C21ACD21454F28002643BD /* AppDelegate.m in Sources */,
 				FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */,
 				FA828827215E2311003C64C0 /* StartView.m in Sources */,
 				FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */,
+				FA0A8991215F743600473305 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

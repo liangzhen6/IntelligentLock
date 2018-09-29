@@ -8,6 +8,7 @@
 
 #import "Tools.h"
 #import <CommonCrypto/CommonCrypto.h>
+#import <LocalAuthentication/LocalAuthentication.h>
 
 @interface Tools ()
 
@@ -203,4 +204,112 @@ static NSString const * key = @"ADER19T22H2K56U5";
     }
     return hexData;
 }
+
+- (NSError *)chickTouchIdCanUse {
+    NSError * error = nil; // 默认为 nil 是可用
+    LAContext * context = [[LAContext alloc] init];
+    /*
+     LAPolicyDeviceOwnerAuthenticationWithBiometrics  > ios 8.0只能通过指纹验证才能成功（常用 推荐）
+     LAPolicyDeviceOwnerAuthentication >ios 9.0 这种方式用户可以指纹验证或者输入密码。（会让用户与本来的账号密码混淆）
+     */
+    if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
+        // 存在错误
+        NSLog(@"%@",error);
+        switch (error.code) {
+            case LAErrorTouchIDNotEnrolled:
+                {// 没有设置Touch Id
+                    error = [[NSError alloc] initWithDomain:NSOSStatusErrorDomain code:-1002 userInfo:@{NSLocalizedDescriptionKey:@"用户没有设置ID", NSUnderlyingErrorKey:@"请先去设置页面开通指纹"}];
+                }
+                break;
+            case LAErrorPasscodeNotSet:
+                {// 没有设置 密码
+                    error = [[NSError alloc] initWithDomain:NSOSStatusErrorDomain code:-1003 userInfo:@{NSLocalizedDescriptionKey:@"用户没有设置解锁密码", NSUnderlyingErrorKey:@"请先去设置页面设置解锁密码"}];
+                }
+                break;
+            case LAErrorTouchIDLockout:
+                {// 多次验证失败被锁 ID
+                    error = [[NSError alloc] initWithDomain:NSOSStatusErrorDomain code:-1004 userInfo:@{NSLocalizedDescriptionKey:@"多次授权失败", NSUnderlyingErrorKey:@"指纹多次输入错误，请稍后再试"}];
+                }
+                break;
+            default:
+                { // 其他 都算是不支持指纹
+                 error = [[NSError alloc] initWithDomain:NSOSStatusErrorDomain code:-1001 userInfo:@{NSLocalizedDescriptionKey:@"设备不支持", NSUnderlyingErrorKey:@"你的设备暂不支持指纹！"}];
+                }
+                break;
+        }
+    }
+    
+    return error;
+}
+
+- (void)verbTouchIdResult:(void(^)(BOOL success, NSError *error))result replyAction:(void(^)(TouchIdReply reply))reply {
+    NSError * chickError = [self chickTouchIdCanUse];
+    
+    if (chickError) {
+        // 直接检查不通过
+        if (result) {
+            result(NO, chickError);
+        }
+    } else {
+        LAContext * context = [[LAContext alloc] init];
+        NSString * reasion = @"通过Home键验证已有手机指纹";
+        
+        context.localizedFallbackTitle = @"密码登录";
+        context.localizedCancelTitle = @"取消";
+        
+        // 检查通过，下面开始验证
+        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:reasion reply:^(BOOL success, NSError * _Nullable error) {
+            if (success) {
+                if (result) {
+                    result(YES, nil);
+                }
+            } else {
+                switch (error.code) {
+                    case LAErrorUserCancel:
+                        {// 用户取消了验证
+                            NSError * resultError = [[NSError alloc] initWithDomain:NSOSStatusErrorDomain code:-1009 userInfo:@{NSLocalizedDescriptionKey:@"用户点击了取消", NSUnderlyingErrorKey:@"你取消了指纹验证"}];
+                            if (result) {
+                                result(NO, resultError);
+                            }
+                            if (reply) {
+                                reply(TouchIdReplyCancel);
+                            }
+                        }
+                        break;
+                    case LAErrorAuthenticationFailed:
+                        {// 用户验证失败
+                         NSError * resultError = [[NSError alloc] initWithDomain:NSOSStatusErrorDomain code:-1005 userInfo:@{NSLocalizedDescriptionKey:@"用户验证失败", NSUnderlyingErrorKey:@"指纹验证失败，请稍后再试"}];
+                            if (result) {
+                                result(NO, resultError);
+                            }
+                        }
+                        break;
+                    case LAErrorUserFallback:
+                        {// 用户身份验证被取消，因为用户点击了后退按钮(输入密码)
+                            NSError * resultError = [[NSError alloc] initWithDomain:NSOSStatusErrorDomain code:-1010 userInfo:@{NSLocalizedDescriptionKey:@"用户选择账号密码登录", NSUnderlyingErrorKey:@"你将使用账号密码登录"}];
+                            if (result) {
+                                result(NO, resultError);
+                            }
+                            if (reply) {
+                                reply(TouchIdReplyPasswordLogin);
+                            }
+                        }
+                        break;
+                    case LAErrorTouchIDLockout:
+                        {// 如果多次输入错误的指纹，验证授权会被锁定，这个时候需要用户锁定手机屏幕后，再次进入手机输入密码才能解锁。
+                            NSError * resultError = [[NSError alloc] initWithDomain:NSOSStatusErrorDomain code:-1004 userInfo:@{NSLocalizedDescriptionKey:@"多次授权失败", NSUnderlyingErrorKey:@"指纹多次输入错误，请稍后再试"}];
+                            if (result) {
+                                result(NO, resultError);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }];
+    }
+    
+}
+
 @end
