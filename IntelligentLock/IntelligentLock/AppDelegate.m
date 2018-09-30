@@ -18,11 +18,6 @@
 @end
 
 @implementation AppDelegate
-/*
- 启动的时候加一个自定义动画
- 
- 开门的效果 如 http://www.demodashi.com/demo/11612.html
- */
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[LockConnectManger shareLockConnectManger] observeReachabilityStatus];

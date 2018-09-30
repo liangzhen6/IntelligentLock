@@ -9,8 +9,8 @@
 #import "ViewController.h"
 #import "Socket.h"
 #import "MesModel.h"
-#import "LockConnectManger.h"
-#import "BluetoothCenter.h"
+//#import "LockConnectManger.h"
+//#import "BluetoothCenter.h"
 #import "StartView.h"
 #import "StartAnimationManger.h"
 #import "Tools.h"
@@ -26,7 +26,7 @@
     [super viewDidLoad];
 //    [self initSocket];
     self.view.backgroundColor = [UIColor whiteColor];
-    [[LockConnectManger shareLockConnectManger] connect];
+//    [[LockConnectManger shareLockConnectManger] connect];
     [self initView];
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -88,7 +88,7 @@
     [self sendMessage];
     return YES;
 }
-
+/*
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [[BluetoothCenter shareBluetoothCenter] sendCommandState:YES completion:^(BluetoothLockState state) {
@@ -100,7 +100,7 @@
             NSLog(@"%lu",(unsigned long)state);
         }];
     });
-}
+}*/
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -57,31 +57,34 @@ static LockConnectManger * _lockConnectManger;
 }
 
 - (void)connect {
-    if (self.connectState == ConnectStateUnConnect) {
-        // 如果是断线状态 就 连接
-        // 1.先尝试 蓝牙连接
-        __weak LockConnectManger * weakSelf = self;
-        [[BluetoothCenter shareBluetoothCenter] bluetoothLockConnectCompletion:^(BluetoothLockLinkState state) {
-            if (state == BluetoothLockLinkStateOn) {
-                weakSelf.connectState = ConnectStateConnectedBluetooth;
-                // 如果socket 已经连接 把socket 关闭
-                if (weakSelf.connectState == ConnectStateConnectedSocket) {
-                    [[Socket shareSocket] setCanConnect:NO];
-                    [[Socket shareSocket] closeConnect];
-                }
-            } else {
-                // 如果是 不能连接状态 就使用socket 连接
-                [[Socket shareSocket] setCanConnect:YES]; //设置可以进行链接
-                [Socket shareSocketWithHost:@"192.168.1.104" port:8008];
-                [[Socket shareSocket] connectServerWithCompletion:^(SocketConnectState connectState) {
-                    if (connectState == SocketConnectStateConnected) {
-                        weakSelf.connectState = ConnectStateConnectedSocket;
-                    } else {
-                        weakSelf.connectState = ConnectStateUnConnect;
+    if (_lockMangerCanConnect) {
+        // 允许链接的时候才链接
+        if (self.connectState == ConnectStateUnConnect) {
+            // 如果是断线状态 就 连接
+            // 1.先尝试 蓝牙连接
+            __weak LockConnectManger * weakSelf = self;
+            [[BluetoothCenter shareBluetoothCenter] bluetoothLockConnectCompletion:^(BluetoothLockLinkState state) {
+                if (state == BluetoothLockLinkStateOn) {
+                    weakSelf.connectState = ConnectStateConnectedBluetooth;
+                    // 如果socket 已经连接 把socket 关闭
+                    if (weakSelf.connectState == ConnectStateConnectedSocket) {
+                        [[Socket shareSocket] setCanConnect:NO];
+                        [[Socket shareSocket] closeConnect];
                     }
-                }];
-            }
-        }];
+                } else {
+                    // 如果是 不能连接状态 就使用socket 连接
+                    [[Socket shareSocket] setCanConnect:YES]; //设置可以进行链接
+                    [Socket shareSocketWithHost:@"192.168.1.104" port:8008];
+                    [[Socket shareSocket] connectServerWithCompletion:^(SocketConnectState connectState) {
+                        if (connectState == SocketConnectStateConnected) {
+                            weakSelf.connectState = ConnectStateConnectedSocket;
+                        } else {
+                            weakSelf.connectState = ConnectStateUnConnect;
+                        }
+                    }];
+                }
+            }];
+        }
     }
 }
 

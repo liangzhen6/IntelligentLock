@@ -11,6 +11,7 @@
 @interface LockConnectManger : NSObject
 @property(nonatomic,assign)BOOL appIsAction; ///< App是否处理活跃状态
 @property(nonatomic,assign)ConnectState connectState; ///< 链接的状态
+@property(nonatomic,assign)BOOL lockMangerCanConnect;
 
 + (id)shareLockConnectManger;
 

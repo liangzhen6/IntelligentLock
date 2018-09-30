@@ -10,6 +10,7 @@ target 'IntelligentLock' do
   pod 'AFNetworking', '~> 3.2.1'
   pod 'NullSafe', '~> 1.2.3'
   pod 'SVProgressHUD', '~> 2.2.5'
+  pod 'AFNetworking', '~> 3.2.1'
 
   target 'IntelligentLockTests' do
     inherit! :search_paths

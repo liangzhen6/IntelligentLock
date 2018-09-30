@@ -172,21 +172,19 @@
 			children = (
 				32C21ACB21454F28002643BD /* AppDelegate.h */,
 				32C21ACC21454F28002643BD /* AppDelegate.m */,
-				32C21AFD21455179002643BD /* Library */,
-				FA0A8986215F729000473305 /* Tools */,
-				FA2A7A0621463CE9002337D4 /* MesModel.h */,
-				FA2A7A0721463CE9002337D4 /* MesModel.m */,
-				FA0A8984215F723600473305 /* MianViewController */,
 				FA0A8985215F726900473305 /* Start */,
+				FA0A8986215F729000473305 /* Tools */,
+				32C21AFD21455179002643BD /* ConnectMessageManger */,
+				FAD31C9D2160A6D80063B9BC /* RootViewController */,
+				FAD31C9C2160A6A90063B9BC /* MainViewManger */,
+				FA0A8984215F723600473305 /* MianViewController */,
+				FAD31C9E2160A7230063B9BC /* LoginViewController */,
+				FAD31C9B2160A5F70063B9BC /* SupportFile */,
 				32C21ACE21454F28002643BD /* ViewController.h */,
 				32C21ACF21454F28002643BD /* ViewController.m */,
 				32C21AD121454F28002643BD /* Main.storyboard */,
 				32C21AD421454F29002643BD /* Assets.xcassets */,
 				32C21AD621454F29002643BD /* LaunchScreen.storyboard */,
-				32C21AD921454F29002643BD /* Info.plist */,
-				FAE1CA552149223E002B1788 /* PrefixHeader.pch */,
-				FAE1CA5721492396002B1788 /* EnumHeader.h */,
-				32C21ADA21454F29002643BD /* main.m */,
 			);
 			path = IntelligentLock;
 			sourceTree = "<group>";
@@ -209,19 +207,19 @@
 			path = IntelligentLockUITests;
 			sourceTree = "<group>";
 		};
-		32C21AFD21455179002643BD /* Library */ = {
+		32C21AFD21455179002643BD /* ConnectMessageManger */ = {
 			isa = PBXGroup;
 			children = (
+				FA2A7A0621463CE9002337D4 /* MesModel.h */,
+				FA2A7A0721463CE9002337D4 /* MesModel.m */,
 				32C21AFF2145519B002643BD /* Socket.h */,
 				32C21AFE2145519B002643BD /* Socket.m */,
 				FA17D798215B7BFD001A4BE4 /* BluetoothCenter.h */,
 				FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */,
-				FA17D79B215B7D61001A4BE4 /* AlertConreoller.h */,
-				FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */,
 				FA17D79E215B8520001A4BE4 /* LockConnectManger.h */,
 				FA17D79F215B8520001A4BE4 /* LockConnectManger.m */,
 			);
-			path = Library;
+			path = ConnectMessageManger;
 			sourceTree = "<group>";
 		};
 		5167AF301E89B33613C7379B /* Frameworks */ = {
@@ -250,18 +248,6 @@
 		FA0A8984215F723600473305 /* MianViewController */ = {
 			isa = PBXGroup;
 			children = (
-				FA0A8987215F732000473305 /* MangerViewController.h */,
-				FA0A8988215F732000473305 /* MangerViewController.m */,
-				FA82882D215E4EFF003C64C0 /* MainNavViewController.h */,
-				FA82882E215E4EFF003C64C0 /* MainNavViewController.m */,
-				FA0A898A215F73DD00473305 /* LeftMenuViewController.h */,
-				FA0A898B215F73DD00473305 /* LeftMenuViewController.m */,
-				FA0A898C215F73DD00473305 /* LeftMenuViewController.xib */,
-				FA0A8997215F890400473305 /* LoginViewController.h */,
-				FA0A8998215F890400473305 /* LoginViewController.m */,
-				FA0A8999215F890400473305 /* LoginViewController.xib */,
-				FA0A898F215F743600473305 /* RootViewController.h */,
-				FA0A8990215F743600473305 /* RootViewController.m */,
 				FA0A8992215F744F00473305 /* MainViewController.h */,
 				FA0A8993215F744F00473305 /* MainViewController.m */,
 				FA0A8994215F744F00473305 /* MainViewController.xib */,
@@ -286,8 +272,54 @@
 			children = (
 				FA2A7A0B21466835002337D4 /* Tools.h */,
 				FA2A7A0C21466835002337D4 /* Tools.m */,
+				FA17D79B215B7D61001A4BE4 /* AlertConreoller.h */,
+				FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		FAD31C9B2160A5F70063B9BC /* SupportFile */ = {
+			isa = PBXGroup;
+			children = (
+				32C21AD921454F29002643BD /* Info.plist */,
+				FAE1CA552149223E002B1788 /* PrefixHeader.pch */,
+				FAE1CA5721492396002B1788 /* EnumHeader.h */,
+				32C21ADA21454F29002643BD /* main.m */,
+			);
+			path = SupportFile;
+			sourceTree = "<group>";
+		};
+		FAD31C9C2160A6A90063B9BC /* MainViewManger */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A8987215F732000473305 /* MangerViewController.h */,
+				FA0A8988215F732000473305 /* MangerViewController.m */,
+				FA82882D215E4EFF003C64C0 /* MainNavViewController.h */,
+				FA82882E215E4EFF003C64C0 /* MainNavViewController.m */,
+				FA0A898A215F73DD00473305 /* LeftMenuViewController.h */,
+				FA0A898B215F73DD00473305 /* LeftMenuViewController.m */,
+				FA0A898C215F73DD00473305 /* LeftMenuViewController.xib */,
+			);
+			path = MainViewManger;
+			sourceTree = "<group>";
+		};
+		FAD31C9D2160A6D80063B9BC /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A898F215F743600473305 /* RootViewController.h */,
+				FA0A8990215F743600473305 /* RootViewController.m */,
+			);
+			path = RootViewController;
+			sourceTree = "<group>";
+		};
+		FAD31C9E2160A7230063B9BC /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FA0A8997215F890400473305 /* LoginViewController.h */,
+				FA0A8998215F890400473305 /* LoginViewController.m */,
+				FA0A8999215F890400473305 /* LoginViewController.xib */,
+			);
+			path = LoginViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -11,6 +11,7 @@
 #import "Tools.h"
 #import "LoginViewController.h"
 #import "StartAnimationManger.h"
+#import "LockConnectManger.h"
 
 @interface MainViewController ()
 
@@ -55,6 +56,7 @@
     // 开启指纹验证
     [[Tools shareTools] verbTouchIdResult:^(BOOL success, NSError *error) {
         if (success) {
+            [weakSelf handleConnectManger];
             // 验证通过
             dispatch_async(dispatch_get_main_queue(), ^{
                 [startView setStartRevolve:YES];
@@ -64,7 +66,7 @@
                 });
                 // 3s 后关闭 启动页
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[StartAnimationManger shareStartAnimationManger] startAnimationWithBackMainView:weakSelf.view startView:startView];
+                    [[StartAnimationManger shareStartAnimationManger] startAnimationWithBackMainView:weakSelf.navigationController.view startView:startView];
                 });
             });
             
@@ -92,6 +94,11 @@
 - (void)presentLoginVC {
     LoginViewController * loginVC = [[LoginViewController alloc] init];
     [self presentViewController:loginVC animated:YES completion:nil];
+}
+// 处理设备连接
+- (void)handleConnectManger {
+    [[LockConnectManger shareLockConnectManger] setLockMangerCanConnect:YES];
+    [[LockConnectManger shareLockConnectManger] connect];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
