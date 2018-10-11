@@ -18,6 +18,7 @@
 @property(nonatomic,assign)NSInteger afterTimeConnect;
 //@property(nonatomic,strong)NSMutableArray * allSendMessage;
 @property(nonatomic,copy)SocketConnectStateBlock connectStateBlock;
+@property(nonatomic,strong)NSTimer *heartTimer;
 
 @end
 static Socket * _socket = nil;
@@ -131,16 +132,23 @@ static Socket * _socket = nil;
     }
 }
 
-
 #pragma mark =============GCDAsyncSocket delegate=================
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
     MPNLog(@"已经连接到host=%@=========port=%d",host,port);
     //更改连接状态
     _socketConnectState = SocketConnectStateConnected;
+    if (self.connectStateBlock) {
+        self.connectStateBlock(SocketConnectStateConnected);
+    }
     // 开始准备接收消息
     [_asyncSocket readDataWithTimeout:-1 tag:100];
     // 初始化 重新连接的时间
     _afterTimeConnect = 0;
+    [self handleHeart];
+    // 开启定时器
+    if ([self.heartTimer isValid]) {
+        self.heartTimer.fireDate = [NSDate distantPast];
+    }
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
@@ -168,6 +176,13 @@ static Socket * _socket = nil;
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(nullable NSError *)err {
     MPNLog(@"socket:%@已经断开连接，错误:%@",sock,err);
     _socketConnectState = SocketConnectStateUnConnect;
+    if (self.connectStateBlock) {
+        self.connectStateBlock(SocketConnectStateUnConnect);
+    }
+    // 暂停定时器
+    if ([self.heartTimer isValid]) {
+        self.heartTimer.fireDate = [NSDate distantFuture];
+    }
     if (_canConnect) {
         //处理 重连问题
         [self handleReConnect];
@@ -182,6 +197,28 @@ static Socket * _socket = nil;
         //重新连接操作
         [ws connectServer];
     });
+}
+
+- (NSTimer *)heartTimer {
+    if (_heartTimer == nil) {
+        __weak typeof (self) ws = self;
+        _heartTimer = [NSTimer scheduledTimerWithTimeInterval:15.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [ws handleHeart];
+        }];
+        [[NSRunLoop currentRunLoop] addTimer:_heartTimer forMode:NSRunLoopCommonModes];
+        [[NSRunLoop currentRunLoop] run];
+    }
+    return _heartTimer;
+}
+
+/**
+ 发送心跳数据
+ */
+- (void)handleHeart {
+    UInt64 recordTime = [[NSDate date] timeIntervalSince1970];
+    NSString * heartStr = [NSString stringWithFormat:@"%llu", recordTime];
+    MesModel * model = [MesModel mesModelType:heartMType message:heartStr lockLink:nil lockState:nil];
+    [self sentMessage:model progress:nil];
 }
 
 //- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket {

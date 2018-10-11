@@ -80,7 +80,7 @@
         MesModel * model = [MesModel mesModelType:heartMType message:heartStr lockLink:nil lockState:nil];
         [[Socket shareSocket] sentMessage:model progress:nil];
     }];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
 }
 
 #pragma mark --- (BOOL)textFieldShouldReturn:(UITextField *)textField;

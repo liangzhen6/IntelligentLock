@@ -18,6 +18,7 @@
 @property(nonatomic,assign)BluetoothLockState lockState;
 @property(nonatomic,copy)SendCommandBlock commandBlock;
 @property(nonatomic,copy)ConnectBlock connectBlock;
+@property(nonatomic,assign)BOOL isNotFristScan;
 @end
 static BluetoothCenter * _bluetoothCenter;
 static NSString * const commandOn = @"ff";  ///< 开启
@@ -77,13 +78,22 @@ static NSString * const commandOff = @"00"; ///< 关闭
             break;
         case CBManagerStatePoweredOff:
             {// 关闭可用
-                [AlertConreoller alertControllerWithController:nil title:@"提示" message:@"请你打开蓝牙开关" cancelButtonTitle:@"暂不打开" otherButtonTitle:@"现在设置" cancelAction:^{
-                    // 拒绝了开启
-                    [self handleLinkState:BluetoothLockLinkStateOff];
-                } otherAction:^{
-                    // 跳到设置界面去设置
-                    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
-                }];
+                 //拒绝了开启
+                [self handleLinkState:BluetoothLockLinkStateOff];
+//                if (_isNotFristScan) {
+//                    // 拒绝了开启
+//                    [self handleLinkState:BluetoothLockLinkStateOff];
+//                } else {
+//                    __weak typeof (self)ws = self;
+//                    [AlertConreoller alertControllerWithController:nil title:@"提示" message:@"请你打开蓝牙开关" cancelButtonTitle:@"暂不打开" otherButtonTitle:@"现在设置" cancelAction:^{
+//                        // 拒绝了开启
+//                        [self handleLinkState:BluetoothLockLinkStateOff];
+//                        ws.isNotFristScan = YES;
+//                    } otherAction:^{
+//                        // 跳到设置界面去设置
+//                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString] options:@{} completionHandler:nil];
+//                    }];
+//                }
             }
             break;
         case CBManagerStateUnsupported:
@@ -159,6 +169,7 @@ static NSString * const commandOff = @"00"; ///< 关闭
     // 这里只获取一个特征，写入数据的时候需要用到这个特征
     self.characteristic = service.characteristics.firstObject;
     MPNLog(@"%@",self.characteristic.description);
+    
     /*
      直接读取这个特征数据，会调用didUpdateValueForCharacteristic
     [peripheral readValueForCharacteristic:self.characteristic];
@@ -210,7 +221,7 @@ static NSString * const commandOff = @"00"; ///< 关闭
     }
     // 将指令转换为 16 进制的方式
     NSData *data = [[Tools shareTools] convertHexStrToData:commandStr];
-    
+
     [self.peripheral writeValue:data forCharacteristic:self.characteristic type:CBCharacteristicWriteWithResponse];
 }
 

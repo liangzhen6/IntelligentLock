@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+typedef void(^LockStateBlock)(ConnectState connectState, BluetoothLockState lockState);
 @interface LockConnectManger : NSObject
 @property(nonatomic,assign)BOOL appIsAction; ///< App是否处理活跃状态
 @property(nonatomic,assign)ConnectState connectState; ///< 链接的状态
 @property(nonatomic,assign)BOOL lockMangerCanConnect;
-
+@property(nonatomic,copy)LockStateBlock lockStateBlock;
 + (id)shareLockConnectManger;
 
 /**
@@ -39,4 +39,9 @@
  关闭 连接
  */
 - (void)closeConnect;
+
+/**
+ 开门操作
+ */
+- (void)openLock;
 @end

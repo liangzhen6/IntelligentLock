@@ -6,18 +6,16 @@ import json
 class Prpcrypt(object):
 	"""docstring for ClassName"""
 	def __init__(self):
-		self.key = 'ADER19T22H2K56U5'.encode('utf8')
+		self.key = 'ADER19T22H2K56U5'
 		self.mode = AES.MODE_CBC
 		
 	# 加密
 	def encrypt(self, text):
-		text = text.encode('utf8')
 		cryptor = AES.new(self.key, self.mode, self.key)
 		length = 16
 		count = len(text)
 		add = length - (count % length)
-		# text = text + ('\0' * add)
-		text = text + ('\0' * add).encode('utf8')
+		text = text + ('\0' * add)
 		ciphertext = cryptor.encrypt(text)
 		base64text = base64.b64encode(ciphertext)
 		return base64text

@@ -13,6 +13,7 @@
 #import "StartAnimationManger.h"
 #import "LockConnectManger.h"
 
+#import "BluetoothCenter.h"
 @interface MainViewController ()
 
 @end
@@ -99,7 +100,19 @@
 - (void)handleConnectManger {
     [[LockConnectManger shareLockConnectManger] setLockMangerCanConnect:YES];
     [[LockConnectManger shareLockConnectManger] connect];
+    
+    [[LockConnectManger shareLockConnectManger] setLockStateBlock:^(ConnectState connectState, BluetoothLockState lockState) {
+        // 刷新UI
+    }];
 }
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+    [[LockConnectManger shareLockConnectManger] openLock];
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -92,18 +92,19 @@ def handle_socket(sock, addr, point):
 				else:
 					# 普通消息
 					mes = '服务端返回数据：' + data_mes
-					# 粘 包了 
-					sendMessage(sock, 'command', mes)
+					# # 粘 包了 
+					# sendMessage(sock, 'command', mes)
 					if point == 8000:
-						lockLink = data_dic['lockLink']
+						lockLink = 'on'
 						lockedState = data_dic['lockState']
 						# 收到 锁发来的状态信息 向所有 客户端发送锁的状态
 						for sockone in sock_list:
-							sendMessage(sockone, 'command', lockedState, lockLink, lockedState)
+							sendMessage(sockone, 'heart', lockedState, lockLink, lockedState)
 						
 					else:
 						#向 lockSock 发送 指令
-						sendMessage(lockSock, 'command', data_mes)
+						if lockLink in 'on':
+							sendMessage(lockSock, 'command', data_mes)
 
 
 		except Exception as e:
