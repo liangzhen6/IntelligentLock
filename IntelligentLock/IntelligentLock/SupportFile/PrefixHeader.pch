@@ -9,6 +9,7 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 #import "EnumHeader.h"
+#import "UIView+MSExtension.h"
 
 /* 自定义log */
 #ifdef DEBUG
@@ -29,6 +30,7 @@
 
 #define MaginWidth 300.0f //左侧菜单栏的偏移量
 #define LeftViewAlpha 0.5f // mianView 的最大透明度
+#define MainView_InsetY     (Screen_Width*0.8) // 主页的collection 的偏移量
 
 //88
 #define NavBarHeight (iPhoneX ? 88.0 : 64.0)

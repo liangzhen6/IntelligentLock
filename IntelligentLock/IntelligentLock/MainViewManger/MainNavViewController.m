@@ -25,9 +25,12 @@
 - (void)initNavView {
     //设置风格 SVP 的风格
     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
-    [UINavigationBar appearance].translucent = YES;
+    [UINavigationBar appearance].translucent = NO;
+    //去除 nav 的底部下划线
+    [self.navigationBar setShadowImage:[UIImage new]];
+
     // 1.设置 导航栏的样式
-    UIFont * navFont =[UIFont systemFontOfSize:18.0];
+    UIFont * navFont =[UIFont boldSystemFontOfSize:18.0];
     UIColor * navTitleColor = [UIColor whiteColor];
     NSDictionary *textAttributes = @{
                                      NSFontAttributeName:navFont,
@@ -35,7 +38,8 @@
                                      };
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
     // 设置 nav 的背景色
-    [self.navigationBar setBarTintColor:RGBColor(63.0, 74.0, 246.0)];
+    [self.navigationBar setBarTintColor:RGBColor(51.0, 66.0, 212.0)];
+
     //2.设置返回按钮字体颜色为透明
     NSDictionary *attributes = @{
                                  NSFontAttributeName:[UIFont systemFontOfSize:17],

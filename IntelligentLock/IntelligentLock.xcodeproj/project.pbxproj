@@ -29,6 +29,10 @@
 		FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */; };
 		FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */; };
 		FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79F215B8520001A4BE4 /* LockConnectManger.m */; };
+		FA1AA3ED21704F0F0000A94D /* MainCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1AA3EC21704F0F0000A94D /* MainCollectionView.m */; };
+		FA1AA3F121705BCC0000A94D /* MainCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1AA3EF21705BCC0000A94D /* MainCollectionViewCell.m */; };
+		FA1AA3F221705BCC0000A94D /* MainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA1AA3F021705BCC0000A94D /* MainCollectionViewCell.xib */; };
+		FA1AA3FA21705F340000A94D /* MainCollectionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1AA3F921705F340000A94D /* MainCollectionModel.m */; };
 		FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0721463CE9002337D4 /* MesModel.m */; };
 		FA2A7A0D21466835002337D4 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0C21466835002337D4 /* Tools.m */; };
 		FA3679292160AD1800FA35B7 /* LeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3679282160AD1800FA35B7 /* LeftMenuViewController.xib */; };
@@ -36,6 +40,10 @@
 		FA828829215E231B003C64C0 /* StartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA828828215E231B003C64C0 /* StartView.xib */; };
 		FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82882B215E49E8003C64C0 /* StartAnimationManger.m */; };
 		FA82882F215E4EFF003C64C0 /* MainNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82882E215E4EFF003C64C0 /* MainNavViewController.m */; };
+		FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */; };
+		FA95B7C921706A71001D4AEB /* HeardCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */; };
+		FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A7E217087480077F616 /* UIView+MSExtension.m */; };
+		FAF47A822170A2A60077F616 /* SixEdgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A812170A2A60077F616 /* SixEdgeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +109,13 @@
 		FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlertConreoller.m; sourceTree = "<group>"; };
 		FA17D79E215B8520001A4BE4 /* LockConnectManger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LockConnectManger.h; sourceTree = "<group>"; };
 		FA17D79F215B8520001A4BE4 /* LockConnectManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LockConnectManger.m; sourceTree = "<group>"; };
+		FA1AA3EB21704F0F0000A94D /* MainCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainCollectionView.h; sourceTree = "<group>"; };
+		FA1AA3EC21704F0F0000A94D /* MainCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainCollectionView.m; sourceTree = "<group>"; };
+		FA1AA3EE21705BCC0000A94D /* MainCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainCollectionViewCell.h; sourceTree = "<group>"; };
+		FA1AA3EF21705BCC0000A94D /* MainCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainCollectionViewCell.m; sourceTree = "<group>"; };
+		FA1AA3F021705BCC0000A94D /* MainCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA1AA3F821705F340000A94D /* MainCollectionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainCollectionModel.h; sourceTree = "<group>"; };
+		FA1AA3F921705F340000A94D /* MainCollectionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainCollectionModel.m; sourceTree = "<group>"; };
 		FA2A7A0621463CE9002337D4 /* MesModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MesModel.h; sourceTree = "<group>"; };
 		FA2A7A0721463CE9002337D4 /* MesModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MesModel.m; sourceTree = "<group>"; };
 		FA2A7A0B21466835002337D4 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
@@ -113,8 +128,15 @@
 		FA82882B215E49E8003C64C0 /* StartAnimationManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartAnimationManger.m; sourceTree = "<group>"; };
 		FA82882D215E4EFF003C64C0 /* MainNavViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainNavViewController.h; sourceTree = "<group>"; };
 		FA82882E215E4EFF003C64C0 /* MainNavViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainNavViewController.m; sourceTree = "<group>"; };
+		FA95B7C521706A70001D4AEB /* HeardCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeardCollectionReusableView.h; sourceTree = "<group>"; };
+		FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeardCollectionReusableView.m; sourceTree = "<group>"; };
+		FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeardCollectionReusableView.xib; sourceTree = "<group>"; };
 		FAE1CA552149223E002B1788 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		FAE1CA5721492396002B1788 /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
+		FAF47A7D217087480077F616 /* UIView+MSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MSExtension.h"; sourceTree = "<group>"; };
+		FAF47A7E217087480077F616 /* UIView+MSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MSExtension.m"; sourceTree = "<group>"; };
+		FAF47A802170A2A60077F616 /* SixEdgeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SixEdgeView.h; sourceTree = "<group>"; };
+		FAF47A812170A2A60077F616 /* SixEdgeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SixEdgeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +270,7 @@
 		FA0A8984215F723600473305 /* MianViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FA1AA3EA21704ECF0000A94D /* View */,
 				FA0A8992215F744F00473305 /* MainViewController.h */,
 				FA0A8993215F744F00473305 /* MainViewController.m */,
 				FA0A8994215F744F00473305 /* MainViewController.xib */,
@@ -270,12 +293,33 @@
 		FA0A8986215F729000473305 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				FAF47A7D217087480077F616 /* UIView+MSExtension.h */,
+				FAF47A7E217087480077F616 /* UIView+MSExtension.m */,
 				FA2A7A0B21466835002337D4 /* Tools.h */,
 				FA2A7A0C21466835002337D4 /* Tools.m */,
 				FA17D79B215B7D61001A4BE4 /* AlertConreoller.h */,
 				FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		FA1AA3EA21704ECF0000A94D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA1AA3F821705F340000A94D /* MainCollectionModel.h */,
+				FA1AA3F921705F340000A94D /* MainCollectionModel.m */,
+				FA1AA3EB21704F0F0000A94D /* MainCollectionView.h */,
+				FA1AA3EC21704F0F0000A94D /* MainCollectionView.m */,
+				FA1AA3EE21705BCC0000A94D /* MainCollectionViewCell.h */,
+				FA1AA3EF21705BCC0000A94D /* MainCollectionViewCell.m */,
+				FA1AA3F021705BCC0000A94D /* MainCollectionViewCell.xib */,
+				FA95B7C521706A70001D4AEB /* HeardCollectionReusableView.h */,
+				FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */,
+				FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */,
+				FAF47A802170A2A60077F616 /* SixEdgeView.h */,
+				FAF47A812170A2A60077F616 /* SixEdgeView.m */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		FAD31C9B2160A5F70063B9BC /* SupportFile */ = {
@@ -436,6 +480,8 @@
 				FA0A899B215F890400473305 /* LoginViewController.xib in Resources */,
 				FA3679292160AD1800FA35B7 /* LeftMenuViewController.xib in Resources */,
 				FA828829215E231B003C64C0 /* StartView.xib in Resources */,
+				FA1AA3F221705BCC0000A94D /* MainCollectionViewCell.xib in Resources */,
+				FA95B7C921706A71001D4AEB /* HeardCollectionReusableView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,9 +587,12 @@
 				FA0A8995215F744F00473305 /* MainViewController.m in Sources */,
 				FA82882F215E4EFF003C64C0 /* MainNavViewController.m in Sources */,
 				FA0A898D215F73DD00473305 /* LeftMenuViewController.m in Sources */,
+				FAF47A822170A2A60077F616 /* SixEdgeView.m in Sources */,
 				32C21AD021454F28002643BD /* ViewController.m in Sources */,
 				FA0A899A215F890400473305 /* LoginViewController.m in Sources */,
+				FA1AA3F121705BCC0000A94D /* MainCollectionViewCell.m in Sources */,
 				FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */,
+				FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */,
 				FA0A8989215F732000473305 /* MangerViewController.m in Sources */,
 				32C21ADB21454F29002643BD /* main.m in Sources */,
 				FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */,
@@ -552,6 +601,9 @@
 				FA828827215E2311003C64C0 /* StartView.m in Sources */,
 				FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */,
 				FA0A8991215F743600473305 /* RootViewController.m in Sources */,
+				FA1AA3FA21705F340000A94D /* MainCollectionModel.m in Sources */,
+				FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */,
+				FA1AA3ED21704F0F0000A94D /* MainCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

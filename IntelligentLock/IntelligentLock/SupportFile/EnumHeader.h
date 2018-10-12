@@ -66,4 +66,9 @@ typedef NS_ENUM(NSUInteger, StartBtnActionType) {
     StartBtnActionTypeLongPress, ///< 长按事件
 };
 
+// 网络连接的状态
+typedef NS_ENUM(NSUInteger, NetWorkState) {
+    NetWorkStateOff = 0, ///< 网络断开
+    NetWorkStateOn,      ///< 网络连接
+};
 #endif /* EnumHeader_h */

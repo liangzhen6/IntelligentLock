@@ -12,9 +12,14 @@
 #import "LoginViewController.h"
 #import "StartAnimationManger.h"
 #import "LockConnectManger.h"
+#import "MainCollectionView.h"
+#import "MainCollectionModel.h"
+#import "SixEdgeView.h"
 
-#import "BluetoothCenter.h"
 @interface MainViewController ()
+@property(nonatomic,strong)MainCollectionView * mainCollectionView;
+@property (weak, nonatomic) IBOutlet UIView *MainHeaderView;
+@property(nonatomic,strong)SixEdgeView * sixEdge;
 
 @end
 
@@ -28,6 +33,7 @@
 }
 
 - (void)initView {
+    // 启动相关
     StartView * startView = [StartView shareStartView];
     // 加在根视图上
     [KeyWindow.rootViewController.view addSubview:startView];
@@ -45,6 +51,77 @@
         }
     }];
     
+    self.title = @"芝麻官家";
+    // 页面布局相关
+    //1.缩放的view
+    CGFloat SEHeight = MainView_InsetY-80;
+    CGFloat SEWidth = SEHeight*1.73/2;
+
+    SixEdgeView * sixEdge = [[SixEdgeView alloc] initWithFrame:CGRectMake(Screen_Width/2-SEWidth/2, MainView_InsetY/2-SEHeight/2-10, SEWidth, SEHeight)];
+
+    [self.MainHeaderView addSubview:sixEdge];
+    _sixEdge = sixEdge;
+
+    //2.uicollectionView 背后的view
+    __block UIView * backView = [[UIView alloc] initWithFrame:CGRectMake(0, MainView_InsetY, Screen_Width, Screen_Height-NavBarHeight)];
+    backView.backgroundColor = RGBColor(250.0, 249.0, 250.0);
+    [self.view addSubview:backView];
+    
+    //3.uicollectionView
+    NSArray * titles = @[@"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备"];
+    NSArray * images = @[@"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add"];
+    NSMutableArray * collectionData = [[NSMutableArray alloc] init];
+    for (NSInteger i = 0; i < titles.count; i++) {
+        [collectionData addObject:[MainCollectionModel mainCollectionModelWithTitle:titles[i] image:images[i]]];
+    }
+    
+    MainCollectionView * mainCollectionView = [MainCollectionView mainCollectionViewWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-NavBarHeight) DataSource:[collectionData copy] selectBlock:^(NSInteger selectIndex) {
+        
+    }];
+    [mainCollectionView setContentInset:UIEdgeInsetsMake(MainView_InsetY, 0, 0, 0)];
+    self.mainCollectionView = mainCollectionView;
+    __weak typeof (self)ws = self;
+    [mainCollectionView setScrollBlock:^(CGFloat scrollY, BOOL endScroll) {
+//        MPNLog(@"%f*****%f",scrollY,MainView_InsetY);
+        if (scrollY > -MainView_InsetY && scrollY <= 0) {
+            if (endScroll) {
+                // 停止滑动
+                if (-scrollY < MainView_InsetY/2) {
+                    [UIView animateWithDuration:0.3 animations:^{
+                        backView.y = 0;
+                        [ws.mainCollectionView setContentOffset:CGPointMake(0, 0)];
+                        ws.sixEdge.transform = CGAffineTransformMakeScale(0.5, 0.5);
+                        ws.sixEdge.alpha = 0.0;
+                    }];
+                } else {
+                    [UIView animateWithDuration:0.3 animations:^{
+                        backView.y = MainView_InsetY;
+                        [ws.mainCollectionView setContentOffset:CGPointMake(0, -MainView_InsetY)];
+                        ws.sixEdge.transform = CGAffineTransformMakeScale(1.0, 1.0);
+                        ws.sixEdge.alpha = 1.0;
+                    }];
+                }
+            } else {
+                backView.y = -scrollY;
+                CGFloat longY = MainView_InsetY/2 - (MainView_InsetY+scrollY);
+                if (longY > MainView_InsetY/4) {
+                    CGFloat scale = longY/(MainView_InsetY/2);
+                    // 缩放
+                    ws.sixEdge.transform = CGAffineTransformMakeScale(scale, scale);
+                }
+                // 处理透明度
+                CGFloat alpha = longY/(MainView_InsetY/2);
+                ws.sixEdge.alpha = alpha;
+            }
+            
+        } else if (scrollY > 0) {
+            backView.y = 0;
+        } else {
+            backView.y = MainView_InsetY;
+        }
+        
+    }];
+    [self.view addSubview:mainCollectionView];
 }
 
 /**
@@ -106,7 +183,14 @@
     }];
 }
 
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [_sixEdge startAnimation];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [_sixEdge endAnimation];
+}
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES];
     [[LockConnectManger shareLockConnectManger] openLock];

@@ -214,7 +214,7 @@ static NSString const * key = @"ADER19T22H2K56U5";
      */
     if (![context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error]) {
         // 存在错误
-        NSLog(@"%@",error);
+        MPNLog(@"%@",error);
         switch (error.code) {
             case LAErrorTouchIDNotEnrolled:
                 {// 没有设置Touch Id

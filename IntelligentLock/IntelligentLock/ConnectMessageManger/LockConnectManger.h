@@ -13,6 +13,8 @@ typedef void(^LockStateBlock)(ConnectState connectState, BluetoothLockState lock
 @property(nonatomic,assign)ConnectState connectState; ///< 链接的状态
 @property(nonatomic,assign)BOOL lockMangerCanConnect;
 @property(nonatomic,copy)LockStateBlock lockStateBlock;
+@property(nonatomic,assign)NetWorkState netWorkState;
+
 + (id)shareLockConnectManger;
 
 /**
