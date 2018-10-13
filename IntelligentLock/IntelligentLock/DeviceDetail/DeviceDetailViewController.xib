@@ -15,6 +15,9 @@
             <connections>
                 <outlet property="desLabel" destination="ZtP-zW-t6l" id="bS8-1b-Hxv"/>
                 <outlet property="mainIcon" destination="kYq-pj-lKX" id="w3d-7i-AQZ"/>
+                <outlet property="onlineIcon" destination="x63-Cm-tuv" id="bgC-dQ-GDt"/>
+                <outlet property="onlineTitle" destination="8Z6-LA-dIf" id="HC3-05-pE6"/>
+                <outlet property="onlineView" destination="Bqz-eJ-kcS" id="En0-ji-AbB"/>
                 <outlet property="switchConnectBtn" destination="kWw-Iw-Mbl" id="VoX-dF-qhr"/>
                 <outlet property="topView" destination="cBJ-K3-XnW" id="bA5-Ou-NNZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -62,9 +65,40 @@
                         <action selector="switchConnectAction:" destination="-1" eventType="touchUpInside" id="x0u-HD-xMt"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bqz-eJ-kcS">
+                    <rect key="frame" x="287" y="50" width="68" height="30"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wifi-big" translatesAutoresizingMaskIntoConstraints="NO" id="x63-Cm-tuv">
+                            <rect key="frame" x="38" y="0.0" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="Lun-Yr-GnT"/>
+                                <constraint firstAttribute="width" constant="30" id="kkE-UM-quu"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在线" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z6-LA-dIf">
+                            <rect key="frame" x="5" y="5" width="33" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="33" id="W61-Ii-hAp"/>
+                                <constraint firstAttribute="height" constant="20" id="rX2-aA-jNA"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="x63-Cm-tuv" secondAttribute="trailing" id="4Er-xa-oGg"/>
+                        <constraint firstItem="8Z6-LA-dIf" firstAttribute="centerY" secondItem="Bqz-eJ-kcS" secondAttribute="centerY" id="C6W-Ce-cMg"/>
+                        <constraint firstAttribute="width" constant="68" id="FHo-3q-FLG"/>
+                        <constraint firstItem="x63-Cm-tuv" firstAttribute="centerY" secondItem="Bqz-eJ-kcS" secondAttribute="centerY" id="HKl-w7-NkT"/>
+                        <constraint firstAttribute="height" constant="30" id="JPP-i2-SPO"/>
+                        <constraint firstItem="x63-Cm-tuv" firstAttribute="leading" secondItem="8Z6-LA-dIf" secondAttribute="trailing" id="MHa-cp-2WG"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.20000000000000001" green="0.25882352941176467" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Bqz-eJ-kcS" secondAttribute="trailing" constant="20" id="35q-rc-cJo"/>
                 <constraint firstItem="cBJ-K3-XnW" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="3M8-Hr-fZ2"/>
                 <constraint firstItem="cBJ-K3-XnW" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="80" id="Bt2-Qc-6dx"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="kWw-Iw-Mbl" secondAttribute="bottom" constant="120" id="DQJ-dW-wpx"/>
@@ -74,6 +108,7 @@
                 <constraint firstItem="ZtP-zW-t6l" firstAttribute="top" secondItem="cBJ-K3-XnW" secondAttribute="bottom" constant="20" id="gJK-Mf-Udd"/>
                 <constraint firstItem="cBJ-K3-XnW" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" constant="-80" id="kQ2-GZ-pwR"/>
                 <constraint firstItem="kWw-Iw-Mbl" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="tbo-KB-LYd"/>
+                <constraint firstItem="Bqz-eJ-kcS" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="30" id="wdj-Zo-ob2"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="-96.5" y="56.5"/>
@@ -81,5 +116,6 @@
     </objects>
     <resources>
         <image name="lock-off" width="64" height="64"/>
+        <image name="wifi-big" width="64" height="64"/>
     </resources>
 </document>

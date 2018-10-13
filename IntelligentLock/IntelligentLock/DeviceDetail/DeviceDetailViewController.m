@@ -15,6 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *desLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *mainIcon;
 @property (weak, nonatomic) IBOutlet UIButton *switchConnectBtn;
+@property (weak, nonatomic) IBOutlet UIView *onlineView;
+@property (weak, nonatomic) IBOutlet UILabel *onlineTitle;
+@property (weak, nonatomic) IBOutlet UIImageView *onlineIcon;
 
 @end
 
@@ -41,8 +44,10 @@
         self.mainIcon.image = [UIImage imageNamed:@"add_detail"];
         self.desLabel.text = @"点击上方按钮添加新设备~";
         self.switchConnectBtn.hidden = YES;
+        self.onlineView.hidden = YES;
     } else {
         self.switchConnectBtn.hidden = NO;
+        self.onlineView.hidden = NO;
         [self.switchConnectBtn setImageEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, -30)];
         [self.switchConnectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, -35, 0)];
         self.switchConnectBtn.layer.cornerRadius = 30;
@@ -51,10 +56,13 @@
         
         self.topView.layer.borderColor = [UIColor whiteColor].CGColor;
         [self.switchConnectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
         [self setConnectTypeUI:self.deviceModel.connectState];
     }
     
+    
+    self.onlineView.layer.cornerRadius = 3;
+    self.onlineView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.onlineView.layer.borderWidth = 1;
 //    self.topView.layer.shadowRadius = 30;
 //    self.topView.layer.shadowOffset = CGSizeMake(0, 0);
 //    self.topView.layer.shadowColor = [UIColor whiteColor].CGColor;
@@ -67,12 +75,18 @@
     if (state == ConnectStateConnectedSocket) {
         // 设备网络链接
         self.desLabel.text = @"设备网络连接~";
+        self.onlineTitle.text = @"在线";
+        self.onlineTitle.textColor = [UIColor whiteColor];
+        self.onlineIcon.image = [UIImage imageNamed:@"wifi-big"];
         [self.switchConnectBtn setImage:[[UIImage imageNamed:@"switch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [self.switchConnectBtn setTitle:@"开关" forState:UIControlStateNormal];
         
     } else if (state == ConnectStateConnectedBluetooth) {
         // 设备蓝牙连接
         self.desLabel.text = @"设备蓝牙连接~";
+        self.onlineTitle.text = @"在线";
+        self.onlineTitle.textColor = [UIColor whiteColor];
+        self.onlineIcon.image = [UIImage imageNamed:@"ble-big"];
         [self.switchConnectBtn setImage:[[UIImage imageNamed:@"switch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [self.switchConnectBtn setTitle:@"开关" forState:UIControlStateNormal];
         
@@ -83,6 +97,9 @@
         } else {
             self.desLabel.text = @"设备断开连接~";
         }
+        self.onlineTitle.text = @"离线";
+        self.onlineTitle.textColor = [UIColor redColor];
+        self.onlineIcon.image = [UIImage imageNamed:@"off-line-big"];
         [self.switchConnectBtn setImage:[[UIImage imageNamed:@"connect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [self.switchConnectBtn setTitle:@"重连" forState:UIControlStateNormal];
     }
