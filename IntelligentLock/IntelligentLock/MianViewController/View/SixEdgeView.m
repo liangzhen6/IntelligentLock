@@ -8,7 +8,7 @@
 
 #import "SixEdgeView.h"
 @interface SixEdgeView ()
-
+@property(nonatomic,strong)UILabel * numberLabel;
 @end
 @implementation SixEdgeView
 - (id)initWithFrame:(CGRect)frame {
@@ -20,6 +20,30 @@
 }
 
 - (void)initView {
+    // 布局UI相关
+    UILabel * numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.width/2-70, self.height/2-45, 80, 55)];
+    numberLabel.textColor = [UIColor whiteColor];
+    numberLabel.font = [UIFont boldSystemFontOfSize:70];
+    numberLabel.text = @"0";
+    numberLabel.textAlignment = NSTextAlignmentRight;
+    [self addSubview:numberLabel];
+    _numberLabel = numberLabel;
+    
+    UILabel * title1Label = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(numberLabel.frame)+10, self.height/2-10, 30, 20)];
+    title1Label.font = [UIFont boldSystemFontOfSize:18];
+    title1Label.textColor = [UIColor whiteColor];
+    title1Label.text = @"个";
+    [self addSubview:title1Label];
+    
+    UILabel * title2Label = [[UILabel alloc] initWithFrame:CGRectMake(self.width/2-60, self.height/2+20, 120, 20)];
+    title2Label.font = [UIFont boldSystemFontOfSize:18];
+    title2Label.textColor = [UIColor whiteColor];
+    title2Label.textAlignment = NSTextAlignmentCenter;
+    title2Label.text = @"设备连接";
+    [self addSubview:title2Label];
+    
+    
+    // 绘制边框相关
     UIColor *color = [UIColor whiteColor];
     [color set];
     CGPoint point1 = CGPointMake(self.width/2, 0);
@@ -108,6 +132,12 @@
     if (shapeLayer) {
         // 移除呼吸灯效果 opacity
         [shapeLayer removeAnimationForKey:@"opacity"];
+    }
+}
+
+- (void)updateDeviceNumber:(NSString *)deviceNumberStr {
+    if ([deviceNumberStr length]) {
+        _numberLabel.text = deviceNumberStr;
     }
 }
 

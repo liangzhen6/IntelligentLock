@@ -39,7 +39,8 @@
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
     // 设置 nav 的背景色
     [self.navigationBar setBarTintColor:RGBColor(51.0, 66.0, 212.0)];
-
+    //设置返回按钮的颜色
+    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
     //2.设置返回按钮字体颜色为透明
     NSDictionary *attributes = @{
                                  NSFontAttributeName:[UIFont systemFontOfSize:17],

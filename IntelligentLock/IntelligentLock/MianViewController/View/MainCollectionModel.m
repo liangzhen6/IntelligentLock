@@ -9,11 +9,11 @@
 #import "MainCollectionModel.h"
 
 @implementation MainCollectionModel
-+ (id)mainCollectionModelWithTitle:(NSString *)title image:(NSString *)image {
++ (id)mainCollectionModelWithTitle:(NSString *)title image:(NSString *)image modelType:(CollectionModelType)modelType {
     MainCollectionModel *model = [[MainCollectionModel alloc] init];
     model.title = title;
     model.imagePath = image;
-    
+    model.modelType = modelType;
     return model;
 }
 @end

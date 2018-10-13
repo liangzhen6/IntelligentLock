@@ -40,6 +40,8 @@
 		FA828829215E231B003C64C0 /* StartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA828828215E231B003C64C0 /* StartView.xib */; };
 		FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82882B215E49E8003C64C0 /* StartAnimationManger.m */; };
 		FA82882F215E4EFF003C64C0 /* MainNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82882E215E4EFF003C64C0 /* MainNavViewController.m */; };
+		FA9384532171DC020009E269 /* DeviceDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9384512171DC020009E269 /* DeviceDetailViewController.m */; };
+		FA9384542171DC020009E269 /* DeviceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9384522171DC020009E269 /* DeviceDetailViewController.xib */; };
 		FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */; };
 		FA95B7C921706A71001D4AEB /* HeardCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */; };
 		FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A7E217087480077F616 /* UIView+MSExtension.m */; };
@@ -128,6 +130,9 @@
 		FA82882B215E49E8003C64C0 /* StartAnimationManger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartAnimationManger.m; sourceTree = "<group>"; };
 		FA82882D215E4EFF003C64C0 /* MainNavViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainNavViewController.h; sourceTree = "<group>"; };
 		FA82882E215E4EFF003C64C0 /* MainNavViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainNavViewController.m; sourceTree = "<group>"; };
+		FA9384502171DC020009E269 /* DeviceDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceDetailViewController.h; sourceTree = "<group>"; };
+		FA9384512171DC020009E269 /* DeviceDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceDetailViewController.m; sourceTree = "<group>"; };
+		FA9384522171DC020009E269 /* DeviceDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeviceDetailViewController.xib; sourceTree = "<group>"; };
 		FA95B7C521706A70001D4AEB /* HeardCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeardCollectionReusableView.h; sourceTree = "<group>"; };
 		FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeardCollectionReusableView.m; sourceTree = "<group>"; };
 		FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeardCollectionReusableView.xib; sourceTree = "<group>"; };
@@ -201,6 +206,7 @@
 				FAD31C9C2160A6A90063B9BC /* MainViewManger */,
 				FA0A8984215F723600473305 /* MianViewController */,
 				FAD31C9E2160A7230063B9BC /* LoginViewController */,
+				FA93844F2171DB7B0009E269 /* DeviceDetail */,
 				FAD31C9B2160A5F70063B9BC /* SupportFile */,
 				32C21ACE21454F28002643BD /* ViewController.h */,
 				32C21ACF21454F28002643BD /* ViewController.m */,
@@ -320,6 +326,16 @@
 				FAF47A812170A2A60077F616 /* SixEdgeView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FA93844F2171DB7B0009E269 /* DeviceDetail */ = {
+			isa = PBXGroup;
+			children = (
+				FA9384502171DC020009E269 /* DeviceDetailViewController.h */,
+				FA9384512171DC020009E269 /* DeviceDetailViewController.m */,
+				FA9384522171DC020009E269 /* DeviceDetailViewController.xib */,
+			);
+			path = DeviceDetail;
 			sourceTree = "<group>";
 		};
 		FAD31C9B2160A5F70063B9BC /* SupportFile */ = {
@@ -480,6 +496,7 @@
 				FA0A899B215F890400473305 /* LoginViewController.xib in Resources */,
 				FA3679292160AD1800FA35B7 /* LeftMenuViewController.xib in Resources */,
 				FA828829215E231B003C64C0 /* StartView.xib in Resources */,
+				FA9384542171DC020009E269 /* DeviceDetailViewController.xib in Resources */,
 				FA1AA3F221705BCC0000A94D /* MainCollectionViewCell.xib in Resources */,
 				FA95B7C921706A71001D4AEB /* HeardCollectionReusableView.xib in Resources */,
 			);
@@ -590,6 +607,7 @@
 				FAF47A822170A2A60077F616 /* SixEdgeView.m in Sources */,
 				32C21AD021454F28002643BD /* ViewController.m in Sources */,
 				FA0A899A215F890400473305 /* LoginViewController.m in Sources */,
+				FA9384532171DC020009E269 /* DeviceDetailViewController.m in Sources */,
 				FA1AA3F121705BCC0000A94D /* MainCollectionViewCell.m in Sources */,
 				FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */,
 				FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */,

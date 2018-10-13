@@ -9,6 +9,7 @@
 #import "MainCollectionView.h"
 #import "MainCollectionViewCell.h"
 #import "HeardCollectionReusableView.h"
+#import "MainCollectionModel.h"
 
 @interface MainCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)NSMutableArray * collectionData;
@@ -27,8 +28,11 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
     layout.minimumInteritemSpacing = 1;
     layout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
     layout.headerReferenceSize = CGSizeMake(Screen_Width, 40);
+    // 设置一个透明的footer 视图撑场
+    layout.footerReferenceSize = CGSizeMake(Screen_Width, Screen_Height-NavBarHeight-40-Width);
     MainCollectionView * mainView = [[MainCollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
     mainView.collectionData = [dataSource mutableCopy];
+    mainView.selectBlock = selectBlock;
     [mainView initCollectionView];
     
     return mainView;
@@ -36,6 +40,7 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
 - (void)initCollectionView {
 //    self.backgroundColor = RGBColor(250.0, 249.0, 250.0);
     self.backgroundColor = [UIColor clearColor];
+    self.showsVerticalScrollIndicator = NO;
     self.delegate = self;
     self.dataSource = self;
     // 注册cell
@@ -47,6 +52,13 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
     
     [self registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:collectionHeaderId];
 
+}
+// 更新链接状态
+- (void)updateConnectState:(ConnectState)connectState {
+    for (MainCollectionModel *model in self.collectionData) {
+        model.connectState = connectState;
+    }
+    [self reloadSections:[NSIndexSet indexSetWithIndex:0]];
 }
 
 #pragma mark -- UICollectionViewDelegate UICollectionViewDataSource
@@ -70,8 +82,11 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
     return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:collectionHeaderId forIndexPath:indexPath];
 }
 
+// 点击了item
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    if (self.selectBlock) {
+        self.selectBlock(self.collectionData[indexPath.item]);
+    }
 }
 
 // 滚动的时候

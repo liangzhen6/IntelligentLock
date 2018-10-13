@@ -22,13 +22,13 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="egI-7S-isy">
-                        <rect key="frame" x="30" y="15" width="40" height="40"/>
+                        <rect key="frame" x="30" y="25" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="egI-7S-isy" secondAttribute="height" multiplier="1:1" id="Vbq-TX-3SB"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2IZ-7f-JOt">
-                        <rect key="frame" x="0.0" y="60" width="100" height="25"/>
+                        <rect key="frame" x="0.0" y="70" width="100" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="dKv-Dt-iRb"/>
                         </constraints>
@@ -36,22 +36,61 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSo-xj-EBP">
+                        <rect key="frame" x="49" y="5" width="46" height="20"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在线" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3DA-5F-f8p">
+                                <rect key="frame" x="2" y="0.0" width="25" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="KyY-Ga-WFQ"/>
+                                    <constraint firstAttribute="width" constant="25" id="bxh-AG-S2Z"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.070588235294117646" green="0.58823529411764708" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WiFi" translatesAutoresizingMaskIntoConstraints="NO" id="sxT-dj-LEl">
+                                <rect key="frame" x="29" y="2.5" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="15" id="9AT-5d-St4"/>
+                                    <constraint firstAttribute="height" constant="15" id="q02-ot-Vbb"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="3DA-5F-f8p" firstAttribute="centerY" secondItem="hSo-xj-EBP" secondAttribute="centerY" id="5Dq-rt-UyR"/>
+                            <constraint firstAttribute="width" constant="46" id="I62-YY-AOK"/>
+                            <constraint firstItem="sxT-dj-LEl" firstAttribute="centerY" secondItem="hSo-xj-EBP" secondAttribute="centerY" id="Isl-Ua-d8K"/>
+                            <constraint firstItem="sxT-dj-LEl" firstAttribute="leading" secondItem="3DA-5F-f8p" secondAttribute="trailing" constant="2" id="KZx-JK-Kbh"/>
+                            <constraint firstAttribute="trailing" secondItem="sxT-dj-LEl" secondAttribute="trailing" constant="2" id="S2M-vf-12k"/>
+                            <constraint firstAttribute="height" constant="20" id="x4Q-rG-oJg"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="2IZ-7f-JOt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Gmc-xJ-vPL"/>
-                <constraint firstItem="egI-7S-isy" firstAttribute="centerY" secondItem="SEy-5g-ep8" secondAttribute="centerY" constant="-15" id="Inz-yw-eIh"/>
+                <constraint firstItem="egI-7S-isy" firstAttribute="centerY" secondItem="SEy-5g-ep8" secondAttribute="centerY" constant="-5" id="Inz-yw-eIh"/>
+                <constraint firstItem="hSo-xj-EBP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="TrT-vE-J8B"/>
                 <constraint firstItem="egI-7S-isy" firstAttribute="width" secondItem="SEy-5g-ep8" secondAttribute="width" multiplier="0.4" id="aD6-dd-hhk"/>
                 <constraint firstItem="egI-7S-isy" firstAttribute="centerX" secondItem="SEy-5g-ep8" secondAttribute="centerX" id="dfj-Me-vdS"/>
                 <constraint firstAttribute="trailing" secondItem="2IZ-7f-JOt" secondAttribute="trailing" id="iMs-hm-ZyI"/>
+                <constraint firstAttribute="trailing" secondItem="hSo-xj-EBP" secondAttribute="trailing" constant="5" id="nXm-Qp-mgM"/>
                 <constraint firstItem="2IZ-7f-JOt" firstAttribute="top" secondItem="egI-7S-isy" secondAttribute="bottom" constant="5" id="t3b-Ur-q3K"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <connections>
+                <outlet property="connectTypeIcon" destination="sxT-dj-LEl" id="yuf-eq-H9T"/>
                 <outlet property="icon" destination="egI-7S-isy" id="jzK-vq-Mhx"/>
+                <outlet property="onlineTitle" destination="3DA-5F-f8p" id="9fx-Qz-eYg"/>
+                <outlet property="onlineView" destination="hSo-xj-EBP" id="1rS-0D-KQ2"/>
                 <outlet property="title" destination="2IZ-7f-JOt" id="hHx-UO-fsd"/>
             </connections>
+            <point key="canvasLocation" x="67" y="45"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="WiFi" width="16" height="16"/>
+    </resources>
 </document>

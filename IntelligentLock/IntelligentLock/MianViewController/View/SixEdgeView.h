@@ -12,4 +12,6 @@
 - (id)initWithFrame:(CGRect)frame;
 - (void)startAnimation;
 - (void)endAnimation;
+- (void)updateDeviceNumber:(NSString *)deviceNumberStr;
+
 @end

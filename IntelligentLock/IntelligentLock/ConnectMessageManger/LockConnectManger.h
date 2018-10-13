@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 typedef void(^LockStateBlock)(ConnectState connectState, BluetoothLockState lockState);
+typedef void(^NetWorkGatewayConnectBlock)(ConnectState connectState);
 @interface LockConnectManger : NSObject
 @property(nonatomic,assign)BOOL appIsAction; ///< App是否处理活跃状态
 @property(nonatomic,assign)ConnectState connectState; ///< 链接的状态
 @property(nonatomic,assign)BOOL lockMangerCanConnect;
+@property(nonatomic,copy)NetWorkGatewayConnectBlock gatewayConnectBlock;
 @property(nonatomic,copy)LockStateBlock lockStateBlock;
 @property(nonatomic,assign)NetWorkState netWorkState;
 

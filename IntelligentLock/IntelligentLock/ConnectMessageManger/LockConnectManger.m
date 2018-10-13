@@ -65,20 +65,30 @@ static LockConnectManger * _lockConnectManger;
     if (_lockMangerCanConnect) {
         // 允许链接的时候才链接
         if (self.connectState == ConnectStateUnConnect) {
+            self.connectState = ConnectStateConnecting;
+            if (self.lockStateBlock) {
+                self.lockStateBlock(ConnectStateConnecting, BluetoothLockStateLock);
+            }
+            
             // 如果是断线状态 就 连接
             //1. 优先本地网关链接 2.网关链接失败进行远程连接 3.网络连接失败，蓝牙链接
             __weak LockConnectManger * weakSelf = self;
             if (self.netWorkState == NetWorkStateOn) {
                 // 去socket 链接
                 [self socketConnectWithHost:@"192.168.1.120" port:8008 completion:^(SocketConnectState connectState) {
-                    if (connectState == SocketConnectStateUnConnect) {
-                        // 链接失败 换远程连接
-                        [weakSelf socketConnectWithHost:@"192.168.104" port:8008 completion:^(SocketConnectState connectState) {
-                            if (connectState == SocketConnectStateUnConnect) {
-                                // 远程连接失败，换蓝牙连接
-                                [weakSelf blueToothConnect];
-                            }
-                        }];
+                    if (self.appIsAction) {
+                        if (connectState == SocketConnectStateUnConnect) {
+                            // 链接失败 换远程连接
+                            [weakSelf socketConnectWithHost:@"192.168.1.104" port:8008 completion:^(SocketConnectState connectState) {
+                                if (connectState == SocketConnectStateUnConnect) {
+                                    // 远程连接失败，换蓝牙连接
+                                    if (self.connectState == ConnectStateConnecting) {
+                                        // 如果当前链接成功，不要重复链接
+                                        [weakSelf blueToothConnect];
+                                    }
+                                }
+                            }];
+                        }
                     }
                 }];
             } else {
@@ -109,7 +119,14 @@ static LockConnectManger * _lockConnectManger;
     [Socket shareSocketWithHost:host port:port];
     [[Socket shareSocket] connectServerWithCompletion:^(SocketConnectState connectState) {
         if (connectState == SocketConnectStateConnected) {
+            // 连接成功 1. 改变连接状态 2.将消息发送给接受者
             weakSelf.connectState = ConnectStateConnectedSocket;
+            if (weakSelf.gatewayConnectBlock) {
+                weakSelf.gatewayConnectBlock(ConnectStateConnectedSocket);
+            }
+            if (weakSelf.lockStateBlock) {
+                weakSelf.lockStateBlock(ConnectStateConnectedSocket, BluetoothLockStateLock);
+            }
         }
         if (completion) {
             completion(connectState);
@@ -122,9 +139,23 @@ static LockConnectManger * _lockConnectManger;
     __weak LockConnectManger * weakSelf = self;
     [[BluetoothCenter shareBluetoothCenter] bluetoothLockConnectCompletion:^(BluetoothLockLinkState state) {
         if (state == BluetoothLockLinkStateOn) {
+            // 连接成功 1. 改变连接状态 2.将消息发送给接受者
             weakSelf.connectState = ConnectStateConnectedBluetooth;
+            if (weakSelf.gatewayConnectBlock) {
+                weakSelf.gatewayConnectBlock(ConnectStateConnectedBluetooth);
+            }
+            if (weakSelf.lockStateBlock) {
+                weakSelf.lockStateBlock(ConnectStateConnectedBluetooth, BluetoothLockStateLock);
+            }
         } else {
+            // 连接失败 1. 改变连接状态 2.将消息发送给接受者
             weakSelf.connectState = ConnectStateUnConnect;
+            if (weakSelf.gatewayConnectBlock) {
+                weakSelf.gatewayConnectBlock(ConnectStateUnConnect);
+            }
+            if (weakSelf.lockStateBlock) {
+                weakSelf.lockStateBlock(ConnectStateUnConnect, BluetoothLockStateLock);
+            }
         }
     }];
 }
@@ -140,11 +171,15 @@ static LockConnectManger * _lockConnectManger;
             {// 目前是socket连接的
                 [[Socket shareSocket] setCanConnect:NO];
                 [[Socket shareSocket] closeConnectServer];
+                // 设置 断线状态
+                self.connectState = ConnectStateUnConnect;
             }
             break;
         default:
             break;
     }
+    
+
 }
 
 - (void)openLock {

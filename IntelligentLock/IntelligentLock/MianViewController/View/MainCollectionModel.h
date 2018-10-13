@@ -11,6 +11,8 @@
 @interface MainCollectionModel : NSObject
 @property(nonatomic,copy)NSString * title;
 @property(nonatomic,copy)NSString * imagePath;
-+ (id)mainCollectionModelWithTitle:(NSString *)title image:(NSString *)image;
+@property(nonatomic,assign)ConnectState connectState;
+@property(nonatomic,assign)CollectionModelType modelType;
++ (id)mainCollectionModelWithTitle:(NSString *)title image:(NSString *)image modelType:(CollectionModelType)modelType;
 
 @end

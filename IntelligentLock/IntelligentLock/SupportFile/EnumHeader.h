@@ -15,6 +15,7 @@ typedef NS_ENUM(NSUInteger, ConnectState) {
     ConnectStateUnConnect = 0,       ///< 未连接状态
     ConnectStateConnectedSocket,     ///< socket 链接状态
     ConnectStateConnectedBluetooth,  ///< 蓝牙 连接状态
+    ConnectStateConnecting,          ///< 设备连接中。。。
 };
 
 // lock 当前的状态
@@ -71,4 +72,11 @@ typedef NS_ENUM(NSUInteger, NetWorkState) {
     NetWorkStateOff = 0, ///< 网络断开
     NetWorkStateOn,      ///< 网络连接
 };
+
+// 主collectionView item 内的类型
+typedef NS_ENUM(NSUInteger, CollectionModelType) {
+    CollectionModelTypeDevice = 0, ///< 是设备
+    CollectionModelTypeAddDevice,  ///< 是增加设备的按钮
+};
+
 #endif /* EnumHeader_h */

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^SelectBlock)(NSInteger selectIndex);
+@class MainCollectionModel;
+typedef void(^SelectBlock)(MainCollectionModel *collectionModel);
 typedef void(^ScrollBlock)(CGFloat scrollY, BOOL endScroll);
 @interface MainCollectionView : UICollectionView
 @property(nonatomic,copy)ScrollBlock scrollBlock;
 
 + (id)mainCollectionViewWithFrame:(CGRect)frame DataSource:(NSArray *)dataSource selectBlock:(SelectBlock)selectBlock;
+
+- (void)updateConnectState:(ConnectState)connectState;
 @end

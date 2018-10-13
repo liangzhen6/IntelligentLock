@@ -15,6 +15,7 @@
 #import "MainCollectionView.h"
 #import "MainCollectionModel.h"
 #import "SixEdgeView.h"
+#import "DeviceDetailViewController.h"
 
 @interface MainViewController ()
 @property(nonatomic,strong)MainCollectionView * mainCollectionView;
@@ -51,7 +52,7 @@
         }
     }];
     
-    self.title = @"芝麻官家";
+    self.title = @"芝麻管家";
     // 页面布局相关
     //1.缩放的view
     CGFloat SEHeight = MainView_InsetY-80;
@@ -68,19 +69,27 @@
     [self.view addSubview:backView];
     
     //3.uicollectionView
-    NSArray * titles = @[@"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备"];
-    NSArray * images = @[@"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add"];
+//    NSArray * titles = @[@"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备"];
+//    NSArray * images = @[@"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add"];
+    NSArray * titles = @[@"智能门禁", @"增加设备"];
+    NSArray * images = @[@"lock", @"add"];
     NSMutableArray * collectionData = [[NSMutableArray alloc] init];
     for (NSInteger i = 0; i < titles.count; i++) {
-        [collectionData addObject:[MainCollectionModel mainCollectionModelWithTitle:titles[i] image:images[i]]];
+        CollectionModelType modelType = CollectionModelTypeDevice;
+        if (i == titles.count-1) {
+            modelType = CollectionModelTypeAddDevice;
+        }
+        [collectionData addObject:[MainCollectionModel mainCollectionModelWithTitle:titles[i] image:images[i] modelType:modelType]];
     }
-    
-    MainCollectionView * mainCollectionView = [MainCollectionView mainCollectionViewWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-NavBarHeight) DataSource:[collectionData copy] selectBlock:^(NSInteger selectIndex) {
+    __weak typeof (self)ws = self;
+    MainCollectionView * mainCollectionView = [MainCollectionView mainCollectionViewWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-NavBarHeight) DataSource:[collectionData copy] selectBlock:^(MainCollectionModel *collectionModel) {
+        DeviceDetailViewController * deviceDetailVC = [[DeviceDetailViewController alloc] init];
+        deviceDetailVC.deviceModel = collectionModel;
+        [ws.navigationController pushViewController:deviceDetailVC animated:YES];
         
     }];
     [mainCollectionView setContentInset:UIEdgeInsetsMake(MainView_InsetY, 0, 0, 0)];
     self.mainCollectionView = mainCollectionView;
-    __weak typeof (self)ws = self;
     [mainCollectionView setScrollBlock:^(CGFloat scrollY, BOOL endScroll) {
 //        MPNLog(@"%f*****%f",scrollY,MainView_InsetY);
         if (scrollY > -MainView_InsetY && scrollY <= 0) {
@@ -116,8 +125,12 @@
             
         } else if (scrollY > 0) {
             backView.y = 0;
+            ws.sixEdge.transform = CGAffineTransformMakeScale(0.5, 0.5);
+            ws.sixEdge.alpha = 0.0;
         } else {
             backView.y = MainView_InsetY;
+            ws.sixEdge.transform = CGAffineTransformMakeScale(1.0, 1.0);
+            ws.sixEdge.alpha = 1.0;
         }
         
     }];
@@ -175,11 +188,20 @@
 }
 // 处理设备连接
 - (void)handleConnectManger {
+    __weak MainViewController * weakSelf = self;
     [[LockConnectManger shareLockConnectManger] setLockMangerCanConnect:YES];
     [[LockConnectManger shareLockConnectManger] connect];
-    
-    [[LockConnectManger shareLockConnectManger] setLockStateBlock:^(ConnectState connectState, BluetoothLockState lockState) {
-        // 刷新UI
+    // 获取网关的链接状态
+    [[LockConnectManger shareLockConnectManger] setGatewayConnectBlock:^(ConnectState connectState) {
+        // 刷新UI状态
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [weakSelf.mainCollectionView updateConnectState:connectState];
+            if (connectState==ConnectStateConnectedBluetooth || connectState==ConnectStateConnectedSocket) {
+                [weakSelf.sixEdge updateDeviceNumber:@"1"];
+            } else {
+                [weakSelf.sixEdge updateDeviceNumber:@"0"];
+            }
+        });
     }];
 }
 
