@@ -144,7 +144,6 @@ static Socket * _socket = nil;
     [_asyncSocket readDataWithTimeout:-1 tag:100];
     // 初始化 重新连接的时间
     _afterTimeConnect = 0;
-    [self handleHeart];
     // 开启定时器
     if ([self.heartTimer isValid]) {
         self.heartTimer.fireDate = [NSDate distantPast];

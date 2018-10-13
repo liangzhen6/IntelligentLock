@@ -69,7 +69,9 @@ static LockConnectManger * _lockConnectManger;
             if (self.lockStateBlock) {
                 self.lockStateBlock(ConnectStateConnecting, BluetoothLockStateLock);
             }
-            
+            /*
+             以后要优化一下 链接，每次进入App或者是网络状态发生改变时通过ping 来检查哪一个ip 可用？
+             */
             // 如果是断线状态 就 连接
             //1. 优先本地网关链接 2.网关链接失败进行远程连接 3.网络连接失败，蓝牙链接
             __weak LockConnectManger * weakSelf = self;
