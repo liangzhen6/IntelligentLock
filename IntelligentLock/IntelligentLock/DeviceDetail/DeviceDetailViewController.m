@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIView *onlineView;
 @property (weak, nonatomic) IBOutlet UILabel *onlineTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *onlineIcon;
+@property (weak, nonatomic) IBOutlet UILabel *progressLabel;
 
 @end
 
@@ -36,26 +37,26 @@
 }
 
 - (void)initView {
-    // 为topView 切圆角 设置阴影
-    self.topView.layer.cornerRadius = (Screen_Width-160)/2;
-    self.topView.layer.borderWidth = 2;
+    CAShapeLayer * shapeLayer = [self getShapeLayerWithProgress:1.0];
+    [self.topView.layer addSublayer:shapeLayer];
+    [self.switchConnectBtn setImageEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, -30)];
+    [self.switchConnectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, -35, 0)];
+    self.switchConnectBtn.layer.cornerRadius = 30;
+    self.switchConnectBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.switchConnectBtn.layer.borderWidth = 1;
+    [self.switchConnectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
     if (self.deviceModel.modelType == CollectionModelTypeAddDevice) {
-        self.topView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+        shapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
         self.mainIcon.image = [UIImage imageNamed:@"add_detail"];
         self.desLabel.text = @"点击上方按钮添加新设备~";
         self.switchConnectBtn.hidden = YES;
         self.onlineView.hidden = YES;
     } else {
+        self.mainIcon.image = [UIImage imageNamed:@"lock-off"];
         self.switchConnectBtn.hidden = NO;
         self.onlineView.hidden = NO;
-        [self.switchConnectBtn setImageEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, -30)];
-        [self.switchConnectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, -35, 0)];
-        self.switchConnectBtn.layer.cornerRadius = 30;
-        self.switchConnectBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        self.switchConnectBtn.layer.borderWidth = 1;
-        
-        self.topView.layer.borderColor = [UIColor whiteColor].CGColor;
-        [self.switchConnectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        shapeLayer.strokeColor = [UIColor whiteColor].CGColor;
         [self setConnectTypeUI:self.deviceModel.connectState];
     }
     
@@ -68,7 +69,14 @@
 //    self.topView.layer.shadowColor = [UIColor whiteColor].CGColor;
 //    self.topView.layer.shadowOpacity = 1.0;
     
+}
+
+- (void)updateView {
+    self.mainIcon.image = [UIImage imageNamed:@"lock-off"];
+    self.switchConnectBtn.hidden = NO;
+    self.onlineView.hidden = NO;
     
+    [self setConnectTypeUI:self.deviceModel.connectState];
 }
 // 设置不同链接方式的UI
 - (void)setConnectTypeUI:(ConnectState)state {
@@ -142,6 +150,69 @@
     
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    __weak typeof (self) ws = self;
+    [self updateAddDeviceProgressComple:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            ws.progressLabel.hidden = YES;
+            ws.mainIcon.hidden = NO;
+            ws.deviceModel.connectState = ConnectStateConnectedSocket;
+            ws.deviceModel.modelType = CollectionModelTypeDevice;
+            [self updateView];
+        });
+    }];
+}
+- (void)updateAddDeviceProgressComple:(void(^)(void))comple {
+    self.mainIcon.hidden = YES;
+    self.progressLabel.hidden = NO;
+dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        __block CAShapeLayer * lastLayer = nil;
+        __weak typeof (self) ws = self;
+        __block float progress = 0.0;
+        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.02 repeats:YES block:^(NSTimer * _Nonnull timer) {
+            if (progress < 1.0) {
+                progress += 0.01;
+                CAShapeLayer * layer = [self getShapeLayerWithProgress:progress];
+                layer.strokeColor = [UIColor whiteColor].CGColor;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (lastLayer) {
+                        [lastLayer removeFromSuperlayer];
+                        lastLayer = nil;
+                    }
+                    ws.progressLabel.text = [NSString stringWithFormat:@"%d%%",(int)(progress*100)];
+                    [ws.topView.layer addSublayer:layer];
+                    lastLayer = layer;
+                });
+            } else {
+                [timer invalidate];// 停止定时器
+                if (comple) {
+                    comple();
+                }
+            }
+        }];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+        [[NSRunLoop currentRunLoop] run];
+    });
+}
+- (CAShapeLayer *)getShapeLayerWithProgress:(float)progress {
+    CGFloat topViewW = (Screen_Width-160)/2;
+    CGPoint center = CGPointMake(topViewW, topViewW);
+    
+    CGFloat startA = -M_PI_2;// 开始角度
+    CGFloat endA = -M_PI_2 + M_PI * 2 * progress;// 结束角度
+    UIBezierPath * bezierPath = [UIBezierPath bezierPathWithArcCenter:center radius:topViewW-2 startAngle:startA endAngle:endA clockwise:YES];
+    
+    CAShapeLayer * shaperLayer = [CAShapeLayer layer];
+    shaperLayer.frame = CGRectMake(0, 0, topViewW, topViewW);
+    shaperLayer.fillColor = [UIColor clearColor].CGColor;
+//    shaperLayer.strokeColor = color.CGColor; //< 线的颜色
+    shaperLayer.opacity = 1.0;
+    shaperLayer.lineWidth = 2;
+    
+    shaperLayer.path = bezierPath.CGPath;
+    
+    return shaperLayer;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

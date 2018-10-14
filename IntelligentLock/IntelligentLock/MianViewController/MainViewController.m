@@ -16,6 +16,7 @@
 #import "MainCollectionModel.h"
 #import "SixEdgeView.h"
 #import "DeviceDetailViewController.h"
+#import "MangerViewController.h"
 
 @interface MainViewController ()
 @property(nonatomic,strong)MainCollectionView * mainCollectionView;
@@ -53,6 +54,10 @@
     }];
     
     self.title = @"芝麻管家";
+    //设置左侧菜单
+    UIBarButtonItem * leftItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"menu"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(showLeftMenu)];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
     // 页面布局相关
     //1.缩放的view
     CGFloat SEHeight = MainView_InsetY-80;
@@ -69,8 +74,6 @@
     [self.view addSubview:backView];
     
     //3.uicollectionView
-//    NSArray * titles = @[@"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备", @"智能门禁", @"增加设备"];
-//    NSArray * images = @[@"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add", @"lock", @"add"];
     NSArray * titles = @[@"智能门禁", @"增加设备"];
     NSArray * images = @[@"lock", @"add"];
     NSMutableArray * collectionData = [[NSMutableArray alloc] init];
@@ -203,6 +206,10 @@
             }
         });
     }];
+}
+
+- (void)showLeftMenu {
+    [[MangerViewController shareMangerViewController] showLeftViewAnimate:YES duration:0.3];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

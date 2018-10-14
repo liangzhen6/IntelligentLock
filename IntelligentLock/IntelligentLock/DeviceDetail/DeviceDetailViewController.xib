@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -18,6 +18,7 @@
                 <outlet property="onlineIcon" destination="x63-Cm-tuv" id="bgC-dQ-GDt"/>
                 <outlet property="onlineTitle" destination="8Z6-LA-dIf" id="HC3-05-pE6"/>
                 <outlet property="onlineView" destination="Bqz-eJ-kcS" id="En0-ji-AbB"/>
+                <outlet property="progressLabel" destination="9p8-n2-YKG" id="hN5-up-z6Z"/>
                 <outlet property="switchConnectBtn" destination="kWw-Iw-Mbl" id="VoX-dF-qhr"/>
                 <outlet property="topView" destination="cBJ-K3-XnW" id="bA5-Ou-NNZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -31,6 +32,15 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cBJ-K3-XnW">
                     <rect key="frame" x="80" y="156" width="215" height="215"/>
                     <subviews>
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9p8-n2-YKG">
+                            <rect key="frame" x="40" y="40.5" width="135" height="135"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="9p8-n2-YKG" secondAttribute="height" multiplier="1:1" id="8ja-pk-cdX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lock-off" translatesAutoresizingMaskIntoConstraints="NO" id="kYq-pj-lKX">
                             <rect key="frame" x="40" y="39.5" width="135" height="135"/>
                             <constraints>
@@ -39,11 +49,14 @@
                         </imageView>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="9p8-n2-YKG" firstAttribute="leading" secondItem="cBJ-K3-XnW" secondAttribute="leading" constant="40" id="LBL-Dr-xKU"/>
                         <constraint firstItem="kYq-pj-lKX" firstAttribute="centerX" secondItem="cBJ-K3-XnW" secondAttribute="centerX" id="X4V-Pa-mNo"/>
                         <constraint firstAttribute="trailing" secondItem="kYq-pj-lKX" secondAttribute="trailing" constant="40" id="ZmW-Lb-ad6"/>
+                        <constraint firstItem="9p8-n2-YKG" firstAttribute="centerY" secondItem="cBJ-K3-XnW" secondAttribute="centerY" id="cpv-Sy-iR3"/>
                         <constraint firstItem="kYq-pj-lKX" firstAttribute="centerY" secondItem="cBJ-K3-XnW" secondAttribute="centerY" id="h87-kV-pTa"/>
                         <constraint firstAttribute="width" secondItem="cBJ-K3-XnW" secondAttribute="height" multiplier="1:1" id="muG-di-7k5"/>
                         <constraint firstItem="kYq-pj-lKX" firstAttribute="leading" secondItem="cBJ-K3-XnW" secondAttribute="leading" constant="40" id="pBD-aA-7UW"/>
+                        <constraint firstAttribute="trailing" secondItem="9p8-n2-YKG" secondAttribute="trailing" constant="40" id="s1M-Qf-ugR"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZtP-zW-t6l">

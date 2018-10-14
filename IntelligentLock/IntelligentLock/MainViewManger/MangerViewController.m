@@ -57,7 +57,7 @@ static MangerViewController * _mangerVC = nil;
     
     
     // 增加侧边栏 呼出手势
-    UIView * leftOpenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 50, Screen_Height)];
+    UIView * leftOpenView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 20, Screen_Height)];
     [mainVC.view addSubview:leftOpenView];
     UIPanGestureRecognizer * leftOpenPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(leftOpenPanAtion:)];
     [leftOpenView addGestureRecognizer:leftOpenPan];

@@ -47,6 +47,8 @@
                                  NSForegroundColorAttributeName:[UIColor clearColor]
                                  };
     [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateSelected];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateHighlighted];
  
 }
 
