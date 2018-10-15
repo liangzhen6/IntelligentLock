@@ -79,4 +79,10 @@ typedef NS_ENUM(NSUInteger, CollectionModelType) {
     CollectionModelTypeAddDevice,  ///< 是增加设备的按钮
 };
 
+// 设备详情页面的回调数据
+typedef NS_ENUM(NSUInteger, DeviceBackType) {
+    DeviceBackTypeAddDevice = 0, ///< 增加一个设备
+    DeviceBackTypeDeleteDevice,     ///< 删除一个设备
+};
+
 #endif /* EnumHeader_h */

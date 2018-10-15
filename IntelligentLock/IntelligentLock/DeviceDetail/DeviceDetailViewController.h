@@ -7,8 +7,11 @@
 //
 
 #import "RootViewController.h"
-#import "MainCollectionModel.h"
+@class MainCollectionModel;
+typedef void(^DeviceBlock)(DeviceBackType backType, MainCollectionModel *model);
+
 @interface DeviceDetailViewController : RootViewController
 @property(nonatomic,strong)MainCollectionModel *deviceModel;
+@property(nonatomic,copy)DeviceBlock deviceBlock;
 
 @end

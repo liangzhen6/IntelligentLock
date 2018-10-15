@@ -10,6 +10,7 @@
 #import "MainCollectionViewCell.h"
 #import "HeardCollectionReusableView.h"
 #import "MainCollectionModel.h"
+#import "Tools.h"
 
 @interface MainCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)NSMutableArray * collectionData;
@@ -59,6 +60,21 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
         model.connectState = connectState;
     }
     [self reloadSections:[NSIndexSet indexSetWithIndex:0]];
+}
+
+//增加或者删除一个 设备的 item
+- (void)handleDeviceItemChange:(DeviceBackType)backType itemModel:(MainCollectionModel *)model {
+    if (backType == DeviceBackTypeAddDevice) {
+        // 增加
+        [self.collectionData insertObject:model atIndex:self.collectionData.count-1];
+    } else {
+        // 删除一个
+        [self.collectionData removeObject:model];
+    }
+    // 刷新UI
+    [self reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    // 本地存储数据
+    [Tools writeID:self.collectionData pathString:Device_Data_Key];
 }
 
 #pragma mark -- UICollectionViewDelegate UICollectionViewDataSource

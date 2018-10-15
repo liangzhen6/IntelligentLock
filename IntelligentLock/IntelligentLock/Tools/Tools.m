@@ -25,6 +25,25 @@ static NSString const * key = @"ADER19T22H2K56U5";
     });
     return _tools;
 }
+
++ (NSString *)returnThePath:(NSString *)key {
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentsDirectory = [paths objectAtIndex:0];
+    NSString * path = [documentsDirectory stringByAppendingPathComponent:key];
+    return path;
+    
+}
+
++ (id)readWithPathString:(NSString *)key {
+    NSString * path = [Tools returnThePath:key];
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+}
+
++ (BOOL)writeID:(id)object pathString:(NSString *)key {
+    NSString * path = [Tools returnThePath:key];
+    return [NSKeyedArchiver archiveRootObject:object toFile:path];
+}
+
 - (NSData *)encryptData:(NSString *)jsonStr {
     char keyPtr[kCCKeySizeAES128+1];
     //    memset(keyPtr, 0, sizeof(keyPtr));
@@ -309,7 +328,6 @@ static NSString const * key = @"ADER19T22H2K56U5";
             }
         }];
     }
-    
 }
 
 @end

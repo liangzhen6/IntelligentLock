@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MainCollectionModel : NSObject
+@interface MainCollectionModel : NSObject<NSCoding>
 @property(nonatomic,copy)NSString * title;
 @property(nonatomic,copy)NSString * imagePath;
 @property(nonatomic,assign)ConnectState connectState;

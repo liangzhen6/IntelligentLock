@@ -27,7 +27,7 @@
 #define Screen_Height    [[UIScreen mainScreen] bounds].size.height
 #define KeyWindow [[[UIApplication sharedApplication] delegate] window]
 #define RGBColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
-
+/* 设置一些常量 */
 #define MaginWidth 300.0f //左侧菜单栏的偏移量
 #define LeftViewAlpha 0.5f // mianView 的最大透明度
 #define MainView_InsetY     (Screen_Width*0.8) // 主页的collection 的偏移量
@@ -40,6 +40,9 @@
 #define TabBar_SafeArea 34.0
 //判断iphonex
 #define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125.0,2436.0), [[UIScreen mainScreen] currentMode].size) : NO)
+
+/* 本地存储的一些写入值 */
+#define Device_Data_Key @"Device_Data"  ///< 已经添加的设备
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.

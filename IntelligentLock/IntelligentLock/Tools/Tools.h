@@ -10,6 +10,30 @@
 
 @interface Tools : NSObject
 + (id)shareTools;
+/**
+ 获取一个路径
+ 
+ @param key 路径的key
+ @return 返回path
+ */
++ (NSString *)returnThePath:(NSString *)key;
+/**
+ 本地化读取操作
+ 
+ @param key key description
+ @return return 读取的值
+ */
++ (id)readWithPathString:(NSString *)key;
+
+/**
+ 本地化写入操作
+ 
+ @param object 写入一个对象
+ @param key key description
+ @return 是否写入成功
+ */
++ (BOOL)writeID:(id)object pathString:(NSString *)key;
+
 // ase 编码
 //- (NSData *)encryptData:(NSData *)rawData;
 // ase 编码

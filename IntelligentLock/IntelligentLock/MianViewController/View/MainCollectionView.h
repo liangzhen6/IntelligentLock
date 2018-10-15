@@ -16,4 +16,6 @@ typedef void(^ScrollBlock)(CGFloat scrollY, BOOL endScroll);
 + (id)mainCollectionViewWithFrame:(CGRect)frame DataSource:(NSArray *)dataSource selectBlock:(SelectBlock)selectBlock;
 
 - (void)updateConnectState:(ConnectState)connectState;
+
+- (void)handleDeviceItemChange:(DeviceBackType)backType itemModel:(MainCollectionModel *)model;
 @end

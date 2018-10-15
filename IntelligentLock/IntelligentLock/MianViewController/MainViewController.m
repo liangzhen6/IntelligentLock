@@ -74,22 +74,16 @@
     [self.view addSubview:backView];
     
     //3.uicollectionView
-    NSArray * titles = @[@"智能门禁", @"增加设备"];
-    NSArray * images = @[@"lock", @"add"];
-    NSMutableArray * collectionData = [[NSMutableArray alloc] init];
-    for (NSInteger i = 0; i < titles.count; i++) {
-        CollectionModelType modelType = CollectionModelTypeDevice;
-        if (i == titles.count-1) {
-            modelType = CollectionModelTypeAddDevice;
-        }
-        [collectionData addObject:[MainCollectionModel mainCollectionModelWithTitle:titles[i] image:images[i] modelType:modelType]];
+    NSArray * deviceDataArr = [Tools readWithPathString:Device_Data_Key];
+    if (![deviceDataArr count]) {
+        //没有旧的数据
+        deviceDataArr = @[[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" modelType:CollectionModelTypeAddDevice]];
+        [Tools writeID:deviceDataArr pathString:Device_Data_Key];
     }
+   
     __weak typeof (self)ws = self;
-    MainCollectionView * mainCollectionView = [MainCollectionView mainCollectionViewWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-NavBarHeight) DataSource:[collectionData copy] selectBlock:^(MainCollectionModel *collectionModel) {
-        DeviceDetailViewController * deviceDetailVC = [[DeviceDetailViewController alloc] init];
-        deviceDetailVC.deviceModel = collectionModel;
-        [ws.navigationController pushViewController:deviceDetailVC animated:YES];
-        
+    MainCollectionView * mainCollectionView = [MainCollectionView mainCollectionViewWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-NavBarHeight) DataSource:deviceDataArr selectBlock:^(MainCollectionModel *collectionModel) {
+        [ws handlePushDevicePage:collectionModel];
     }];
     [mainCollectionView setContentInset:UIEdgeInsetsMake(MainView_InsetY, 0, 0, 0)];
     self.mainCollectionView = mainCollectionView;
@@ -199,13 +193,18 @@
         // 刷新UI状态
         dispatch_async(dispatch_get_main_queue(), ^{
             [weakSelf.mainCollectionView updateConnectState:connectState];
-            if (connectState==ConnectStateConnectedBluetooth || connectState==ConnectStateConnectedSocket) {
-                [weakSelf.sixEdge updateDeviceNumber:@"1"];
-            } else {
-                [weakSelf.sixEdge updateDeviceNumber:@"0"];
-            }
+            [weakSelf updateSixEdgeDeviceNum:connectState];
         });
     }];
+}
+// 更新链接设备的数量
+- (void)updateSixEdgeDeviceNum:(ConnectState)connectState {
+    if (connectState==ConnectStateConnectedBluetooth || connectState==ConnectStateConnectedSocket) {
+        NSString * connectNum = [NSString stringWithFormat:@"%lu",[[self.mainCollectionView valueForKey:@"collectionData"] count]-1];
+        [self.sixEdge updateDeviceNumber:connectNum];
+    } else {
+        [self.sixEdge updateDeviceNumber:@"0"];
+    }
 }
 
 - (void)showLeftMenu {
@@ -220,10 +219,16 @@
     [super viewWillDisappear:animated];
     [_sixEdge endAnimation];
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES];
-    [[LockConnectManger shareLockConnectManger] openLock];
-    
+// 处理Device 页面的跳转等
+- (void)handlePushDevicePage:(MainCollectionModel *)collectionModel {
+    DeviceDetailViewController * deviceDetailVC = [[DeviceDetailViewController alloc] init];
+    deviceDetailVC.deviceModel = collectionModel;
+    [deviceDetailVC setDeviceBlock:^(DeviceBackType backType, MainCollectionModel *model) {
+        [self.mainCollectionView handleDeviceItemChange:backType itemModel:model];
+        [self updateSixEdgeDeviceNum:[[LockConnectManger shareLockConnectManger] connectState]];
+    }];
+    [self.navigationController pushViewController:deviceDetailVC animated:YES];
+
 }
 
 - (void)didReceiveMemoryWarning {
