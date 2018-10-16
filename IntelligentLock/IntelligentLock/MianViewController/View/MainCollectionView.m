@@ -11,6 +11,7 @@
 #import "HeardCollectionReusableView.h"
 #import "MainCollectionModel.h"
 #import "Tools.h"
+#import "User.h"
 
 @interface MainCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)NSMutableArray * collectionData;
@@ -67,9 +68,12 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
     if (backType == DeviceBackTypeAddDevice) {
         // 增加
         [self.collectionData insertObject:model atIndex:self.collectionData.count-1];
+        [[[User shareUser] devicesArr] addObject:model];
     } else {
         // 删除一个
         [self.collectionData removeObject:model];
+        [[[User shareUser] devicesArr] removeObject:model];
+
     }
     // 刷新UI
     [self reloadSections:[NSIndexSet indexSetWithIndex:0]];

@@ -17,6 +17,7 @@
 #import "SixEdgeView.h"
 #import "DeviceDetailViewController.h"
 #import "MangerViewController.h"
+#import "User.h"
 
 @interface MainViewController ()
 @property(nonatomic,strong)MainCollectionView * mainCollectionView;
@@ -76,9 +77,14 @@
     //3.uicollectionView
     NSArray * deviceDataArr = [Tools readWithPathString:Device_Data_Key];
     if (![deviceDataArr count]) {
-        //没有旧的数据
-        deviceDataArr = @[[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" modelType:CollectionModelTypeAddDevice]];
+        //没有旧的数据 增加设备的设备编码为 空字符串
+        deviceDataArr = @[[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" deviceCode:@"" modelType:CollectionModelTypeAddDevice]];
         [Tools writeID:deviceDataArr pathString:Device_Data_Key];
+    } else {
+        // 已经有数据了
+        for (NSInteger i = 0; i < deviceDataArr.count-1; i++) {
+            [[[User shareUser] devicesArr] addObject:deviceDataArr[i]];
+        }
     }
    
     __weak typeof (self)ws = self;

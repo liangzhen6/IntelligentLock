@@ -9,6 +9,8 @@
 #import "DeviceDetailViewController.h"
 #import "MainCollectionModel.h"
 #import "LockConnectManger.h"
+#import <SVProgressHUD.h>
+#import "User.h"
 
 @interface DeviceDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIView *topView;
@@ -40,7 +42,7 @@
     self.collectionModelType = self.deviceModel.modelType;
     self.connectState = self.deviceModel.connectState;
     
-    if (self.connectState == CollectionModelTypeDevice) {
+    if (self.collectionModelType == CollectionModelTypeDevice) {
         // 是设备连接状态就 设置监听。。设备的状态
         [self initVerbLockState];
     }
@@ -160,28 +162,81 @@
     });
     
 }
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    __weak typeof (self) ws = self;
-    [self updateAddDeviceProgressComple:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            ws.connectState = ConnectStateConnectedSocket;
-            ws.collectionModelType = CollectionModelTypeDevice;
-            [ws setMainViewStyle];
-            [ws initVerbLockState];
-            // 通知 home 页面要增加一个
-            if (ws.deviceBlock) {
-               MainCollectionModel *model = [MainCollectionModel mainCollectionModelWithTitle:@"智能门禁" image:@"lock" modelType:CollectionModelTypeDevice];
-                model.connectState = ws.connectState;
-                ws.deviceBlock(DeviceBackTypeAddDevice, model);
-            }
-        });
-    }];
+- (IBAction)addDeviceAction:(UITapGestureRecognizer *)sender {
+    if (self.collectionModelType == CollectionModelTypeAddDevice) {
+        // 是增加一个设备
+        UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        UIAlertAction * alertAction1 = [UIAlertAction actionWithTitle:@"扫描二维码添加" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }];
+        UIAlertAction * alertAction2 = [UIAlertAction actionWithTitle:@"输入设备编码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIAlertController * alertTextController = [UIAlertController alertControllerWithTitle:nil message:@"请输入设备的编码" preferredStyle:UIAlertControllerStyleAlert];
+            __block UITextField * codeTextField = nil;
+            [alertTextController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+                textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+                codeTextField = textField;
+            }];
+            UIAlertAction * alertActionDone = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if (codeTextField) {
+                    [self handleAddDeviceWithcode:codeTextField.text];
+                }
+            }];
+            UIAlertAction * alertActionCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+            [alertTextController addAction:alertActionDone];
+            [alertTextController addAction:alertActionCancel];
+            [self presentViewController:alertTextController animated:YES completion:nil];
+        }];
+        UIAlertAction * alertAction3 = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        [alertController addAction:alertAction1];
+        [alertController addAction:alertAction2];
+        [alertController addAction:alertAction3];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    }
 }
+
+- (void)handleAddDeviceWithcode:(NSString *)deviceCode {
+    if ([[LockConnectManger shareLockConnectManger] netWorkState] == NetWorkStateOn) {
+        if ([deviceCode length] && [deviceCode isEqualToString:@"ZMGJS0001"]) {
+            for (MainCollectionModel * model in [[User shareUser] devicesArr]) {
+                if ([model.deviceCode isEqualToString:deviceCode]) {
+                    [SVProgressHUD showErrorWithStatus:@"当前设备已经添加请勿重复添加！"];
+                    [SVProgressHUD dismissWithDelay:1.0];
+                    return;
+                }
+            }
+            __weak typeof (self) ws = self;
+            [self updateAddDeviceProgressComple:^{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    ws.connectState = ConnectStateConnectedSocket;
+                    ws.collectionModelType = CollectionModelTypeDevice;
+                    [ws setMainViewStyle];
+                    [ws initVerbLockState];
+                    // 通知 home 页面要增加一个
+                    if (ws.deviceBlock) {
+                        MainCollectionModel *model = [MainCollectionModel mainCollectionModelWithTitle:@"智能门禁" image:@"lock" deviceCode:deviceCode modelType:CollectionModelTypeDevice];
+                        model.connectState = ws.connectState;
+                        ws.deviceBlock(DeviceBackTypeAddDevice, model);
+                    }
+                });
+            }];
+        } else {
+            // 请输入正确的 设备编码
+            [SVProgressHUD showErrorWithStatus:@"请输入正确的设备编码!"];
+            [SVProgressHUD dismissWithDelay:1.0];
+        }
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"请检查网络是否连接？"];
+        [SVProgressHUD dismissWithDelay:1.0];
+    }
+    
+}
+
 - (void)updateAddDeviceProgressComple:(void(^)(void))comple {
     // topView 的 logo 隐藏 进度条展示
     self.mainIcon.hidden = YES;
     self.progressLabel.hidden = NO;
+    self.desLabel.text = @"设备添加中。。。";
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         __block CAShapeLayer * lastLayer = nil;
         __weak typeof (self) ws = self;
@@ -230,6 +285,8 @@ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
     return shaperLayer;
 }
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

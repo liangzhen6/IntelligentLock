@@ -11,8 +11,9 @@
 @interface MainCollectionModel : NSObject<NSCoding>
 @property(nonatomic,copy)NSString * title;
 @property(nonatomic,copy)NSString * imagePath;
+@property(nonatomic,copy)NSString * deviceCode;
 @property(nonatomic,assign)ConnectState connectState;
 @property(nonatomic,assign)CollectionModelType modelType;
-+ (id)mainCollectionModelWithTitle:(NSString *)title image:(NSString *)image modelType:(CollectionModelType)modelType;
++ (id)mainCollectionModelWithTitle:(NSString *)title image:(NSString *)image deviceCode:(NSString *)code modelType:(CollectionModelType)modelType;
 
 @end

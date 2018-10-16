@@ -43,7 +43,7 @@ static LockConnectManger * _lockConnectManger;
             }
         } else {
             // 网络状态
-            self.netWorkState = NetWorkStateOn;
+            self.netWorkState = NetWorkStateOff;
         }
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];

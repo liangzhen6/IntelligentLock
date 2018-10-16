@@ -44,6 +44,7 @@
 		FA9384542171DC020009E269 /* DeviceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9384522171DC020009E269 /* DeviceDetailViewController.xib */; };
 		FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */; };
 		FA95B7C921706A71001D4AEB /* HeardCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */; };
+		FAF34EE5217473DF004FACD3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF34EE4217473DF004FACD3 /* User.m */; };
 		FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A7E217087480077F616 /* UIView+MSExtension.m */; };
 		FAF47A822170A2A60077F616 /* SixEdgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A812170A2A60077F616 /* SixEdgeView.m */; };
 /* End PBXBuildFile section */
@@ -138,6 +139,8 @@
 		FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeardCollectionReusableView.xib; sourceTree = "<group>"; };
 		FAE1CA552149223E002B1788 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		FAE1CA5721492396002B1788 /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
+		FAF34EE3217473DF004FACD3 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		FAF34EE4217473DF004FACD3 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		FAF47A7D217087480077F616 /* UIView+MSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MSExtension.h"; sourceTree = "<group>"; };
 		FAF47A7E217087480077F616 /* UIView+MSExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MSExtension.m"; sourceTree = "<group>"; };
 		FAF47A802170A2A60077F616 /* SixEdgeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SixEdgeView.h; sourceTree = "<group>"; };
@@ -203,6 +206,7 @@
 				FA0A8986215F729000473305 /* Tools */,
 				32C21AFD21455179002643BD /* ConnectMessageManger */,
 				FAD31C9D2160A6D80063B9BC /* RootViewController */,
+				FAF34EE22174739B004FACD3 /* UserMessage */,
 				FAD31C9C2160A6A90063B9BC /* MainViewManger */,
 				FA0A8984215F723600473305 /* MianViewController */,
 				FAD31C9E2160A7230063B9BC /* LoginViewController */,
@@ -380,6 +384,15 @@
 				FA0A8999215F890400473305 /* LoginViewController.xib */,
 			);
 			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		FAF34EE22174739B004FACD3 /* UserMessage */ = {
+			isa = PBXGroup;
+			children = (
+				FAF34EE3217473DF004FACD3 /* User.h */,
+				FAF34EE4217473DF004FACD3 /* User.m */,
+			);
+			path = UserMessage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -598,6 +611,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAF34EE5217473DF004FACD3 /* User.m in Sources */,
 				FA2A7A0D21466835002337D4 /* Tools.m in Sources */,
 				FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */,
 				32C21B002145519B002643BD /* Socket.m in Sources */,
