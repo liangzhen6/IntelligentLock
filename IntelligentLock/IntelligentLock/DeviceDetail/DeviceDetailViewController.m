@@ -11,12 +11,19 @@
 #import "LockConnectManger.h"
 #import <SVProgressHUD.h>
 #import "User.h"
+#import "AlertConreoller.h"
+#import "QRCodeTool.h"
+#import "MPShare.h"
+#import "Tools.h"
+#import "QRCodeIdentifyVC.h"
 
 @interface DeviceDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UILabel *desLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *mainIcon;
 @property (weak, nonatomic) IBOutlet UIButton *switchConnectBtn;
+@property (weak, nonatomic) IBOutlet UIButton *deleteDeviceBtn;
+@property (weak, nonatomic) IBOutlet UIButton *shareDeviceBtn;
 @property (weak, nonatomic) IBOutlet UIView *onlineView;
 @property (weak, nonatomic) IBOutlet UILabel *onlineTitle;
 @property (weak, nonatomic) IBOutlet UIImageView *onlineIcon;
@@ -32,7 +39,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = self.deviceModel.title;
     [self initData];
     [self initView];
 //    self.view.backgroundColor = RGBColor(51.0, 66.0, 212.0);
@@ -47,17 +53,31 @@
         [self initVerbLockState];
     }
 }
-- (void)initView {
+- (void)initView {    
     CAShapeLayer * shapeLayer = [self getShapeLayerWithProgress:1.0];
     [self.topView.layer addSublayer:shapeLayer];
     self.topViewMainShapeLayer = shapeLayer;
     
-    [self.switchConnectBtn setImageEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, -30)];
+    [self.switchConnectBtn setImageEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, -32)];
     [self.switchConnectBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, -35, 0)];
     self.switchConnectBtn.layer.cornerRadius = 30;
     self.switchConnectBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.switchConnectBtn.layer.borderWidth = 1;
     [self.switchConnectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [self.deleteDeviceBtn setImageEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, -35)];
+    [self.deleteDeviceBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, -35, 0)];
+    self.deleteDeviceBtn.layer.cornerRadius = 30;
+    self.deleteDeviceBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.deleteDeviceBtn.layer.borderWidth = 1;
+    [self.deleteDeviceBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [self.shareDeviceBtn setImageEdgeInsets:UIEdgeInsetsMake(-20, 0, 0, -32)];
+    [self.shareDeviceBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30, -35, 0)];
+    self.shareDeviceBtn.layer.cornerRadius = 30;
+    self.shareDeviceBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.shareDeviceBtn.layer.borderWidth = 1;
+    [self.shareDeviceBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     // 小标签的样式
     self.onlineView.layer.cornerRadius = 3;
@@ -68,23 +88,24 @@
 }
 
 - (void)setMainViewStyle {
-//    self.mainIcon.image = [UIImage imageNamed:@"lock-off"];
-//    self.switchConnectBtn.hidden = NO;
-//    self.onlineView.hidden = NO;
-//
-//    [self setConnectTypeUI:self.deviceModel.connectState];
 
     self.progressLabel.hidden = YES;
     self.mainIcon.hidden = NO;
     if (self.collectionModelType == CollectionModelTypeAddDevice) {
+        self.title = @"增加设备";
         self.topViewMainShapeLayer.strokeColor = [UIColor lightGrayColor].CGColor;
         self.mainIcon.image = [UIImage imageNamed:@"add_detail"];
         self.desLabel.text = @"点击上方按钮添加新设备~";
         self.switchConnectBtn.hidden = YES;
+        self.deleteDeviceBtn.hidden = YES;
+        self.shareDeviceBtn.hidden = YES;
         self.onlineView.hidden = YES;
     } else {
+        self.title = @"智能门禁";
         self.mainIcon.image = [UIImage imageNamed:@"lock-off"];
         self.switchConnectBtn.hidden = NO;
+        self.deleteDeviceBtn.hidden = NO;
+        self.shareDeviceBtn.hidden = NO;
         self.onlineView.hidden = NO;
         self.topViewMainShapeLayer.strokeColor = [UIColor whiteColor].CGColor;
         [self setConnectTypeUI:self.connectState];
@@ -147,26 +168,72 @@
 }
 
 - (IBAction)switchConnectAction:(UIButton *)sender {
-    if (self.deviceModel.connectState == ConnectStateUnConnect) {
-        // 发起重新连接
-        [[LockConnectManger shareLockConnectManger] connect];
-    } else {
-        // 发送开锁命令
-        [[LockConnectManger shareLockConnectManger] openLock];
+    switch (sender.tag) {
+        case 0:
+            {//开关按钮
+                if (self.deviceModel.connectState == ConnectStateUnConnect) {
+                    // 发起重新连接
+                    [[LockConnectManger shareLockConnectManger] connect];
+                } else {
+                    // 发送开锁命令
+                    [[LockConnectManger shareLockConnectManger] openLock];
+                }
+                
+                // 防止暴力点击
+                sender.userInteractionEnabled = NO;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    sender.userInteractionEnabled = YES;
+                });
+            }
+            break;
+        case 1:
+            {//删除按钮
+                [AlertConreoller alertControllerWithController:self title:@"提示" message:@"确定要删除当前设备吗？" cancelButtonTitle:@"再想想" otherButtonTitle:@"确定" cancelAction:nil otherAction:^{
+                    // 执行删除操作
+                    self.collectionModelType = CollectionModelTypeAddDevice;
+                    [self setMainViewStyle];
+                    // 通知 home 页面要删除一个
+                    if (self.deviceBlock) {
+                        self.deviceBlock(DeviceBackTypeDeleteDevice, self.deviceModel);
+                    }
+                }];
+            }
+            break;
+        case 2:
+            {//分享按钮
+                // 将设备的Id 加密处理
+                NSData * enCodeData = [[Tools shareTools] encryptData:self.deviceModel.deviceCode];
+                NSString * enCodeStr = [[NSString alloc] initWithData:enCodeData encoding:NSUTF8StringEncoding];
+                
+                UIImage *qrCodeImage = [QRCodeTool createDefaultQRCodeWithData:enCodeStr imageViewSize:CGSizeMake(Screen_Width, Screen_Width)];
+                [MPShare shareWithText:@"门禁二维码，请不要转发他人。" image:qrCodeImage url:nil];
+            }
+            break;
+        default:
+            break;
     }
-    
-    // 防止暴力点击
-    sender.userInteractionEnabled = NO;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        sender.userInteractionEnabled = YES;
-    });
-    
+ 
 }
 - (IBAction)addDeviceAction:(UITapGestureRecognizer *)sender {
     if (self.collectionModelType == CollectionModelTypeAddDevice) {
         // 是增加一个设备
         UIAlertController * alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         UIAlertAction * alertAction1 = [UIAlertAction actionWithTitle:@"扫描二维码添加" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            __weak typeof (self) ws = self;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                QRCodeIdentifyVC * qrCodeIdentifyVC = [[QRCodeIdentifyVC alloc] init];
+                [qrCodeIdentifyVC setIdentifyBlock:^(NSString *resulrStr) {
+                    if ([resulrStr length]) {
+                        NSData * deData = [[Tools shareTools] decryptData:[resulrStr dataUsingEncoding:NSUTF8StringEncoding]];
+                        NSString * deStr = [[NSString alloc] initWithData:deData encoding:NSUTF8StringEncoding];
+                        [ws handleAddDeviceWithcode:deStr];
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:@"二维码扫描失败"];
+                        [SVProgressHUD dismissWithDelay:1.0];
+                    }
+                }];
+                [self.navigationController pushViewController:qrCodeIdentifyVC animated:YES];
+            });
             
         }];
         UIAlertAction * alertAction2 = [UIAlertAction actionWithTitle:@"输入设备编码" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -236,7 +303,7 @@
     // topView 的 logo 隐藏 进度条展示
     self.mainIcon.hidden = YES;
     self.progressLabel.hidden = NO;
-    self.desLabel.text = @"设备添加中。。。";
+    self.desLabel.text = @"设备添加中...";
 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         __block CAShapeLayer * lastLayer = nil;
         __weak typeof (self) ws = self;

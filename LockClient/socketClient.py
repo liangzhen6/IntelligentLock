@@ -58,7 +58,7 @@ def clientConnect():
 	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 	#定义绑定的ip 和 端口
-	ip_point = ('192.168.1.104', 8000)
+	ip_point = ('144.34.162.116', 8000)
 	try:
 		#绑定监听
 		client.connect(ip_point)

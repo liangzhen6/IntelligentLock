@@ -78,7 +78,7 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
     // 刷新UI
     [self reloadSections:[NSIndexSet indexSetWithIndex:0]];
     // 本地存储数据
-    [Tools writeID:self.collectionData pathString:Device_Data_Key];
+    [[Tools shareTools] writeID:self.collectionData pathString:Device_Data_Key];
 }
 
 #pragma mark -- UICollectionViewDelegate UICollectionViewDataSource

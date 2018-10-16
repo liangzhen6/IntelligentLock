@@ -13,12 +13,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeviceDetailViewController">
             <connections>
+                <outlet property="deleteDeviceBtn" destination="aNA-P7-6nN" id="Jq8-ck-Q8r"/>
                 <outlet property="desLabel" destination="ZtP-zW-t6l" id="bS8-1b-Hxv"/>
                 <outlet property="mainIcon" destination="kYq-pj-lKX" id="w3d-7i-AQZ"/>
                 <outlet property="onlineIcon" destination="x63-Cm-tuv" id="bgC-dQ-GDt"/>
                 <outlet property="onlineTitle" destination="8Z6-LA-dIf" id="HC3-05-pE6"/>
                 <outlet property="onlineView" destination="Bqz-eJ-kcS" id="En0-ji-AbB"/>
                 <outlet property="progressLabel" destination="9p8-n2-YKG" id="hN5-up-z6Z"/>
+                <outlet property="shareDeviceBtn" destination="rYR-wg-rPC" id="sb0-jW-hfe"/>
                 <outlet property="switchConnectBtn" destination="kWw-Iw-Mbl" id="VoX-dF-qhr"/>
                 <outlet property="topView" destination="cBJ-K3-XnW" id="bA5-Ou-NNZ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -79,7 +81,7 @@
                         <constraint firstAttribute="width" constant="60" id="ZYL-0U-BWC"/>
                     </constraints>
                     <connections>
-                        <action selector="switchConnectAction:" destination="-1" eventType="touchUpInside" id="x0u-HD-xMt"/>
+                        <action selector="switchConnectAction:" destination="-1" eventType="touchUpInside" id="HtO-dl-hHl"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bqz-eJ-kcS">
@@ -112,14 +114,40 @@
                         <constraint firstItem="x63-Cm-tuv" firstAttribute="leading" secondItem="8Z6-LA-dIf" secondAttribute="trailing" id="MHa-cp-2WG"/>
                     </constraints>
                 </view>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNA-P7-6nN">
+                    <rect key="frame" x="57" y="487" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="9x3-I6-h2h"/>
+                        <constraint firstAttribute="width" constant="60" id="aKx-9V-MKL"/>
+                    </constraints>
+                    <state key="normal" title="删除" image="delete_device"/>
+                    <connections>
+                        <action selector="switchConnectAction:" destination="-1" eventType="touchUpInside" id="Deb-Qn-FW0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rYR-wg-rPC">
+                    <rect key="frame" x="257" y="487" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="d22-h6-VIv"/>
+                        <constraint firstAttribute="width" constant="60" id="g3f-rB-YxL"/>
+                    </constraints>
+                    <state key="normal" title="分享" image="share_device"/>
+                    <connections>
+                        <action selector="switchConnectAction:" destination="-1" eventType="touchUpInside" id="8Y3-fk-yFX"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.20000000000000001" green="0.25882352941176467" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="rYR-wg-rPC" firstAttribute="leading" secondItem="kWw-Iw-Mbl" secondAttribute="trailing" constant="40" id="1Gv-hJ-Li1"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Bqz-eJ-kcS" secondAttribute="trailing" constant="20" id="35q-rc-cJo"/>
                 <constraint firstItem="cBJ-K3-XnW" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="3M8-Hr-fZ2"/>
+                <constraint firstItem="rYR-wg-rPC" firstAttribute="top" secondItem="kWw-Iw-Mbl" secondAttribute="top" id="5LL-ml-8OY"/>
                 <constraint firstItem="cBJ-K3-XnW" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="80" id="Bt2-Qc-6dx"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="kWw-Iw-Mbl" secondAttribute="bottom" constant="120" id="DQJ-dW-wpx"/>
                 <constraint firstItem="ZtP-zW-t6l" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="EYX-kw-tzd"/>
+                <constraint firstItem="kWw-Iw-Mbl" firstAttribute="top" secondItem="aNA-P7-6nN" secondAttribute="top" id="ONX-Pp-FyM"/>
+                <constraint firstItem="kWw-Iw-Mbl" firstAttribute="leading" secondItem="aNA-P7-6nN" secondAttribute="trailing" constant="40" id="OeL-iH-jFf"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="cBJ-K3-XnW" secondAttribute="trailing" constant="80" id="UwO-Qo-qkL"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="ZtP-zW-t6l" secondAttribute="trailing" id="fkb-AZ-mcT"/>
                 <constraint firstItem="ZtP-zW-t6l" firstAttribute="top" secondItem="cBJ-K3-XnW" secondAttribute="bottom" constant="20" id="gJK-Mf-Udd"/>
@@ -137,7 +165,9 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="delete_device" width="30" height="30"/>
         <image name="lock-off" width="64" height="64"/>
+        <image name="share_device" width="30" height="30"/>
         <image name="wifi-big" width="64" height="64"/>
     </resources>
 </document>

@@ -26,7 +26,7 @@ static NSString const * key = @"ADER19T22H2K56U5";
     return _tools;
 }
 
-+ (NSString *)returnThePath:(NSString *)key {
+- (NSString *)returnThePath:(NSString *)key {
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString * documentsDirectory = [paths objectAtIndex:0];
     NSString * path = [documentsDirectory stringByAppendingPathComponent:key];
@@ -34,13 +34,13 @@ static NSString const * key = @"ADER19T22H2K56U5";
     
 }
 
-+ (id)readWithPathString:(NSString *)key {
-    NSString * path = [Tools returnThePath:key];
+- (id)readWithPathString:(NSString *)key {
+    NSString * path = [self returnThePath:key];
     return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
 }
 
-+ (BOOL)writeID:(id)object pathString:(NSString *)key {
-    NSString * path = [Tools returnThePath:key];
+- (BOOL)writeID:(id)object pathString:(NSString *)key {
+    NSString * path = [self returnThePath:key];
     return [NSKeyedArchiver archiveRootObject:object toFile:path];
 }
 
@@ -86,9 +86,7 @@ static NSString const * key = @"ADER19T22H2K56U5";
         NSString *base64String= [resultData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         return [base64String dataUsingEncoding:NSUTF8StringEncoding];
     }
-    free(buffer);
-    return nil;
-    
+    free(buffer);    
     return nil;
 }
 /*

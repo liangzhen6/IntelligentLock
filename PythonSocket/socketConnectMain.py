@@ -22,7 +22,7 @@ def socketClose(sock):
 
 def sendMessage(sock, typeStr, mes = None, lockLink = None, lockState = None):
 	#发送信息
-	send_mes = {'Mtype':typeStr, 'Mes':mes}
+	send_mes = {'Mtype':typeStr}
 	if mes != None:
 		send_mes['Mes'] = mes
 	if lockLink != None:
@@ -37,9 +37,10 @@ def sendMessage(sock, typeStr, mes = None, lockLink = None, lockState = None):
 		sock.send(code_json)
 
 def createSocket(point):
+	global lockLink, lockedState
 	#初始化 监听等
 	sk = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-	ip = '192.168.1.104'
+	ip = '0.0.0.0'
 	sk.bind((ip, point))
 	sk.listen()
 
@@ -47,7 +48,8 @@ def createSocket(point):
 		print('服务器-等待接收数据')
 		sock, addr = sk.accept()
 		message = '链接成功' + str(addr)
-		sendMessage(sock, 'command', message)
+		# sendMessage(sock, 'command', message)
+		sendMessage(sock, 'heart', lockedState, lockLink, lockedState)
 		print(message)
 		if point == 8000:
 			global lockSock, sock_list

@@ -81,7 +81,7 @@ static LockConnectManger * _lockConnectManger;
                     if (self.appIsAction) {
                         if (connectState == SocketConnectStateUnConnect) {
                             // 链接失败 换远程连接
-                            [weakSelf socketConnectWithHost:@"192.168.1.104" port:8008 completion:^(SocketConnectState connectState) {
+                            [weakSelf socketConnectWithHost:@"144.34.162.116" port:8008 completion:^(SocketConnectState connectState) {
                                 if (connectState == SocketConnectStateUnConnect) {
                                     // 远程连接失败，换蓝牙连接
                                     if (self.connectState == ConnectStateConnecting) {

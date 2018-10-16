@@ -75,11 +75,11 @@
     [self.view addSubview:backView];
     
     //3.uicollectionView
-    NSArray * deviceDataArr = [Tools readWithPathString:Device_Data_Key];
+    NSArray * deviceDataArr = [[Tools shareTools] readWithPathString:Device_Data_Key];
     if (![deviceDataArr count]) {
         //没有旧的数据 增加设备的设备编码为 空字符串
         deviceDataArr = @[[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" deviceCode:@"" modelType:CollectionModelTypeAddDevice]];
-        [Tools writeID:deviceDataArr pathString:Device_Data_Key];
+        [[Tools shareTools] writeID:deviceDataArr pathString:Device_Data_Key];
     } else {
         // 已经有数据了
         for (NSInteger i = 0; i < deviceDataArr.count-1; i++) {

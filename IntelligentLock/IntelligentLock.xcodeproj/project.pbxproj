@@ -36,6 +36,10 @@
 		FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0721463CE9002337D4 /* MesModel.m */; };
 		FA2A7A0D21466835002337D4 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = FA2A7A0C21466835002337D4 /* Tools.m */; };
 		FA3679292160AD1800FA35B7 /* LeftMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA3679282160AD1800FA35B7 /* LeftMenuViewController.xib */; };
+		FA36B7232175EB2600AA4A85 /* QRCodeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = FA36B7202175EB2500AA4A85 /* QRCodeTool.m */; };
+		FA36B7242175EB2600AA4A85 /* QRCodeScnnerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA36B7212175EB2600AA4A85 /* QRCodeScnnerView.m */; };
+		FA36B7272175ED2900AA4A85 /* MPShare.m in Sources */ = {isa = PBXBuildFile; fileRef = FA36B7252175ED2900AA4A85 /* MPShare.m */; };
+		FA36B72A2175F54500AA4A85 /* QRCodeIdentifyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FA36B7292175F54500AA4A85 /* QRCodeIdentifyVC.m */; };
 		FA828827215E2311003C64C0 /* StartView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA828826215E2311003C64C0 /* StartView.m */; };
 		FA828829215E231B003C64C0 /* StartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA828828215E231B003C64C0 /* StartView.xib */; };
 		FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA82882B215E49E8003C64C0 /* StartAnimationManger.m */; };
@@ -124,6 +128,14 @@
 		FA2A7A0B21466835002337D4 /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		FA2A7A0C21466835002337D4 /* Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		FA3679282160AD1800FA35B7 /* LeftMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftMenuViewController.xib; sourceTree = "<group>"; };
+		FA36B71F2175EB2500AA4A85 /* QRCodeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeTool.h; sourceTree = "<group>"; };
+		FA36B7202175EB2500AA4A85 /* QRCodeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeTool.m; sourceTree = "<group>"; };
+		FA36B7212175EB2600AA4A85 /* QRCodeScnnerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeScnnerView.m; sourceTree = "<group>"; };
+		FA36B7222175EB2600AA4A85 /* QRCodeScnnerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeScnnerView.h; sourceTree = "<group>"; };
+		FA36B7252175ED2900AA4A85 /* MPShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPShare.m; sourceTree = "<group>"; };
+		FA36B7262175ED2900AA4A85 /* MPShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPShare.h; sourceTree = "<group>"; };
+		FA36B7282175F54500AA4A85 /* QRCodeIdentifyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeIdentifyVC.h; sourceTree = "<group>"; };
+		FA36B7292175F54500AA4A85 /* QRCodeIdentifyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeIdentifyVC.m; sourceTree = "<group>"; };
 		FA828825215E2311003C64C0 /* StartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StartView.h; sourceTree = "<group>"; };
 		FA828826215E2311003C64C0 /* StartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StartView.m; sourceTree = "<group>"; };
 		FA828828215E231B003C64C0 /* StartView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StartView.xib; sourceTree = "<group>"; };
@@ -303,6 +315,12 @@
 		FA0A8986215F729000473305 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				FA36B7262175ED2900AA4A85 /* MPShare.h */,
+				FA36B7252175ED2900AA4A85 /* MPShare.m */,
+				FA36B7222175EB2600AA4A85 /* QRCodeScnnerView.h */,
+				FA36B7212175EB2600AA4A85 /* QRCodeScnnerView.m */,
+				FA36B71F2175EB2500AA4A85 /* QRCodeTool.h */,
+				FA36B7202175EB2500AA4A85 /* QRCodeTool.m */,
 				FAF47A7D217087480077F616 /* UIView+MSExtension.h */,
 				FAF47A7E217087480077F616 /* UIView+MSExtension.m */,
 				FA2A7A0B21466835002337D4 /* Tools.h */,
@@ -335,6 +353,8 @@
 		FA93844F2171DB7B0009E269 /* DeviceDetail */ = {
 			isa = PBXGroup;
 			children = (
+				FA36B7282175F54500AA4A85 /* QRCodeIdentifyVC.h */,
+				FA36B7292175F54500AA4A85 /* QRCodeIdentifyVC.m */,
 				FA9384502171DC020009E269 /* DeviceDetailViewController.h */,
 				FA9384512171DC020009E269 /* DeviceDetailViewController.m */,
 				FA9384522171DC020009E269 /* DeviceDetailViewController.xib */,
@@ -612,6 +632,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAF34EE5217473DF004FACD3 /* User.m in Sources */,
+				FA36B7242175EB2600AA4A85 /* QRCodeScnnerView.m in Sources */,
 				FA2A7A0D21466835002337D4 /* Tools.m in Sources */,
 				FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */,
 				32C21B002145519B002643BD /* Socket.m in Sources */,
@@ -622,6 +643,7 @@
 				32C21AD021454F28002643BD /* ViewController.m in Sources */,
 				FA0A899A215F890400473305 /* LoginViewController.m in Sources */,
 				FA9384532171DC020009E269 /* DeviceDetailViewController.m in Sources */,
+				FA36B72A2175F54500AA4A85 /* QRCodeIdentifyVC.m in Sources */,
 				FA1AA3F121705BCC0000A94D /* MainCollectionViewCell.m in Sources */,
 				FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */,
 				FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */,
@@ -630,10 +652,12 @@
 				FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */,
 				32C21ACD21454F28002643BD /* AppDelegate.m in Sources */,
 				FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */,
+				FA36B7272175ED2900AA4A85 /* MPShare.m in Sources */,
 				FA828827215E2311003C64C0 /* StartView.m in Sources */,
 				FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */,
 				FA0A8991215F743600473305 /* RootViewController.m in Sources */,
 				FA1AA3FA21705F340000A94D /* MainCollectionModel.m in Sources */,
+				FA36B7232175EB2600AA4A85 /* QRCodeTool.m in Sources */,
 				FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */,
 				FA1AA3ED21704F0F0000A94D /* MainCollectionView.m in Sources */,
 			);
