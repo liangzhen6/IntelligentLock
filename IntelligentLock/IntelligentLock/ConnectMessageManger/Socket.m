@@ -152,7 +152,7 @@ static Socket * _socket = nil;
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     
-    if (data.length) {
+    if (data) {
         NSData * jsonData = [[Tools shareTools] decryptData:data];
        
         NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];

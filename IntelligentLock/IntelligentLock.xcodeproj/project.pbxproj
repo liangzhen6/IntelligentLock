@@ -48,6 +48,8 @@
 		FA9384542171DC020009E269 /* DeviceDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9384522171DC020009E269 /* DeviceDetailViewController.xib */; };
 		FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */; };
 		FA95B7C921706A71001D4AEB /* HeardCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */; };
+		FAAFBA6E2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAFBA6C2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.m */; };
+		FAAFBA6F2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAFBA6D2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib */; };
 		FAF34EE5217473DF004FACD3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF34EE4217473DF004FACD3 /* User.m */; };
 		FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A7E217087480077F616 /* UIView+MSExtension.m */; };
 		FAF47A822170A2A60077F616 /* SixEdgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A812170A2A60077F616 /* SixEdgeView.m */; };
@@ -149,6 +151,9 @@
 		FA95B7C521706A70001D4AEB /* HeardCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeardCollectionReusableView.h; sourceTree = "<group>"; };
 		FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeardCollectionReusableView.m; sourceTree = "<group>"; };
 		FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeardCollectionReusableView.xib; sourceTree = "<group>"; };
+		FAAFBA6B2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderUnNetWorkCollectionReusableView.h; sourceTree = "<group>"; };
+		FAAFBA6C2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderUnNetWorkCollectionReusableView.m; sourceTree = "<group>"; };
+		FAAFBA6D2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderUnNetWorkCollectionReusableView.xib; sourceTree = "<group>"; };
 		FAE1CA552149223E002B1788 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		FAE1CA5721492396002B1788 /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
 		FAF34EE3217473DF004FACD3 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -344,6 +349,9 @@
 				FA95B7C521706A70001D4AEB /* HeardCollectionReusableView.h */,
 				FA95B7C621706A70001D4AEB /* HeardCollectionReusableView.m */,
 				FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */,
+				FAAFBA6B2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.h */,
+				FAAFBA6C2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.m */,
+				FAAFBA6D2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib */,
 				FAF47A802170A2A60077F616 /* SixEdgeView.h */,
 				FAF47A812170A2A60077F616 /* SixEdgeView.m */,
 			);
@@ -522,6 +530,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAAFBA6F2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib in Resources */,
 				32C21AD821454F29002643BD /* LaunchScreen.storyboard in Resources */,
 				FA0A8996215F744F00473305 /* MainViewController.xib in Resources */,
 				32C21AD521454F29002643BD /* Assets.xcassets in Resources */,
@@ -649,6 +658,7 @@
 				FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */,
 				FA0A8989215F732000473305 /* MangerViewController.m in Sources */,
 				32C21ADB21454F29002643BD /* main.m in Sources */,
+				FAAFBA6E2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.m in Sources */,
 				FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */,
 				32C21ACD21454F28002643BD /* AppDelegate.m in Sources */,
 				FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */,
@@ -840,7 +850,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -860,7 +870,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = lz.IntelligentLock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

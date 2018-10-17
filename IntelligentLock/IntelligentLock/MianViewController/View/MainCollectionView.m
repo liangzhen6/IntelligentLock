@@ -9,16 +9,19 @@
 #import "MainCollectionView.h"
 #import "MainCollectionViewCell.h"
 #import "HeardCollectionReusableView.h"
+#import "HeaderUnNetWorkCollectionReusableView.h"
 #import "MainCollectionModel.h"
+#import "LockConnectManger.h"
 #import "Tools.h"
 #import "User.h"
 
-@interface MainCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface MainCollectionView ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property(nonatomic,strong)NSMutableArray * collectionData;
 @property(nonatomic,copy)SelectBlock selectBlock;
 @end
 static NSString *const collectionCellId = @"collectionCellId";
 static NSString *const collectionHeaderId = @"collectionHeaderId";
+static NSString *const collectionHeaderUnNetWorkId = @"collectionHeaderUnNetWorkId";
 
 @implementation MainCollectionView
 
@@ -29,7 +32,7 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
     layout.minimumLineSpacing = 1;
     layout.minimumInteritemSpacing = 1;
     layout.sectionInset = UIEdgeInsetsMake(0, 15, 0, 15);
-    layout.headerReferenceSize = CGSizeMake(Screen_Width, 40);
+//    layout.headerReferenceSize = CGSizeMake(Screen_Width, 40);
     // 设置一个透明的footer 视图撑场
     layout.footerReferenceSize = CGSizeMake(Screen_Width, Screen_Height-NavBarHeight-40-Width);
     MainCollectionView * mainView = [[MainCollectionView alloc] initWithFrame:frame collectionViewLayout:layout];
@@ -51,8 +54,14 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
     // 注册 header
     UINib * headerNib = [UINib nibWithNibName:NSStringFromClass([HeardCollectionReusableView class]) bundle:nil];
     [self registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:collectionHeaderId];
+    // 注册 无网络的header
+    UINib *unNetWorkNib = [UINib nibWithNibName:NSStringFromClass([HeaderUnNetWorkCollectionReusableView class]) bundle:nil];
+    [self registerNib:unNetWorkNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:collectionHeaderUnNetWorkId];
     
     [self registerNib:headerNib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:collectionHeaderId];
+    
+    // 增加网络状态的监听
+    [[LockConnectManger shareLockConnectManger] addObserver:self forKeyPath:@"netWorkState" options:NSKeyValueObservingOptionNew context:nil];
 
 }
 // 更新链接状态
@@ -95,9 +104,16 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         // 是头部
-        HeardCollectionReusableView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:collectionHeaderId forIndexPath:indexPath];
-        [headerView addTitle:@"我的设备"];
-        return headerView;
+        if ([[LockConnectManger shareLockConnectManger] netWorkState] == NetWorkStateOff) {
+            // 无网络
+            HeaderUnNetWorkCollectionReusableView * headerUnNetWorkCollectionReusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:collectionHeaderUnNetWorkId forIndexPath:indexPath];
+            [headerUnNetWorkCollectionReusableView addTitle:@"我的设备"];
+            return headerUnNetWorkCollectionReusableView;
+        } else {
+            HeardCollectionReusableView * headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:collectionHeaderId forIndexPath:indexPath];
+            [headerView addTitle:@"我的设备"];
+            return headerView;
+        }
     }
     return [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:collectionHeaderId forIndexPath:indexPath];
 }
@@ -106,6 +122,23 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     if (self.selectBlock) {
         self.selectBlock(self.collectionData[indexPath.item]);
+    }
+}
+
+#pragma --UICollectionViewDelegateFlowLayout
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    if ([[LockConnectManger shareLockConnectManger] netWorkState] == NetWorkStateOff) {
+        // 无网络
+        return CGSizeMake(Screen_Width, 70);
+    } else {
+        return CGSizeMake(Screen_Width, 40);
+    }
+}
+
+#pragma mark -- kvo监听网络状态
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"netWorkState"]) {
+        [self reloadData];
     }
 }
 
@@ -134,6 +167,10 @@ static NSString *const collectionHeaderId = @"collectionHeaderId";
             self.scrollBlock(contentOffsetY, YES);
         }
     }
+}
+
+- (void)dealloc {
+    [[LockConnectManger shareLockConnectManger] removeObserver:self name:@"netWorkState" object:nil];
 }
 /*
 // Only override drawRect: if you perform custom drawing.
