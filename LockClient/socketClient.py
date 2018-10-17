@@ -128,7 +128,8 @@ def createSocket(point):
 		print('服务器-等待接收数据')
 		sock, addr = sk.accept()
 		message = '链接成功' + str(addr)
-		sendClientsMessage(sock, 'command', message)
+		# sendClientsMessage(sock, 'command', message)
+		sendClientsMessage(sock, 'heart', message, 'on', 'off')
 		print(message)
 		# if point == 8000:
 		# 	global lockSock, sock_list

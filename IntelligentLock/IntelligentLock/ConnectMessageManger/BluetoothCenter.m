@@ -117,6 +117,8 @@ static NSString * const commandOff = @"00"; ///< 关闭
         self.peripheral = peripheral;
         // 连接 设备
         [central connectPeripheral:peripheral options:nil];
+    } else {
+        [self handleLinkState:BluetoothLockLinkStateOff];
     }
     MPNLog(@"%@-----%@---%@", peripheral.identifier, advertisementData, RSSI);
 }

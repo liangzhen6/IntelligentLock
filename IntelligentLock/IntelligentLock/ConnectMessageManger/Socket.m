@@ -154,12 +154,12 @@ static Socket * _socket = nil;
     
     if (data) {
         NSData * jsonData = [[Tools shareTools] decryptData:data];
-       
-        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
-//        NSString * mesStr = dict[@"Mes"];
-        if ([dict count]) {
-            if (self.messageBlack) {
-                self.messageBlack(dict);
+        if (jsonData) {
+            NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+            if ([dict count]) {
+                if (self.messageBlack) {
+                    self.messageBlack(dict);
+                }
             }
         }
     }

@@ -56,7 +56,12 @@ def createSocket(point):
 			# 是lock 的链接
 			lockSock = sock
 			lockLink = 'on'
+			#  锁的链接状态发生变化 向所有 客户端发送锁的状态
+			for sockone in sock_list:
+				sendMessage(sockone, 'heart', lockedState, lockLink, lockedState)
+			# 创建线程
 			handle_socket(sock, addr, point)
+			
 		else:
 			sock_list.append(sock)
 			client_thread = threading.Thread(target = handle_socket, args=(sock, addr, point))
@@ -116,6 +121,9 @@ def handle_socket(sock, addr, point):
 	if point == 8000:
 		#是 lock 的链接 设置链接状态
 		lockLink = 'off'
+		#  锁的链接状态发生变化 向所有 客户端发送锁的状态
+		for sockone in sock_list:
+			sendMessage(sockone, 'heart', lockedState, lockLink, lockedState)
 	socketClose(sock)
 
 lockServer = threading.Thread(target = createSocket, args=(8000,))

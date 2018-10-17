@@ -33,18 +33,21 @@ static LockConnectManger * _lockConnectManger;
         if (status == AFNetworkReachabilityStatusReachableViaWWAN || status == AFNetworkReachabilityStatusReachableViaWiFi) {
             // 网络状态
             self.netWorkState = NetWorkStateOn;
-            Socket *socket = [Socket shareSocket];
-            if (socket.socketConnectState != SocketConnectStateConnected && socket.canConnect == YES) {
-                //网络状态 改变 处于非链接状态 并且允许链接的情况下 才 重新连接
-                if (socket.socketConnectState == SocketConnectStateConnecting) {
-                    [socket setSocketConnectState:SocketConnectStateUnConnect];
-                }
-                [socket connectServer];
-            }
+//            Socket *socket = [Socket shareSocket];
+//            if (socket.socketConnectState != SocketConnectStateConnected && socket.canConnect == YES) {
+//                //网络状态 改变 处于非链接状态 并且允许链接的情况下 才 重新连接
+//                if (socket.socketConnectState == SocketConnectStateConnecting) {
+//                    [socket setSocketConnectState:SocketConnectStateUnConnect];
+//                }
+//                [socket connectServer];
+//            }
         } else {
             // 网络状态
             self.netWorkState = NetWorkStateOff;
+            self.connectState = ConnectStateUnConnect;
         }
+        // 重新连接
+        [self connect];
     }];
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
 }
@@ -102,12 +105,18 @@ static LockConnectManger * _lockConnectManger;
             [[Socket shareSocket] setMessageBlack:^(NSDictionary *message) {
                 MPNLog(@"%@",message);
                 BluetoothLockState lockState = BluetoothLockStateLock;
+                ConnectState connectState = ConnectStateUnConnect;
                 if ([message[@"lockState"] isEqualToString:@"on"]) {
                     lockState = BluetoothLockStateUnLock;
                 }
-
+                if ([message[@"lockLink"] isEqualToString:@"on"]) {
+                    connectState = weakSelf.connectState;
+                }
                 if (weakSelf.lockStateBlock) {
-                    weakSelf.lockStateBlock(weakSelf.connectState, lockState);
+                    weakSelf.lockStateBlock(connectState, lockState);
+                }
+                if (weakSelf.gatewayConnectBlock) {
+                    weakSelf.gatewayConnectBlock(connectState);
                 }
             }];
         }
@@ -121,7 +130,7 @@ static LockConnectManger * _lockConnectManger;
     [Socket shareSocketWithHost:host port:port];
     [[Socket shareSocket] connectServerWithCompletion:^(SocketConnectState connectState) {
         if (connectState == SocketConnectStateConnected) {
-            // 连接成功 1. 改变连接状态 2.将消息发送给接受者
+            // 状态 刷新UI界面 1. 改变连接状态 2.将消息发送给接受者
             weakSelf.connectState = ConnectStateConnectedSocket;
             if (weakSelf.gatewayConnectBlock) {
                 weakSelf.gatewayConnectBlock(ConnectStateConnectedSocket);
@@ -130,6 +139,7 @@ static LockConnectManger * _lockConnectManger;
                 weakSelf.lockStateBlock(ConnectStateConnectedSocket, BluetoothLockStateLock);
             }
         }
+        
         if (completion) {
             completion(connectState);
         }
