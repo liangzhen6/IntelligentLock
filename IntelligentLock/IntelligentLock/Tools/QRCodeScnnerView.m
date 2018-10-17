@@ -221,7 +221,7 @@ static CGFloat const timer_animation_Duration = 0.05;
         flag = NO;
         [UIView animateWithDuration:timer_animation_Duration animations:^{
             frame.origin.y += 5;
-            _animation_line.frame = frame;
+            self.animation_line.frame = frame;
         } completion:nil];
     } else {
         if (_animation_line.frame.origin.y >= scanContent_Y) {
@@ -233,7 +233,7 @@ static CGFloat const timer_animation_Duration = 0.05;
             } else {
                 [UIView animateWithDuration:timer_animation_Duration animations:^{
                     frame.origin.y += 5;
-                    _animation_line.frame = frame;
+                    self.animation_line.frame = frame;
                 } completion:nil];
             }
         } else {

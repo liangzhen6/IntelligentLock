@@ -17,7 +17,7 @@
 
 @property(nonatomic)AVCaptureVideoPreviewLayer * captureVideoPreviewLayer;
 
-@property(nonatomic)QRCodeScnnerView * scnnerView;
+@property(nonatomic,strong)QRCodeScnnerView * scnnerView;
 
 
 @end
@@ -27,11 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"二维码";
+    self.view.backgroundColor = [UIColor whiteColor];
     [self initRightBarButtonItem];
     [self initCaptureDevice];
     [self.view addSubview:self.scnnerView];
-
-
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -126,12 +125,8 @@
 - (void)initRightBarButtonItem {
     
     UIBarButtonItem * rightBarItem = [[UIBarButtonItem alloc] initWithTitle:@"相册" style:UIBarButtonItemStyleDone target:self action:@selector(rightBarButtonItenAction)];
-//    [rightBarItem setTintColor:[UIColor whiteColor]];
-    
     
     [rightBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
-    
-
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
 }
@@ -146,18 +141,16 @@
 - (void)readImageFromAlbum {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init]; // 创建对象
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary; //（选择类型）表示仅仅从相册中选取照片
-    imagePicker.delegate = self; // 指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议
+    imagePicker.delegate = self; // 指定代理，因此我们要实现UIImagePickerControllerDelegate,  UINavigationControllerDelegate协议    
     [self presentViewController:imagePicker animated:YES completion:nil]; // 显示相册
 }
 
 #pragma mark - - - UIImagePickerControllerDelegate
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo {
-    
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     [self dismissViewControllerAnimated:YES completion:^{
-        [self scanQRCodeFromPhotosInTheAlbum:image];
+        [self scanQRCodeFromPhotosInTheAlbum:info[@"UIImagePickerControllerOriginalImage"]];
     }];
 }
-
 
 /** 从相册中识别二维码, 并进行界面跳转 */
 - (void)scanQRCodeFromPhotosInTheAlbum:(UIImage *)image {
