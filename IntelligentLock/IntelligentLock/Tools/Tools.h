@@ -60,4 +60,12 @@
  */
 - (void)verbTouchIdResult:(void(^)(BOOL success, NSError *error))result replyAction:(void(^)(TouchIdReply reply))reply;
 
+/**
+ 正则判断邮箱格式是否正确
+
+ @param email 邮箱号码
+ @return 返回bool值
+ */
+- (BOOL)isValidateEmail:(NSString *)email;
+
 @end

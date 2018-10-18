@@ -10,6 +10,8 @@
 
 @interface User : NSObject
 @property(nonatomic,strong)NSMutableArray *devicesArr;
+@property(nonatomic,copy)NSString *username;
+@property(nonatomic,copy)NSString *password;
 
 + (id)shareUser;
 

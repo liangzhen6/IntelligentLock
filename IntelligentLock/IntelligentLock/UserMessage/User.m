@@ -17,6 +17,8 @@ static User * _user = nil;
     dispatch_once(&onceToken, ^{
         if (_user == nil) {
             _user = [[User alloc] init];
+            _user.username = @"liangzhen@163.com";
+            _user.password = @"liangzhen";
         }
     });
     return _user;
