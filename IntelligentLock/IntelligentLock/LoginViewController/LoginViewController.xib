@@ -15,6 +15,8 @@
                 <outlet property="backScrollView" destination="VxB-Vz-tcx" id="R9f-Ch-e2J"/>
                 <outlet property="iconImage" destination="3Zc-1L-2bx" id="HI3-nH-yoO"/>
                 <outlet property="loginBtn" destination="1iJ-7J-jDf" id="PiO-sR-EcH"/>
+                <outlet property="paddingTableHeight" destination="jFu-9x-aXb" id="Atd-7b-EN2"/>
+                <outlet property="paddingTableView" destination="4JF-fj-0lQ" id="uFN-za-ISn"/>
                 <outlet property="password" destination="RWH-hy-Vr8" id="v1p-q1-NOT"/>
                 <outlet property="passwordLine" destination="TfQ-Qg-oqp" id="UuX-K9-xcX"/>
                 <outlet property="username" destination="eEW-In-Biv" id="LZu-Tc-SBh"/>
@@ -37,7 +39,7 @@
                                 <constraint firstAttribute="height" constant="80" id="GFb-Fj-EEr"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="邮件" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eEW-In-Biv">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="邮件" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eEW-In-Biv">
                             <rect key="frame" x="40" y="190" width="295" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="eNF-C9-q9l"/>
@@ -46,7 +48,7 @@
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="RWH-hy-Vr8">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RWH-hy-Vr8">
                             <rect key="frame" x="40" y="250" width="295" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="1qE-IJ-uO4"/>
@@ -78,7 +80,17 @@
                             <state key="normal" title="登录">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="GbG-he-zV9"/>
+                            </connections>
                         </button>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4JF-fj-0lQ">
+                            <rect key="frame" x="25" y="226" width="310" height="0.0"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="jFu-9x-aXb"/>
+                            </constraints>
+                        </tableView>
                     </subviews>
                     <gestureRecognizers/>
                     <constraints>
@@ -91,17 +103,20 @@
                         <constraint firstAttribute="trailing" secondItem="TfQ-Qg-oqp" secondAttribute="trailing" constant="40" id="EHa-R1-lRa"/>
                         <constraint firstAttribute="trailing" secondItem="zJI-Nb-ifh" secondAttribute="trailing" constant="40" id="Fek-xE-2aC"/>
                         <constraint firstItem="eEW-In-Biv" firstAttribute="centerX" secondItem="VxB-Vz-tcx" secondAttribute="centerX" id="GTK-KR-nel"/>
+                        <constraint firstItem="4JF-fj-0lQ" firstAttribute="top" secondItem="zJI-Nb-ifh" secondAttribute="bottom" id="GkR-Ik-Drz"/>
                         <constraint firstAttribute="trailing" secondItem="RWH-hy-Vr8" secondAttribute="trailing" constant="40" id="Ht8-7a-WzI"/>
                         <constraint firstItem="zJI-Nb-ifh" firstAttribute="leading" secondItem="VxB-Vz-tcx" secondAttribute="leading" constant="40" id="Owh-bD-GXj"/>
                         <constraint firstItem="eEW-In-Biv" firstAttribute="top" secondItem="3Zc-1L-2bx" secondAttribute="bottom" constant="60" id="X58-B8-I9B"/>
                         <constraint firstAttribute="trailing" secondItem="1iJ-7J-jDf" secondAttribute="trailing" constant="40" id="YZa-XE-BoU"/>
                         <constraint firstItem="3Zc-1L-2bx" firstAttribute="centerX" secondItem="VxB-Vz-tcx" secondAttribute="centerX" id="atz-6L-wya"/>
+                        <constraint firstAttribute="trailing" secondItem="4JF-fj-0lQ" secondAttribute="trailing" constant="40" id="c3s-36-BVr"/>
                         <constraint firstItem="zJI-Nb-ifh" firstAttribute="top" secondItem="eEW-In-Biv" secondAttribute="bottom" constant="5" id="cbq-Bo-SkK"/>
                         <constraint firstItem="3Zc-1L-2bx" firstAttribute="top" secondItem="VxB-Vz-tcx" secondAttribute="top" constant="50" id="chw-OP-KBu"/>
                         <constraint firstItem="1iJ-7J-jDf" firstAttribute="top" secondItem="TfQ-Qg-oqp" secondAttribute="bottom" constant="60" id="ckQ-qu-Lvt"/>
                         <constraint firstItem="TfQ-Qg-oqp" firstAttribute="top" secondItem="RWH-hy-Vr8" secondAttribute="bottom" constant="5" id="ds1-JK-MMX"/>
                         <constraint firstItem="RWH-hy-Vr8" firstAttribute="top" secondItem="eEW-In-Biv" secondAttribute="bottom" constant="30" id="gSp-Li-8RR"/>
                         <constraint firstAttribute="bottom" secondItem="1iJ-7J-jDf" secondAttribute="bottom" constant="380" id="tLo-AS-ioh"/>
+                        <constraint firstItem="4JF-fj-0lQ" firstAttribute="leading" secondItem="VxB-Vz-tcx" secondAttribute="leading" constant="25" id="yXe-f3-oHL"/>
                     </constraints>
                     <connections>
                         <outletCollection property="gestureRecognizers" destination="dzz-S1-WIZ" appends="YES" id="iDw-Wh-g8k"/>
@@ -134,6 +149,7 @@
         <tapGestureRecognizer id="dzz-S1-WIZ">
             <connections>
                 <action selector="scrollViewTapAction:" destination="-1" id="rJb-UC-NFe"/>
+                <outlet property="delegate" destination="-1" id="xca-Pr-bJJ"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

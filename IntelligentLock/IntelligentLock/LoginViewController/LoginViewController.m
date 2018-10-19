@@ -9,8 +9,9 @@
 #import "LoginViewController.h"
 #import "Tools.h"
 #import "User.h"
+#import <SVProgressHUD.h>
 
-@interface LoginViewController ()<UITextFieldDelegate>
+@interface LoginViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UITextField *username;
 @property (weak, nonatomic) IBOutlet UITextField *password;
@@ -18,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UIView *passwordLine;
 @property (weak, nonatomic) IBOutlet UIScrollView *backScrollView;
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
+@property (weak, nonatomic) IBOutlet UITableView *paddingTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *paddingTableHeight;
+@property(nonatomic,strong)NSMutableArray * paddingTableData;
 
 @end
 
@@ -38,9 +42,12 @@
     self.username.delegate = self;
     self.password.delegate = self;
     self.loginBtn.layer.cornerRadius = 20;
+    
+    self.paddingTableView.delegate = self;
+    self.paddingTableView.dataSource = self;
+
     // 监听键盘升起 与 落下
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
@@ -66,10 +73,30 @@
 }
 
 - (IBAction)removeLogin:(UIButton *)sender {
+    [self.view endEditing:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma --mark
+- (IBAction)loginAction:(UIButton *)sender {
+    if ([self chickUsernamePassword]) {
+        [self.view endEditing:YES];
+    }
+}
+
+- (BOOL)chickUsernamePassword {
+    if (![[Tools shareTools] isValidateEmail:_username.text]) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确的邮箱号码！"];
+        [SVProgressHUD dismissWithDelay:1.0];
+        return NO;
+    }
+    if (![_password.text length]) {
+        [SVProgressHUD showErrorWithStatus:@"密码不能为空字符！"];
+        [SVProgressHUD dismissWithDelay:1.0];
+        return NO;
+    }
+    return YES;
+}
+#pragma mark---UITextFieldDelegate
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     if (textField == _username) {
         _usernameLine.backgroundColor = [UIColor redColor];
@@ -90,6 +117,7 @@
         } else {
             _iconImage.image = [UIImage imageNamed:@"header_icon"];
         }
+        self.paddingTableHeight.constant = 0;
     }
 }
 
@@ -106,6 +134,8 @@
             // 删除字符串
             [userName deleteCharactersInRange:range];
         }
+        // 处理动态补全问题
+        [self handleUsernameTextFieldChange:userName];
     }
 
     if ([[Tools shareTools] isValidateEmail:userName]) {
@@ -143,9 +173,85 @@
         [_password becomeFirstResponder];
     } else {
         // 登录操作
-        [self.view endEditing:YES];
+        if ([self chickUsernamePassword]) {
+            [self.view endEditing:YES];
+        }
     }
     return YES;
+}
+
+#pragma mark --UITableViewDelegate
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return self.paddingTableData.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 40;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"paddingTable"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] init];
+        cell.textLabel.textColor = [UIColor lightGrayColor];
+    }
+    cell.textLabel.text = self.paddingTableData[indexPath.row];
+    
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.paddingTableHeight.constant = 0;
+    self.username.text = self.paddingTableData[indexPath.row];
+}
+
+- (void)handleUsernameTextFieldChange:(NSString *)usernameText {
+    [self.paddingTableData removeAllObjects];
+    NSArray * paddingStrArr = @[@"@163.com", @"@126.com", @"@qq.com",  @"@yeah.net", @"@gmail.com"];
+    NSMutableString * keyText = nil;
+    NSArray * keyArr = [usernameText componentsSeparatedByString:@"@"];
+    NSString * prefixText = keyArr.firstObject;
+    
+    if ([keyArr count] > 1) {
+        keyText = [[NSMutableString alloc] initWithString:usernameText];
+        NSRange prefixRange = [usernameText rangeOfString:prefixText];
+        // 删除那些前缀
+        [keyText deleteCharactersInRange:prefixRange];
+        // 把字符串转化为小写
+        keyText = [[keyText lowercaseString] mutableCopy];
+    }
+    if (keyText.length) {
+        for (NSString *paddingStr in paddingStrArr) {
+            if ([paddingStr hasPrefix:keyText]) {
+                [self.paddingTableData addObject:[NSString stringWithFormat:@"%@%@",prefixText,paddingStr]];
+            }
+        }
+    } else {
+        if (usernameText.length) {
+            // 没有关键字 就是 所有匹配
+            for (NSString *paddingStr in paddingStrArr) {
+                [self.paddingTableData addObject:[NSString stringWithFormat:@"%@%@",prefixText,paddingStr]];
+            }
+        }
+    }
+    self.paddingTableHeight.constant = 40*self.paddingTableData.count;
+    [self.paddingTableView reloadData];
+}
+
+#pragma mark --UIGestureRecognizerDelegate 处理手势冲突
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
+    return YES;
+}
+
+- (NSMutableArray *)paddingTableData {
+    if (_paddingTableData == nil) {
+        _paddingTableData = [[NSMutableArray alloc] init];
+    }
+    return _paddingTableData;
 }
 
 - (void)dealloc {
