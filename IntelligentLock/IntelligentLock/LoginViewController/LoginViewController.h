@@ -10,5 +10,5 @@
 typedef void(^LoginSuccessBlock)(void);
 @interface LoginViewController : RootViewController
 @property(nonatomic,copy)LoginSuccessBlock successBlock;
-
+@property(nonatomic,copy)NSString *loginTitle;
 @end

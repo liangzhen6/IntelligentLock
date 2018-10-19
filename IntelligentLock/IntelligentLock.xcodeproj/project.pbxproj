@@ -26,6 +26,11 @@
 		FA0A8996215F744F00473305 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0A8994215F744F00473305 /* MainViewController.xib */; };
 		FA0A899A215F890400473305 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA0A8998215F890400473305 /* LoginViewController.m */; };
 		FA0A899B215F890400473305 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA0A8999215F890400473305 /* LoginViewController.xib */; };
+		FA10C9582179C2FD00E63722 /* SettTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA10C9562179C2FD00E63722 /* SettTableViewCell.m */; };
+		FA10C9592179C2FD00E63722 /* SettTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA10C9572179C2FD00E63722 /* SettTableViewCell.xib */; };
+		FA10C95D2179C3D400E63722 /* SettSwitchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA10C95B2179C3D400E63722 /* SettSwitchTableViewCell.m */; };
+		FA10C95E2179C3D400E63722 /* SettSwitchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA10C95C2179C3D400E63722 /* SettSwitchTableViewCell.xib */; };
+		FA10C9612179C57E00E63722 /* SettModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA10C9602179C57E00E63722 /* SettModel.m */; };
 		FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */; };
 		FA17D79D215B7D61001A4BE4 /* AlertConreoller.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */; };
 		FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */ = {isa = PBXBuildFile; fileRef = FA17D79F215B8520001A4BE4 /* LockConnectManger.m */; };
@@ -112,6 +117,14 @@
 		FA0A8997215F890400473305 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		FA0A8998215F890400473305 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		FA0A8999215F890400473305 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		FA10C9552179C2FD00E63722 /* SettTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettTableViewCell.h; sourceTree = "<group>"; };
+		FA10C9562179C2FD00E63722 /* SettTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettTableViewCell.m; sourceTree = "<group>"; };
+		FA10C9572179C2FD00E63722 /* SettTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettTableViewCell.xib; sourceTree = "<group>"; };
+		FA10C95A2179C3D400E63722 /* SettSwitchTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettSwitchTableViewCell.h; sourceTree = "<group>"; };
+		FA10C95B2179C3D400E63722 /* SettSwitchTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettSwitchTableViewCell.m; sourceTree = "<group>"; };
+		FA10C95C2179C3D400E63722 /* SettSwitchTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettSwitchTableViewCell.xib; sourceTree = "<group>"; };
+		FA10C95F2179C57E00E63722 /* SettModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettModel.h; sourceTree = "<group>"; };
+		FA10C9602179C57E00E63722 /* SettModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettModel.m; sourceTree = "<group>"; };
 		FA17D798215B7BFD001A4BE4 /* BluetoothCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothCenter.h; sourceTree = "<group>"; };
 		FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothCenter.m; sourceTree = "<group>"; };
 		FA17D79B215B7D61001A4BE4 /* AlertConreoller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlertConreoller.h; sourceTree = "<group>"; };
@@ -336,6 +349,21 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		FA10C9622179EAD800E63722 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				FA10C95F2179C57E00E63722 /* SettModel.h */,
+				FA10C9602179C57E00E63722 /* SettModel.m */,
+				FA10C9552179C2FD00E63722 /* SettTableViewCell.h */,
+				FA10C9562179C2FD00E63722 /* SettTableViewCell.m */,
+				FA10C9572179C2FD00E63722 /* SettTableViewCell.xib */,
+				FA10C95A2179C3D400E63722 /* SettSwitchTableViewCell.h */,
+				FA10C95B2179C3D400E63722 /* SettSwitchTableViewCell.m */,
+				FA10C95C2179C3D400E63722 /* SettSwitchTableViewCell.xib */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		FA1AA3EA21704ECF0000A94D /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +419,7 @@
 				FA0A898A215F73DD00473305 /* LeftMenuViewController.h */,
 				FA0A898B215F73DD00473305 /* LeftMenuViewController.m */,
 				FA3679282160AD1800FA35B7 /* LeftMenuViewController.xib */,
+				FA10C9622179EAD800E63722 /* Setting */,
 			);
 			path = MainViewManger;
 			sourceTree = "<group>";
@@ -531,12 +560,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAAFBA6F2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib in Resources */,
+				FA10C9592179C2FD00E63722 /* SettTableViewCell.xib in Resources */,
 				32C21AD821454F29002643BD /* LaunchScreen.storyboard in Resources */,
 				FA0A8996215F744F00473305 /* MainViewController.xib in Resources */,
 				32C21AD521454F29002643BD /* Assets.xcassets in Resources */,
 				32C21AD321454F28002643BD /* Main.storyboard in Resources */,
 				FA0A899B215F890400473305 /* LoginViewController.xib in Resources */,
 				FA3679292160AD1800FA35B7 /* LeftMenuViewController.xib in Resources */,
+				FA10C95E2179C3D400E63722 /* SettSwitchTableViewCell.xib in Resources */,
 				FA828829215E231B003C64C0 /* StartView.xib in Resources */,
 				FA9384542171DC020009E269 /* DeviceDetailViewController.xib in Resources */,
 				FA1AA3F221705BCC0000A94D /* MainCollectionViewCell.xib in Resources */,
@@ -649,6 +680,7 @@
 				FA82882F215E4EFF003C64C0 /* MainNavViewController.m in Sources */,
 				FA0A898D215F73DD00473305 /* LeftMenuViewController.m in Sources */,
 				FAF47A822170A2A60077F616 /* SixEdgeView.m in Sources */,
+				FA10C95D2179C3D400E63722 /* SettSwitchTableViewCell.m in Sources */,
 				32C21AD021454F28002643BD /* ViewController.m in Sources */,
 				FA0A899A215F890400473305 /* LoginViewController.m in Sources */,
 				FA9384532171DC020009E269 /* DeviceDetailViewController.m in Sources */,
@@ -662,11 +694,13 @@
 				FA17D7A0215B8520001A4BE4 /* LockConnectManger.m in Sources */,
 				32C21ACD21454F28002643BD /* AppDelegate.m in Sources */,
 				FA2A7A0821463CE9002337D4 /* MesModel.m in Sources */,
+				FA10C9612179C57E00E63722 /* SettModel.m in Sources */,
 				FA36B7272175ED2900AA4A85 /* MPShare.m in Sources */,
 				FA828827215E2311003C64C0 /* StartView.m in Sources */,
 				FA82882C215E49E8003C64C0 /* StartAnimationManger.m in Sources */,
 				FA0A8991215F743600473305 /* RootViewController.m in Sources */,
 				FA1AA3FA21705F340000A94D /* MainCollectionModel.m in Sources */,
+				FA10C9582179C2FD00E63722 /* SettTableViewCell.m in Sources */,
 				FA36B7232175EB2600AA4A85 /* QRCodeTool.m in Sources */,
 				FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */,
 				FA1AA3ED21704F0F0000A94D /* MainCollectionView.m in Sources */,

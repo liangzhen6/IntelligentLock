@@ -12,6 +12,7 @@
 #import "MainViewController.h"
 #import "MangerViewController.h"
 #import "LeftMenuViewController.h"
+#import "User.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[LockConnectManger shareLockConnectManger] observeReachabilityStatus];
-    
+    [[User shareUser] readUserMesage];
     [self initWindow];
     // Override point for customization after application launch.
     return YES;

@@ -30,7 +30,9 @@ static MangerViewController * _mangerVC = nil;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+//    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = RGBColor(39.0, 31.0, 61.0);
+
     // Do any additional setup after loading the view.
 }
 

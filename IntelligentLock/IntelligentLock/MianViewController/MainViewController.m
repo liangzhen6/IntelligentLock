@@ -40,9 +40,14 @@
     StartView * startView = [StartView shareStartView];
     // 加在根视图上
     [KeyWindow.rootViewController.view addSubview:startView];
- 
-    //启动的时候先校验一次
-    [self handleTouchIdVerb];
+    if ([[[User shareUser] username] length]) {
+        // 已经登陆过了  直接验证指纹
+        [self handleTouchIdVerb];
+    } else {
+        // 从来没有登陆过 就 密码账户登录
+        [self presentLoginVC];
+    }
+
     //处理 启动页传来的事件
     [startView setStartBtnBlock:^(StartBtnActionType btnActionType) {
         if (btnActionType == StartBtnActionTypeTap) {
@@ -150,7 +155,7 @@
     // 开启指纹验证
     [[Tools shareTools] verbTouchIdResult:^(BOOL success, NSError *error) {
         if (success) {
-            [weakSelf handleVerbSucess];
+            [weakSelf handleVerbSucessFingerprint:YES];
         } else {
             if (error.code > -1008) {
                 // 需要 在 startView 上展示出错误的消息
@@ -173,7 +178,14 @@
     }];
 }
 
-- (void)handleVerbSucess {
+- (void)handleVerbSucessFingerprint:(BOOL)isFingerprint {
+    // 登录成功了 是指纹仅仅把登录状态改一下就好了
+    if (isFingerprint) {
+        [[User shareUser] setLoginState:YES];
+        [[User shareUser] writeUserMesage];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+    }
+    
     StartView * startView = [StartView shareStartView];
     [self handleConnectManger];
     // 验证通过
@@ -192,9 +204,10 @@
 
 - (void)presentLoginVC {
     LoginViewController * loginVC = [[LoginViewController alloc] init];
+    loginVC.loginTitle = @"登录";
     // 登录成功的回调
     [loginVC setSuccessBlock:^{
-        [self handleVerbSucess];
+        [self handleVerbSucessFingerprint:NO];
     }];
     [self presentViewController:loginVC animated:YES completion:nil];
 }

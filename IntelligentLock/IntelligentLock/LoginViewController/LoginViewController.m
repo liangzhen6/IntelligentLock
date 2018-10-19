@@ -45,7 +45,7 @@
     
     self.paddingTableView.delegate = self;
     self.paddingTableView.dataSource = self;
-
+    [self.loginBtn setTitle:self.loginTitle forState:UIControlStateNormal];
     // 监听键盘升起 与 落下
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -84,15 +84,38 @@
 - (void)handleLogin {
     if ([self chickUsernamePassword]) {
         [self.view endEditing:YES];
-        if ([_username.text isEqualToString:[[User shareUser] username]] && [_password.text isEqualToString:[[User shareUser] password]]) {
-            [self dismissViewControllerAnimated:YES completion:^{
-                if (self.successBlock) {
-                    self.successBlock();
-                }
-            }];
-        } else {
-            [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误"];
+        if ([self.loginTitle isEqualToString:@"登录"]) {
+            // 是登录界面 不是创建新账户 保存账户密码等信息
+            [[User shareUser] setUsername:_username.text];
+            [[User shareUser] setPassword:_password.text];
+            [[User shareUser] setLoginState:YES];
+            [[User shareUser] setUserIcon:@"liangzhen"];
+            [[User shareUser] writeUserMesage];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
         }
+        [self dismissViewControllerAnimated:YES completion:^{
+            if (self.successBlock) {
+                self.successBlock();
+            }
+        }];
+//        if ([_username.text isEqualToString:[[User shareUser] username]] && [_password.text isEqualToString:[[User shareUser] password]]) {
+//            if ([self.loginTitle isEqualToString:@"登录"]) {
+//                // 是登录界面 不是创建新账户 保存账户密码等信息
+//                [[User shareUser] setUsername:_username.text];
+//                [[User shareUser] setPassword:_password.text];
+//                [[User shareUser] setLoginState:YES];
+//                [[User shareUser] setUserIcon:@"liangzhen"];
+//                [[User shareUser] writeUserMesage];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+//            }
+//            [self dismissViewControllerAnimated:YES completion:^{
+//                if (self.successBlock) {
+//                    self.successBlock();
+//                }
+//            }];
+//        } else {
+//            [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误"];
+//        }
     }
 }
 

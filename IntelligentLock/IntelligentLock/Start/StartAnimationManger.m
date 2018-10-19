@@ -43,6 +43,8 @@ static StartAnimationManger * _startManger;
     [containerView addSubview:rightStartSnapView];
     // 移除启动视图
     [startView removeFromSuperview];
+    // 设置状态栏为白色
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     
     [UIView animateWithDuration:0.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         leftStartSnapView.frame = CGRectOffset(leftStartSnapView.frame, -Screen_Width/2, 0);

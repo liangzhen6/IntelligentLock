@@ -85,4 +85,11 @@ typedef NS_ENUM(NSUInteger, DeviceBackType) {
     DeviceBackTypeDeleteDevice,     ///< 删除一个设备
 };
 
+// 设置页面的table cell类型
+typedef NS_ENUM(NSUInteger, SettModelType) {
+    SettModelTypeNormal = 0, ///< 正常状态的下cell ，无 switch 不能进入
+    SettModelTypeInsert,     ///< 能进入状态的下cell ，无 switch
+    SettModelTypeSwitch,     ///< 不能进入状态的下cell ，有 switch 按钮
+};
+
 #endif /* EnumHeader_h */

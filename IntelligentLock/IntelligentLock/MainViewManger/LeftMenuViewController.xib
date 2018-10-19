@@ -12,6 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeftMenuViewController">
             <connections>
+                <outlet property="headerIcon" destination="erp-bF-fFl" id="Nmk-uH-VRN"/>
+                <outlet property="mainView" destination="sY4-9g-DnJ" id="j27-oc-tbP"/>
+                <outlet property="nickName" destination="Vph-S2-aJT" id="aF7-mP-Gm8"/>
+                <outlet property="rightWidth" destination="Bwq-Cc-feg" id="erY-h3-MjB"/>
+                <outlet property="settTableView" destination="jnH-ab-mub" id="nMh-Un-TNw"/>
+                <outlet property="username" destination="2NP-w2-olv" id="5mg-4n-Awh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,22 +26,68 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="F8b-dz-erk">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sY4-9g-DnJ">
                     <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                </textView>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header_icon" translatesAutoresizingMaskIntoConstraints="NO" id="erp-bF-fFl">
+                            <rect key="frame" x="20" y="60" width="80" height="80"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="07o-Rw-hdt"/>
+                                <constraint firstAttribute="width" constant="80" id="tAw-cd-SoL"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="芝麻管家" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vph-S2-aJT">
+                            <rect key="frame" x="115" y="80" width="260" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="pwp-xg-Qgz"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="jnH-ab-mub">
+                            <rect key="frame" x="0.0" y="150" width="375" height="497"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </tableView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="liangzhen@163.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2NP-w2-olv">
+                            <rect key="frame" x="114" y="110" width="261" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="25" id="gZe-aM-T7x"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.15294117647058825" green="0.12156862745098039" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="jnH-ab-mub" firstAttribute="top" secondItem="erp-bF-fFl" secondAttribute="bottom" constant="10" id="1Gg-T6-DzO"/>
+                        <constraint firstItem="jnH-ab-mub" firstAttribute="leading" secondItem="sY4-9g-DnJ" secondAttribute="leading" id="1ID-fE-yiE"/>
+                        <constraint firstItem="erp-bF-fFl" firstAttribute="leading" secondItem="sY4-9g-DnJ" secondAttribute="leading" constant="20" id="56Y-Mq-ol2"/>
+                        <constraint firstAttribute="trailing" secondItem="2NP-w2-olv" secondAttribute="trailing" id="7uG-Ha-JJB"/>
+                        <constraint firstAttribute="trailing" secondItem="jnH-ab-mub" secondAttribute="trailing" id="BfH-vq-p2o"/>
+                        <constraint firstItem="Vph-S2-aJT" firstAttribute="top" secondItem="erp-bF-fFl" secondAttribute="top" constant="20" id="GOU-Mj-UeY"/>
+                        <constraint firstItem="erp-bF-fFl" firstAttribute="top" secondItem="sY4-9g-DnJ" secondAttribute="top" constant="60" id="Hkm-pH-VWr"/>
+                        <constraint firstAttribute="bottom" secondItem="jnH-ab-mub" secondAttribute="bottom" id="IW4-uh-JUu"/>
+                        <constraint firstItem="2NP-w2-olv" firstAttribute="leading" secondItem="erp-bF-fFl" secondAttribute="trailing" constant="14" id="Qj3-2F-rvv"/>
+                        <constraint firstItem="Vph-S2-aJT" firstAttribute="leading" secondItem="erp-bF-fFl" secondAttribute="trailing" constant="15" id="c7Y-sd-ElA"/>
+                        <constraint firstItem="2NP-w2-olv" firstAttribute="top" secondItem="Vph-S2-aJT" secondAttribute="bottom" constant="5" id="gNY-iP-Tze"/>
+                        <constraint firstAttribute="trailing" secondItem="Vph-S2-aJT" secondAttribute="trailing" id="gsp-x6-EMe"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="F8b-dz-erk" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="BTC-oG-1Rw"/>
-                <constraint firstItem="F8b-dz-erk" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="NF6-M9-SWL"/>
-                <constraint firstItem="F8b-dz-erk" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="ddt-AW-yx2"/>
-                <constraint firstItem="F8b-dz-erk" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="jOV-qx-l7f"/>
+                <constraint firstItem="sY4-9g-DnJ" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Bwq-Cc-feg"/>
+                <constraint firstItem="sY4-9g-DnJ" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="hk7-kM-Esl"/>
+                <constraint firstItem="sY4-9g-DnJ" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="jE3-x2-EJ3"/>
+                <constraint firstItem="sY4-9g-DnJ" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="smr-eL-Uni"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="header_icon" width="64" height="64"/>
+    </resources>
 </document>
