@@ -7,7 +7,8 @@
 //
 
 #import "RootViewController.h"
-
+typedef void(^LoginSuccessBlock)(void);
 @interface LoginViewController : RootViewController
+@property(nonatomic,copy)LoginSuccessBlock successBlock;
 
 @end

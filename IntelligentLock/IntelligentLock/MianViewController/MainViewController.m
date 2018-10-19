@@ -150,20 +150,7 @@
     // 开启指纹验证
     [[Tools shareTools] verbTouchIdResult:^(BOOL success, NSError *error) {
         if (success) {
-            [weakSelf handleConnectManger];
-            // 验证通过
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [startView setStartRevolve:YES];
-                // 2s 后停止旋转，展示
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [startView setStartRevolve:NO];
-                });
-                // 3s 后关闭 启动页
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [[StartAnimationManger shareStartAnimationManger] startAnimationWithBackMainView:weakSelf.navigationController.view startView:startView];
-                });
-            });
-            
+            [weakSelf handleVerbSucess];
         } else {
             if (error.code > -1008) {
                 // 需要 在 startView 上展示出错误的消息
@@ -185,8 +172,30 @@
         }
     }];
 }
+
+- (void)handleVerbSucess {
+    StartView * startView = [StartView shareStartView];
+    [self handleConnectManger];
+    // 验证通过
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [startView setStartRevolve:YES];
+        // 2s 后停止旋转，展示
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [startView setStartRevolve:NO];
+        });
+        // 3s 后关闭 启动页
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[StartAnimationManger shareStartAnimationManger] startAnimationWithBackMainView:self.navigationController.view startView:startView];
+        });
+    });
+}
+
 - (void)presentLoginVC {
     LoginViewController * loginVC = [[LoginViewController alloc] init];
+    // 登录成功的回调
+    [loginVC setSuccessBlock:^{
+        [self handleVerbSucess];
+    }];
     [self presentViewController:loginVC animated:YES completion:nil];
 }
 // 处理设备连接

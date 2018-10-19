@@ -78,8 +78,21 @@
 }
 
 - (IBAction)loginAction:(UIButton *)sender {
+    [self handleLogin];
+}
+
+- (void)handleLogin {
     if ([self chickUsernamePassword]) {
         [self.view endEditing:YES];
+        if ([_username.text isEqualToString:[[User shareUser] username]] && [_password.text isEqualToString:[[User shareUser] password]]) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.successBlock) {
+                    self.successBlock();
+                }
+            }];
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"用户名或者密码错误"];
+        }
     }
 }
 
@@ -173,9 +186,7 @@
         [_password becomeFirstResponder];
     } else {
         // 登录操作
-        if ([self chickUsernamePassword]) {
-            [self.view endEditing:YES];
-        }
+        [self handleLogin];
     }
     return YES;
 }
