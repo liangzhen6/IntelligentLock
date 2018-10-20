@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @class SettModel;
+typedef void(^SwitchBtnBlock)(SettModel *model);
 @interface SettSwitchTableViewCell : UITableViewCell
 @property(nonatomic,strong)SettModel *model;
-
+@property(nonatomic,copy)SwitchBtnBlock switchBtnBlock;
 @end

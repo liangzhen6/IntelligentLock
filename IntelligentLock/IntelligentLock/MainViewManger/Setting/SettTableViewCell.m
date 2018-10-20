@@ -17,6 +17,11 @@
 - (void)setModel:(SettModel *)model {
     _model = model;
     _title.text = model.title;
+    if (model.loginState) {
+        _title.textColor = [UIColor whiteColor];
+    } else {
+        _title.textColor = [UIColor grayColor];
+    }
 }
 
 - (void)awakeFromNib {

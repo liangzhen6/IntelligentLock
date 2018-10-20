@@ -42,6 +42,8 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
 
 - (void)initData {
     [self.settTableData removeAllObjects];
+    User *user = [User shareUser];
+    BOOL isLoginState = [user loginState];
     NSArray * titles = @[@"禁用所有设备", @"指纹登录", @"新增账号"];
     NSMutableArray * titlesM = [[NSMutableArray alloc] initWithArray:titles];
     if ([[User shareUser] loginState]) {
@@ -55,22 +57,22 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
         switch (i) {
             case 0:
                 {
-                    [arrM1 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeSwitch]];
+                    [arrM1 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeSwitch loginState:isLoginState switchOn:user.closeAllDevice]];
                 }
                 break;
             case 1:
                 {
-                    [arrM2 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeSwitch]];
+                    [arrM2 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeSwitch loginState:isLoginState switchOn:user.fingerprintLogin]];
                 }
                 break;
             case 2:
                 {
-                    [arrM2 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeInsert]];
+                    [arrM2 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeInsert loginState:isLoginState switchOn:NO]];
                 }
                 break;
             case 3:
                 {
-                    [arrM3 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeNormal]];
+                    [arrM3 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeNormal loginState:isLoginState switchOn:NO]];
                 }
                 break;
             default:
@@ -115,6 +117,28 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setLoginStateUI) name:@"loginSuccess" object:nil];
 }
+- (IBAction)headerTapAction:(UITapGestureRecognizer *)sender {
+    if ([[User shareUser] loginState]) {
+        // 是登录成功 就 换头像
+    } else {
+        // 是登出状态 就是去登陆
+        LoginViewController * loginVC = [[LoginViewController alloc] init];
+        loginVC.loginTitle = @"登录";
+        [self presentViewController:loginVC animated:YES completion:nil];
+    }
+}
+
+- (void)handleSwitchBtnState:(SettModel *)model {
+    User *user = [User shareUser];
+    if ([model.title isEqualToString:@"禁用所有设备"]) {
+        // 禁用所有设备
+        user.closeAllDevice = model.switchOn;
+    } else {
+        // 开启指纹验证
+        user.fingerprintLogin = model.switchOn;
+    }
+    [user writeUserMesage];
+}
 
 #pragma mark--UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -134,6 +158,10 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
     if (model.modelType == SettModelTypeSwitch) {
         // switch 样式
         SettSwitchTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TableViewCellSwitch];
+        __weak typeof (self) ws = self;
+        [cell setSwitchBtnBlock:^(SettModel *model) {
+            [ws handleSwitchBtnState:model];
+        }];
         cell.model = model;
         return cell;
     } else {
@@ -151,18 +179,24 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
 // 选中
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1 && indexPath.row == 1) {
-        // 创建新的账号
-        LoginViewController * loginVC = [[LoginViewController alloc] init];
-        loginVC.loginTitle = @"新增账号";
-        [self presentViewController:loginVC animated:YES completion:nil];
+        if ([[User shareUser] loginState]) {
+            // 登录成功后才允许操作
+            // 创建新的账号
+            LoginViewController * loginVC = [[LoginViewController alloc] init];
+            loginVC.loginTitle = @"新增账号";
+            [self presentViewController:loginVC animated:YES completion:nil];
+        }
     }
     if (indexPath.section == 2) {
         // 是退出登录
-        [AlertConreoller alertControllerWithController:self title:@"提示" message:@"确定要退出当前账户" cancelButtonTitle:@"再想想" otherButtonTitle:@"确定" cancelAction:nil otherAction:^{
-            [[User shareUser] setLoginState:NO];
-            [[User shareUser] writeUserMesage];
-            [self setLoginStateUI];
-        }];
+        if ([[User shareUser] loginState]) {
+            // 登录成功后才允许操作
+            [AlertConreoller alertControllerWithController:self title:@"提示" message:@"确定要退出当前账户" cancelButtonTitle:@"再想想" otherButtonTitle:@"确定" cancelAction:nil otherAction:^{
+                [[User shareUser] setLoginState:NO];
+                [[User shareUser] writeUserMesage];
+                [self setLoginStateUI];
+            }];
+        }
     }
 }
 

@@ -10,6 +10,7 @@
 #import "SettModel.h"
 @interface SettSwitchTableViewCell()
 @property (weak, nonatomic) IBOutlet UILabel *title;
+@property (weak, nonatomic) IBOutlet UISwitch *switchBtn;
 
 @end
 
@@ -17,6 +18,13 @@
 - (void)setModel:(SettModel *)model {
     _model = model;
     _title.text = model.title;
+    if (model.loginState) {
+        _title.textColor = [UIColor whiteColor];
+        _switchBtn.on = model.switchOn;
+    } else {
+        _title.textColor = [UIColor grayColor];
+        _switchBtn.on = NO;
+    }
 }
 
 - (void)awakeFromNib {
@@ -25,6 +33,16 @@
     // Initialization code
 }
 - (IBAction)switchBtnAction:(UISwitch *)sender {
+    if (self.model.loginState) {
+        self.model.switchOn = sender.on;
+        // 已经登录
+        if (self.switchBtnBlock) {
+            self.switchBtnBlock(self.model);
+        }
+    } else {
+        // 没有登录
+        sender.on = NO;
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

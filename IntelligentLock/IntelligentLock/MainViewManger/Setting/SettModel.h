@@ -11,6 +11,8 @@
 @interface SettModel : NSObject
 @property(nonatomic,copy)NSString * title;
 @property(nonatomic,assign)SettModelType modelType;
-+ (id)settModelWithTitle:(NSString *)title modelType:(SettModelType)modelType;
+@property(nonatomic,assign)BOOL loginState;
+@property(nonatomic,assign)BOOL switchOn;
++ (id)settModelWithTitle:(NSString *)title modelType:(SettModelType)modelType loginState:(BOOL)loginState switchOn:(BOOL)switchOn;
 
 @end

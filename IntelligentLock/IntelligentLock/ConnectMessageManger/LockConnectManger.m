@@ -112,11 +112,18 @@ static LockConnectManger * _lockConnectManger;
                 if ([message[@"lockLink"] isEqualToString:@"on"]) {
                     connectState = weakSelf.connectState;
                 }
+//                if (weakSelf.lockStateBlock) {
+//                    weakSelf.lockStateBlock(connectState, lockState);
+//                }
+//                if (weakSelf.gatewayConnectBlock) {
+//                    weakSelf.gatewayConnectBlock(connectState);
+//                }
+#warning 暂时这样改
                 if (weakSelf.lockStateBlock) {
-                    weakSelf.lockStateBlock(connectState, lockState);
+                    weakSelf.lockStateBlock(ConnectStateConnectedSocket, lockState);
                 }
                 if (weakSelf.gatewayConnectBlock) {
-                    weakSelf.gatewayConnectBlock(connectState);
+                    weakSelf.gatewayConnectBlock(ConnectStateConnectedSocket);
                 }
             }];
         }

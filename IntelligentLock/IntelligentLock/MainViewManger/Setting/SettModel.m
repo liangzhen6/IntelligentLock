@@ -9,10 +9,12 @@
 #import "SettModel.h"
 
 @implementation SettModel
-+ (id)settModelWithTitle:(NSString *)title modelType:(SettModelType)modelType {
++ (id)settModelWithTitle:(NSString *)title modelType:(SettModelType)modelType loginState:(BOOL)loginState switchOn:(BOOL)switchOn {
     SettModel *model = [[SettModel alloc] init];
     model.title = title;
     model.modelType = modelType;
+    model.loginState = loginState;
+    model.switchOn = switchOn;
     return model;
 }
 @end
