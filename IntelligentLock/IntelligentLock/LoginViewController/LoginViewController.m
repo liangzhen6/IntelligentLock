@@ -10,6 +10,7 @@
 #import "Tools.h"
 #import "User.h"
 #import <SVProgressHUD.h>
+#import "User.h"
 
 @interface LoginViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
@@ -21,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 @property (weak, nonatomic) IBOutlet UITableView *paddingTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *paddingTableHeight;
+@property (weak, nonatomic) IBOutlet UIButton *fingerLoginBtn;
 @property(nonatomic,strong)NSMutableArray * paddingTableData;
 
 @end
@@ -42,13 +44,32 @@
     self.username.delegate = self;
     self.password.delegate = self;
     self.loginBtn.layer.cornerRadius = 20;
-    
+
     self.paddingTableView.delegate = self;
     self.paddingTableView.dataSource = self;
-    [self.loginBtn setTitle:self.loginTitle forState:UIControlStateNormal];
+    if (self.loginType == LoginVCTypeLogin) {
+        [self.loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+    } else {
+        [self.loginBtn setTitle:@"新增账号" forState:UIControlStateNormal];
+    }
     // 监听键盘升起 与 落下
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    if (self.loginType == LoginVCTypeLogin) {
+        User *user = [User shareUser];
+        if (user.username.length) {
+            self.username.text = user.username;
+        }
+        if (user.userIcon.length) {
+            self.iconImage.image = [UIImage imageNamed:user.userIcon];
+        }
+        if (user.fingerprintLogin) {
+            _fingerLoginBtn.hidden = NO;
+            if (_needFingerLogin) {
+                [self fingerLoginBtnAction:self.fingerLoginBtn];
+            }
+        }
+    }
 }
 
 - (void)keyboardWillShow:(NSNotification *)notification {
@@ -78,13 +99,39 @@
 }
 
 - (IBAction)loginAction:(UIButton *)sender {
-    [self handleLogin];
+    [self handleLoginIsFinger:NO];
+}
+- (IBAction)fingerLoginBtnAction:(UIButton *)sender {
+    [self.view endEditing:YES];
+    [[Tools shareTools] verbTouchIdResult:^(BOOL success, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (success) {
+                [self handleLoginIsFinger:YES];
+            } else {
+                if (error.code > -1008) {
+                    // 展示出错误的消息
+                    if (error.code == -1004) {
+                        [SVProgressHUD showErrorWithStatus:@"指纹多次输入错误，请稍后再试或使用账号密码登录"];
+                    } else {
+                        [SVProgressHUD showErrorWithStatus:error.userInfo[NSUnderlyingErrorKey]];
+                    }
+                    [SVProgressHUD dismissWithDelay:1.5];
+                }
+            }
+        });
+    } replyAction:^(TouchIdReply reply) {
+        if (reply == TouchIdReplyPasswordLogin) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.password becomeFirstResponder];
+            });
+        }
+    }];
 }
 
-- (void)handleLogin {
-    if ([self chickUsernamePassword]) {
+- (void)handleLoginIsFinger:(BOOL)isFinger {
+    if (isFinger || [self chickUsernamePassword]) {
         [self.view endEditing:YES];
-        if ([self.loginTitle isEqualToString:@"登录"]) {
+        if (self.loginType ==LoginVCTypeLogin) {
             // 是登录界面 不是创建新账户 保存账户密码等信息
             [[User shareUser] setUsername:_username.text];
             [[User shareUser] setPassword:_password.text];
@@ -147,12 +194,6 @@
     _usernameLine.backgroundColor = [UIColor lightGrayColor];
     _passwordLine.backgroundColor = [UIColor lightGrayColor];
     if (textField == _username) {
-        // 看看是不是 自己的头像
-        if ([textField.text isEqualToString:[[User shareUser] username]]) {
-            _iconImage.image = [UIImage imageNamed:@"liangzhen"];
-        } else {
-            _iconImage.image = [UIImage imageNamed:@"header_icon"];
-        }
         self.paddingTableHeight.constant = 0;
     }
 }
@@ -172,6 +213,8 @@
         }
         // 处理动态补全问题
         [self handleUsernameTextFieldChange:userName];
+        
+        [self handleUsernameChange:userName];
     }
 
     if ([[Tools shareTools] isValidateEmail:userName]) {
@@ -209,7 +252,7 @@
         [_password becomeFirstResponder];
     } else {
         // 登录操作
-        [self handleLogin];
+        [self handleLoginIsFinger:NO];
     }
     return YES;
 }
@@ -238,6 +281,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.paddingTableHeight.constant = 0;
     self.username.text = self.paddingTableData[indexPath.row];
+    
+    [self handleUsernameChange:self.username.text];
+}
+// 处理用户名输入变化 与之前账号匹配问题
+- (void)handleUsernameChange:(NSString *)username {
+    if (self.loginType == LoginVCTypeLogin) {
+        // 看看是不是 自己的头像
+        if ([username isEqualToString:[[User shareUser] username]]) {
+            _iconImage.image = [UIImage imageNamed:[[User shareUser] userIcon]];
+            if ([[User shareUser] fingerprintLogin]) {
+                _fingerLoginBtn.hidden = NO;
+            }
+        } else {
+            _iconImage.image = [UIImage imageNamed:@"header_icon"];
+            _fingerLoginBtn.hidden = YES;
+        }
+    }
 }
 
 - (void)handleUsernameTextFieldChange:(NSString *)usernameText {
