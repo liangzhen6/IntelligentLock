@@ -10,5 +10,6 @@
 typedef void(^LoginSuccessBlock)(void);
 @interface LoginViewController : RootViewController
 @property(nonatomic,copy)LoginSuccessBlock successBlock;
-@property(nonatomic,copy)NSString *loginTitle;
+@property(nonatomic,assign)LoginVCType loginType;
+@property(nonatomic,assign)BOOL needFingerLogin;
 @end
