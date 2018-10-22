@@ -89,14 +89,7 @@ typedef NS_ENUM(NSUInteger, DeviceBackType) {
 typedef NS_ENUM(NSUInteger, SettModelType) {
     SettModelTypeNormal = 0, ///< 正常状态的下cell ，无 switch 不能进入
     SettModelTypeInsert,     ///< 能进入状态的下cell ，无 switch
-    SettModelTypeCloseAllDeviceSwitch, ///< 是关闭所有的 switch 按钮
-    SettModelTypeFingerprintLoginSwitch, ///< 是指纹登录的按钮
-};
-
-// Login 界面的类型
-typedef NS_ENUM(NSUInteger, LoginVCType) {
-    LoginVCTypeLogin = 0, ///< 是登录用的
-    LoginVCTypeRegister,  ///< 是去注册新的子账号
+    SettModelTypeSwitch,     ///< 不能进入状态的下cell ，有 switch 按钮
 };
 
 #endif /* EnumHeader_h */

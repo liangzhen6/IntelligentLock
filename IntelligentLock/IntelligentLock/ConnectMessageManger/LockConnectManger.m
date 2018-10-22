@@ -192,9 +192,6 @@ static LockConnectManger * _lockConnectManger;
                 [[Socket shareSocket] closeConnectServer];
                 // 设置 断线状态
                 self.connectState = ConnectStateUnConnect;
-                if (self.gatewayConnectBlock) {
-                    self.gatewayConnectBlock(ConnectStateUnConnect);
-                }
             }
             break;
         default:

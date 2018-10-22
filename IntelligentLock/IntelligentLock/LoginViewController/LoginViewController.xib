@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
                 <outlet property="backScrollView" destination="VxB-Vz-tcx" id="R9f-Ch-e2J"/>
-                <outlet property="fingerLoginBtn" destination="4kc-dD-Izv" id="Co7-aJ-b4z"/>
                 <outlet property="iconImage" destination="3Zc-1L-2bx" id="HI3-nH-yoO"/>
                 <outlet property="loginBtn" destination="1iJ-7J-jDf" id="PiO-sR-EcH"/>
                 <outlet property="paddingTableHeight" destination="jFu-9x-aXb" id="Atd-7b-EN2"/>
@@ -92,17 +91,6 @@
                                 <constraint firstAttribute="height" id="jFu-9x-aXb"/>
                             </constraints>
                         </tableView>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4kc-dD-Izv">
-                            <rect key="frame" x="157" y="446" width="60" height="60"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="60" id="C84-lQ-Tai"/>
-                                <constraint firstAttribute="width" constant="60" id="gf5-Uw-UzN"/>
-                            </constraints>
-                            <state key="normal" backgroundImage="finger_icon"/>
-                            <connections>
-                                <action selector="fingerLoginBtnAction:" destination="-1" eventType="touchUpInside" id="2tt-XP-JD4"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <gestureRecognizers/>
                     <constraints>
@@ -127,9 +115,7 @@
                         <constraint firstItem="1iJ-7J-jDf" firstAttribute="top" secondItem="TfQ-Qg-oqp" secondAttribute="bottom" constant="60" id="ckQ-qu-Lvt"/>
                         <constraint firstItem="TfQ-Qg-oqp" firstAttribute="top" secondItem="RWH-hy-Vr8" secondAttribute="bottom" constant="5" id="ds1-JK-MMX"/>
                         <constraint firstItem="RWH-hy-Vr8" firstAttribute="top" secondItem="eEW-In-Biv" secondAttribute="bottom" constant="30" id="gSp-Li-8RR"/>
-                        <constraint firstItem="4kc-dD-Izv" firstAttribute="top" secondItem="1iJ-7J-jDf" secondAttribute="bottom" constant="60" id="ook-yR-Q6z"/>
                         <constraint firstAttribute="bottom" secondItem="1iJ-7J-jDf" secondAttribute="bottom" constant="380" id="tLo-AS-ioh"/>
-                        <constraint firstItem="4kc-dD-Izv" firstAttribute="centerX" secondItem="VxB-Vz-tcx" secondAttribute="centerX" id="xhU-DE-Rxj"/>
                         <constraint firstItem="4JF-fj-0lQ" firstAttribute="leading" secondItem="VxB-Vz-tcx" secondAttribute="leading" constant="25" id="yXe-f3-oHL"/>
                     </constraints>
                     <connections>
@@ -168,7 +154,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="finger_icon" width="64" height="64"/>
         <image name="header_icon" width="64" height="64"/>
         <image name="remove_login" width="32" height="32"/>
     </resources>

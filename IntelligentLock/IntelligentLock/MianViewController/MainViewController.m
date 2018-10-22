@@ -40,7 +40,7 @@
     StartView * startView = [StartView shareStartView];
     // 加在根视图上
     [KeyWindow.rootViewController.view addSubview:startView];
-    if ([[User shareUser] fingerprintLogin]) {
+    if ([[[User shareUser] username] length]) {
         // 已经登陆过了  直接验证指纹
         [self handleTouchIdVerb];
     } else {
@@ -204,7 +204,7 @@
 
 - (void)presentLoginVC {
     LoginViewController * loginVC = [[LoginViewController alloc] init];
-    loginVC.loginType = LoginVCTypeLogin;
+    loginVC.loginTitle = @"登录";
     // 登录成功的回调
     [loginVC setSuccessBlock:^{
         [self handleVerbSucessFingerprint:NO];

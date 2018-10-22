@@ -13,8 +13,6 @@
 #import "User.h"
 #import "LoginViewController.h"
 #import "AlertConreoller.h"
-#import <SVProgressHUD.h>
-#import "LockConnectManger.h"
 
 @interface LeftMenuViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightWidth;
@@ -59,12 +57,12 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
         switch (i) {
             case 0:
                 {
-                    [arrM1 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeCloseAllDeviceSwitch loginState:isLoginState switchOn:user.closeAllDevice]];
+                    [arrM1 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeSwitch loginState:isLoginState switchOn:user.closeAllDevice]];
                 }
                 break;
             case 1:
                 {
-                    [arrM2 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeFingerprintLoginSwitch loginState:isLoginState switchOn:user.fingerprintLogin]];
+                    [arrM2 addObject:[SettModel settModelWithTitle:titlesM[i] modelType:SettModelTypeSwitch loginState:isLoginState switchOn:user.fingerprintLogin]];
                 }
                 break;
             case 2:
@@ -81,8 +79,6 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
                 break;
         }
     }
-    
-    [self.settTableView reloadData];
 }
 - (void)setLoginStateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -95,6 +91,7 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
             self.headerIcon.image = [UIImage imageNamed:@"header_icon"];
             self.username.text = @"";
         }
+        [self.settTableView reloadData];
     });
 }
 - (void)initView {
@@ -126,64 +123,21 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
     } else {
         // 是登出状态 就是去登陆
         LoginViewController * loginVC = [[LoginViewController alloc] init];
-        loginVC.loginType = LoginVCTypeLogin;
-        loginVC.needFingerLogin = YES;
-        [loginVC setSuccessBlock:^{
-            // 打开长链接
-            [[LockConnectManger shareLockConnectManger] setLockMangerCanConnect:YES];
-            [[LockConnectManger shareLockConnectManger] connect];
-        }];
+        loginVC.loginTitle = @"登录";
         [self presentViewController:loginVC animated:YES completion:nil];
     }
 }
 
 - (void)handleSwitchBtnState:(SettModel *)model {
     User *user = [User shareUser];
-    if (model.modelType == SettModelTypeCloseAllDeviceSwitch) {
-        // 禁用所有设备 1.发送后台数据 2.更改user的设置
+    if ([model.title isEqualToString:@"禁用所有设备"]) {
+        // 禁用所有设备
         user.closeAllDevice = model.switchOn;
-        
-        [user writeUserMesage];
     } else {
         // 开启指纹验证
-//        user.fingerprintLogin = model.switchOn;
-        
-        UIAlertController * alertTextController = [UIAlertController alertControllerWithTitle:@"请输入当前账号的密码" message:user.username preferredStyle:UIAlertControllerStyleAlert];
-        __block UITextField * codeTextField = nil;
-        [alertTextController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-            textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-            textField.secureTextEntry = YES;
-            textField.returnKeyType = UIReturnKeyGo;
-            codeTextField = textField;
-        }];
-        UIAlertAction * alertActionDone = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (codeTextField) {
-                [self handlePasswordTextField:codeTextField.text];
-            }
-        }];
-        UIAlertAction * alertActionCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-        [alertTextController addAction:alertActionDone];
-        [alertTextController addAction:alertActionCancel];
-        [self presentViewController:alertTextController animated:YES completion:nil];
-        
+        user.fingerprintLogin = model.switchOn;
     }
     [user writeUserMesage];
-}
-
-- (void)handlePasswordTextField:(NSString *)password {
-    if (password.length) {
-        User *user = [User shareUser];
-        if ([user.password isEqualToString:password]) {
-            // 密码相同，指纹开启或关闭成功 1.设置 user状态 2.刷新UI
-            user.fingerprintLogin = !user.fingerprintLogin;
-            [user writeUserMesage];
-            
-            [self initData];
-        } else {
-            [SVProgressHUD showErrorWithStatus:@"密码输入错误，请稍后再试"];
-            [SVProgressHUD dismissWithDelay:1.5];
-        }
-    }
 }
 
 #pragma mark--UITableViewDelegate
@@ -201,7 +155,7 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SettModel * model = self.settTableData[indexPath.section][indexPath.row];
-    if (model.modelType == SettModelTypeCloseAllDeviceSwitch || model.modelType == SettModelTypeFingerprintLoginSwitch) {
+    if (model.modelType == SettModelTypeSwitch) {
         // switch 样式
         SettSwitchTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TableViewCellSwitch];
         __weak typeof (self) ws = self;
@@ -229,7 +183,7 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
             // 登录成功后才允许操作
             // 创建新的账号
             LoginViewController * loginVC = [[LoginViewController alloc] init];
-            loginVC.loginType = LoginVCTypeRegister;
+            loginVC.loginTitle = @"新增账号";
             [self presentViewController:loginVC animated:YES completion:nil];
         }
     }
@@ -241,9 +195,6 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
                 [[User shareUser] setLoginState:NO];
                 [[User shareUser] writeUserMesage];
                 [self setLoginStateUI];
-            // 关闭长链接
-                [[LockConnectManger shareLockConnectManger] setLockMangerCanConnect:NO];
-                [[LockConnectManger shareLockConnectManger] closeConnect];
             }];
         }
     }

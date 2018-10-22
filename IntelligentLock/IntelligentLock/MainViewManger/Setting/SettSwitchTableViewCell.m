@@ -34,12 +34,8 @@
 }
 - (IBAction)switchBtnAction:(UISwitch *)sender {
     if (self.model.loginState) {
+        self.model.switchOn = sender.on;
         // 已经登录
-        if (self.model.modelType == SettModelTypeCloseAllDeviceSwitch) {
-            self.model.switchOn = sender.on;
-        } else {
-            sender.on = self.model.switchOn;
-        }
         if (self.switchBtnBlock) {
             self.switchBtnBlock(self.model);
         }
