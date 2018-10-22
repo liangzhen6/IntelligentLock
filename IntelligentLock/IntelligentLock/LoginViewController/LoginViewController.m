@@ -138,7 +138,7 @@
             [[User shareUser] setLoginState:YES];
             [[User shareUser] setUserIcon:@"liangzhen"];
             [[User shareUser] writeUserMesage];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:Login_State_Key object:nil userInfo:@{@"state":@"login"}];
         }
         [self dismissViewControllerAnimated:YES completion:^{
             if (self.successBlock) {

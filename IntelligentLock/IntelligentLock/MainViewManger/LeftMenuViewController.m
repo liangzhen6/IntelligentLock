@@ -84,6 +84,14 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
     
     [self.settTableView reloadData];
 }
+// 接受通知 的方法
+- (void)loginStateNotifition:(NSNotification *)notification {
+    if ([notification.userInfo[@"state"] isEqualToString:@"login"]) {
+        // 是登录状态 刷新UI
+        [self setLoginStateUI];
+    }
+}
+
 - (void)setLoginStateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self initData];
@@ -97,6 +105,7 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
         }
     });
 }
+
 - (void)initView {
     self.view.backgroundColor = RGBColor(39.0, 31.0, 61.0);
     self.mainView.backgroundColor = RGBColor(39.0, 31.0, 61.0);
@@ -118,7 +127,7 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
     self.settTableView.delegate  = self;
     self.settTableView.dataSource = self;
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setLoginStateUI) name:@"loginSuccess" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStateNotifition:) name:Login_State_Key object:nil];
 }
 - (IBAction)headerTapAction:(UITapGestureRecognizer *)sender {
     if ([[User shareUser] loginState]) {
@@ -241,6 +250,8 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
                 [[User shareUser] setLoginState:NO];
                 [[User shareUser] writeUserMesage];
                 [self setLoginStateUI];
+                // 发出登出的消息，告诉其他页面刷新消息
+                [[NSNotificationCenter defaultCenter] postNotificationName:Login_State_Key object:nil userInfo:@{@"state":@"logout"}];
             // 关闭长链接
                 [[LockConnectManger shareLockConnectManger] setLockMangerCanConnect:NO];
                 [[LockConnectManger shareLockConnectManger] closeConnect];

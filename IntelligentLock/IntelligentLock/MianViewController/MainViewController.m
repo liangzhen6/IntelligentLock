@@ -18,6 +18,7 @@
 #import "DeviceDetailViewController.h"
 #import "MangerViewController.h"
 #import "User.h"
+#import <SVProgressHUD.h>
 
 @interface MainViewController ()
 @property(nonatomic,strong)MainCollectionView * mainCollectionView;
@@ -80,17 +81,10 @@
     [self.view addSubview:backView];
     
     //3.uicollectionView
-    NSArray * deviceDataArr = [[Tools shareTools] readWithPathString:Device_Data_Key];
-    if (![deviceDataArr count]) {
-        //没有旧的数据 增加设备的设备编码为 空字符串
-        deviceDataArr = @[[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" deviceCode:@"" modelType:CollectionModelTypeAddDevice]];
-        [[Tools shareTools] writeID:deviceDataArr pathString:Device_Data_Key];
-    } else {
-        // 已经有数据了
-        for (NSInteger i = 0; i < deviceDataArr.count-1; i++) {
-            [[[User shareUser] devicesArr] addObject:deviceDataArr[i]];
-        }
-    }
+//    NSMutableArray * deviceDataArr = [[[User shareUser] devicesArr] mutableCopy];
+    // 增加添加设备按钮
+//    [deviceDataArr addObject:[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" deviceCode:@"" modelType:CollectionModelTypeAddDevice]];
+    NSArray * deviceDataArr = @[[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" deviceCode:@"" modelType:CollectionModelTypeAddDevice]];
    
     __weak typeof (self)ws = self;
     MainCollectionView * mainCollectionView = [MainCollectionView mainCollectionViewWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-NavBarHeight) DataSource:deviceDataArr selectBlock:^(MainCollectionModel *collectionModel) {
@@ -143,6 +137,7 @@
         
     }];
     [self.view addSubview:mainCollectionView];
+    
 }
 
 /**
@@ -183,7 +178,7 @@
     if (isFingerprint) {
         [[User shareUser] setLoginState:YES];
         [[User shareUser] writeUserMesage];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:Login_State_Key object:nil userInfo:@{@"state":@"login"}];
     }
     
     StartView * startView = [StartView shareStartView];
@@ -249,13 +244,19 @@
 }
 // 处理Device 页面的跳转等
 - (void)handlePushDevicePage:(MainCollectionModel *)collectionModel {
-    DeviceDetailViewController * deviceDetailVC = [[DeviceDetailViewController alloc] init];
-    deviceDetailVC.deviceModel = collectionModel;
-    [deviceDetailVC setDeviceBlock:^(DeviceBackType backType, MainCollectionModel *model) {
-        [self.mainCollectionView handleDeviceItemChange:backType itemModel:model];
-        [self updateSixEdgeDeviceNum:[[LockConnectManger shareLockConnectManger] connectState]];
-    }];
-    [self.navigationController pushViewController:deviceDetailVC animated:YES];
+    if ([[User shareUser] loginState]) {
+        // 是登录状态才可以
+        DeviceDetailViewController * deviceDetailVC = [[DeviceDetailViewController alloc] init];
+        deviceDetailVC.deviceModel = collectionModel;
+        [deviceDetailVC setDeviceBlock:^(DeviceBackType backType, MainCollectionModel *model) {
+            [self.mainCollectionView handleDeviceItemChange:backType itemModel:model];
+            [self updateSixEdgeDeviceNum:[[LockConnectManger shareLockConnectManger] connectState]];
+        }];
+        [self.navigationController pushViewController:deviceDetailVC animated:YES];
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"登录状态下，才能添加设备！"];
+        [SVProgressHUD dismissWithDelay:1.5];
+    }
 
 }
 

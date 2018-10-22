@@ -62,14 +62,50 @@ static NSString *const collectionHeaderUnNetWorkId = @"collectionHeaderUnNetWork
     
     // 增加网络状态的监听
     [[LockConnectManger shareLockConnectManger] addObserver:self forKeyPath:@"netWorkState" options:NSKeyValueObservingOptionNew context:nil];
-
+    
+    // 增加监控登录 登出的 处理
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginStateNotification:) name:Login_State_Key object:nil];
 }
+
+// 处理登入 登出 状态 设备的个数问题
+- (void)loginStateNotification:(NSNotification *)notification {
+    if ([notification.userInfo[@"state"] isEqualToString:@"login"]) {
+        // 是登录状态，把user内的设备 加入到当前 collection 内
+        NSMutableArray * userDevices = [[User shareUser] devicesArr];
+        if ([userDevices count]) {
+            for (NSInteger i = 0; i < userDevices.count; i++) {
+                [self.collectionData insertObject:userDevices[i] atIndex:i];
+            }
+        }
+    } else {
+        // 是登出状态，把user内的设备 从当前 collection 内移除
+        NSObject * addDeviceItem = [self.collectionData lastObject];
+        [self.collectionData removeAllObjects];
+        [self.collectionData addObject:addDeviceItem];
+    }
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // 更新item的 链接 状态
+        [self updateConnectState:[[LockConnectManger shareLockConnectManger] connectState]];
+        [self reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    });
+}
+
 // 更新链接状态
 - (void)updateConnectState:(ConnectState)connectState {
+    BOOL needReload = NO;
     for (MainCollectionModel *model in self.collectionData) {
-        model.connectState = connectState;
+        if (model.connectState != connectState) {
+            model.connectState = connectState;
+            needReload = YES;
+        }
     }
-    [self reloadSections:[NSIndexSet indexSetWithIndex:0]];
+    
+    if (needReload) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self reloadSections:[NSIndexSet indexSetWithIndex:0]];
+        });
+    }
 }
 
 //增加或者删除一个 设备的 item
@@ -87,7 +123,7 @@ static NSString *const collectionHeaderUnNetWorkId = @"collectionHeaderUnNetWork
     // 刷新UI
     [self reloadSections:[NSIndexSet indexSetWithIndex:0]];
     // 本地存储数据
-    [[Tools shareTools] writeID:self.collectionData pathString:Device_Data_Key];
+    [[User shareUser] writeUserMesage];
 }
 
 #pragma mark -- UICollectionViewDelegate UICollectionViewDataSource

@@ -62,6 +62,11 @@
                 }
                 break;
             default:
+                {// 没有匹配的 一律是 离线
+                    _onlineTitle.text = @"离线";
+                    _onlineTitle.textColor = [UIColor redColor];
+                    _connectTypeIcon.image = [UIImage imageNamed:@"off-line"];
+                }
                 break;
         }
 

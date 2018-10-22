@@ -42,8 +42,10 @@
 #define iPhoneX ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1125.0,2436.0), [[UIScreen mainScreen] currentMode].size) : NO)
 
 /* 本地存储的一些写入值 */
-#define Device_Data_Key @"Device_Data"  ///< 已经添加的设备
 #define User_Data_Key @"User_Data_Key"  ///< 用户信息
+
+/* 发送通知（广播）的各种 key */
+#define Login_State_Key @"Login_State_Key" ///< 登入 登出 发送通知的Key
 
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
