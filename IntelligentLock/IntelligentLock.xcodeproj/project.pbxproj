@@ -55,6 +55,9 @@
 		FA95B7C921706A71001D4AEB /* HeardCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA95B7C721706A70001D4AEB /* HeardCollectionReusableView.xib */; };
 		FAAFBA6E2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAAFBA6C2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.m */; };
 		FAAFBA6F2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAAFBA6D2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib */; };
+		FAE75E43217DA7D600BAD4D3 /* ShareDeviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE75E41217DA7D600BAD4D3 /* ShareDeviceViewController.m */; };
+		FAE75E44217DA7D600BAD4D3 /* ShareDeviceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAE75E42217DA7D600BAD4D3 /* ShareDeviceViewController.xib */; };
+		FAE75E47217DAFC100BAD4D3 /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE75E46217DAFC100BAD4D3 /* DatePickerView.m */; };
 		FAF34EE5217473DF004FACD3 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF34EE4217473DF004FACD3 /* User.m */; };
 		FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A7E217087480077F616 /* UIView+MSExtension.m */; };
 		FAF47A822170A2A60077F616 /* SixEdgeView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF47A812170A2A60077F616 /* SixEdgeView.m */; };
@@ -169,6 +172,11 @@
 		FAAFBA6D2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderUnNetWorkCollectionReusableView.xib; sourceTree = "<group>"; };
 		FAE1CA552149223E002B1788 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		FAE1CA5721492396002B1788 /* EnumHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnumHeader.h; sourceTree = "<group>"; };
+		FAE75E40217DA7D600BAD4D3 /* ShareDeviceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareDeviceViewController.h; sourceTree = "<group>"; };
+		FAE75E41217DA7D600BAD4D3 /* ShareDeviceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareDeviceViewController.m; sourceTree = "<group>"; };
+		FAE75E42217DA7D600BAD4D3 /* ShareDeviceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShareDeviceViewController.xib; sourceTree = "<group>"; };
+		FAE75E45217DAFC100BAD4D3 /* DatePickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatePickerView.h; sourceTree = "<group>"; };
+		FAE75E46217DAFC100BAD4D3 /* DatePickerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DatePickerView.m; sourceTree = "<group>"; };
 		FAF34EE3217473DF004FACD3 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		FAF34EE4217473DF004FACD3 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		FAF47A7D217087480077F616 /* UIView+MSExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MSExtension.h"; sourceTree = "<group>"; };
@@ -241,6 +249,7 @@
 				FA0A8984215F723600473305 /* MianViewController */,
 				FAD31C9E2160A7230063B9BC /* LoginViewController */,
 				FA93844F2171DB7B0009E269 /* DeviceDetail */,
+				FAE75E3F217DA7AB00BAD4D3 /* ShareDevice */,
 				FAD31C9B2160A5F70063B9BC /* SupportFile */,
 				32C21ACE21454F28002643BD /* ViewController.h */,
 				32C21ACF21454F28002643BD /* ViewController.m */,
@@ -345,6 +354,8 @@
 				FA2A7A0C21466835002337D4 /* Tools.m */,
 				FA17D79B215B7D61001A4BE4 /* AlertConreoller.h */,
 				FA17D79C215B7D61001A4BE4 /* AlertConreoller.m */,
+				FAE75E45217DAFC100BAD4D3 /* DatePickerView.h */,
+				FAE75E46217DAFC100BAD4D3 /* DatePickerView.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -441,6 +452,16 @@
 				FA0A8999215F890400473305 /* LoginViewController.xib */,
 			);
 			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		FAE75E3F217DA7AB00BAD4D3 /* ShareDevice */ = {
+			isa = PBXGroup;
+			children = (
+				FAE75E40217DA7D600BAD4D3 /* ShareDeviceViewController.h */,
+				FAE75E41217DA7D600BAD4D3 /* ShareDeviceViewController.m */,
+				FAE75E42217DA7D600BAD4D3 /* ShareDeviceViewController.xib */,
+			);
+			path = ShareDevice;
 			sourceTree = "<group>";
 		};
 		FAF34EE22174739B004FACD3 /* UserMessage */ = {
@@ -561,6 +582,7 @@
 			files = (
 				FAAFBA6F2177236B007FE924 /* HeaderUnNetWorkCollectionReusableView.xib in Resources */,
 				FA10C9592179C2FD00E63722 /* SettTableViewCell.xib in Resources */,
+				FAE75E44217DA7D600BAD4D3 /* ShareDeviceViewController.xib in Resources */,
 				32C21AD821454F29002643BD /* LaunchScreen.storyboard in Resources */,
 				FA0A8996215F744F00473305 /* MainViewController.xib in Resources */,
 				32C21AD521454F29002643BD /* Assets.xcassets in Resources */,
@@ -671,6 +693,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAE75E47217DAFC100BAD4D3 /* DatePickerView.m in Sources */,
 				FAF34EE5217473DF004FACD3 /* User.m in Sources */,
 				FA36B7242175EB2600AA4A85 /* QRCodeScnnerView.m in Sources */,
 				FA2A7A0D21466835002337D4 /* Tools.m in Sources */,
@@ -685,6 +708,7 @@
 				FA0A899A215F890400473305 /* LoginViewController.m in Sources */,
 				FA9384532171DC020009E269 /* DeviceDetailViewController.m in Sources */,
 				FA36B72A2175F54500AA4A85 /* QRCodeIdentifyVC.m in Sources */,
+				FAE75E43217DA7D600BAD4D3 /* ShareDeviceViewController.m in Sources */,
 				FA1AA3F121705BCC0000A94D /* MainCollectionViewCell.m in Sources */,
 				FA17D79A215B7BFE001A4BE4 /* BluetoothCenter.m in Sources */,
 				FA95B7C821706A71001D4AEB /* HeardCollectionReusableView.m in Sources */,

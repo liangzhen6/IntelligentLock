@@ -11,11 +11,10 @@
 #import "LockConnectManger.h"
 #import <SVProgressHUD.h>
 #import "User.h"
-#import "AlertConreoller.h"
-#import "QRCodeTool.h"
-#import "MPShare.h"
 #import "Tools.h"
+#import "AlertConreoller.h"
 #import "QRCodeIdentifyVC.h"
+#import "ShareDeviceViewController.h"
 
 @interface DeviceDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIView *topView;
@@ -201,12 +200,9 @@
             break;
         case 2:
             {//分享按钮
-                // 将设备的Id 加密处理
-                NSData * enCodeData = [[Tools shareTools] encryptData:self.deviceModel.deviceCode];
-                NSString * enCodeStr = [[NSString alloc] initWithData:enCodeData encoding:NSUTF8StringEncoding];
-                
-                UIImage *qrCodeImage = [QRCodeTool createDefaultQRCodeWithData:enCodeStr imageViewSize:CGSizeMake(Screen_Width, Screen_Width)];
-                [MPShare shareWithText:@"门禁二维码，请不要转发他人。" image:qrCodeImage url:nil];
+                ShareDeviceViewController * shareDeviceVC = [[ShareDeviceViewController alloc] init];
+                shareDeviceVC.deviceModel = self.deviceModel;
+                [self.navigationController pushViewController:shareDeviceVC animated:YES];
             }
             break;
         default:
@@ -225,8 +221,11 @@
                 [qrCodeIdentifyVC setIdentifyBlock:^(NSString *resulrStr) {
                     if ([resulrStr length]) {
                         NSData * deData = [[Tools shareTools] decryptData:[resulrStr dataUsingEncoding:NSUTF8StringEncoding]];
-                        NSString * deStr = [[NSString alloc] initWithData:deData encoding:NSUTF8StringEncoding];
-                        [ws handleAddDeviceWithcode:deStr];
+                        
+                        NSDictionary * dict = [NSJSONSerialization JSONObjectWithData:deData options:NSJSONReadingAllowFragments error:nil];
+                        if ([dict count]) {
+                            [ws handleAddDeviceWithDict:dict];
+                        }
                     } else {
                         [SVProgressHUD showErrorWithStatus:@"二维码扫描失败"];
                         [SVProgressHUD dismissWithDelay:1.0];
@@ -245,7 +244,8 @@
             }];
             UIAlertAction * alertActionDone = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 if (codeTextField) {
-                    [self handleAddDeviceWithcode:codeTextField.text];
+                    NSDictionary * dict = @{@"expiredTime":@"never", @"deviceCode":codeTextField.text};
+                    [self handleAddDeviceWithDict:dict];
                 }
             }];
             UIAlertAction * alertActionCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
@@ -262,8 +262,28 @@
     }
 }
 
-- (void)handleAddDeviceWithcode:(NSString *)deviceCode {
+- (void)handleAddDeviceWithDict:(NSDictionary *)messageDict {
     if ([[LockConnectManger shareLockConnectManger] netWorkState] == NetWorkStateOn) {
+        /*
+         expiredTime":self.timeStr, @"deviceCode"
+         */
+        NSString * deviceCode = messageDict[@"deviceCode"];
+        NSString * expiredTime = messageDict[@"expiredTime"];
+        if (![expiredTime isEqualToString:@"never"]) {
+            NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy/MM/dd HH:mm"];
+            NSDate * selectTime = [formatter dateFromString:expiredTime];
+            NSDate * currentDate = [NSDate date];
+            NSComparisonResult result = [selectTime compare:currentDate];
+            if (result == NSOrderedAscending) {
+                // 已经过期
+                [SVProgressHUD showErrorWithStatus:@"设备分享已过期！"];
+                [SVProgressHUD dismissWithDelay:1.0];
+                
+                return;
+            }
+        }
+        
         if ([deviceCode length] && [deviceCode isEqualToString:@"ZMGJS0001"]) {
             for (MainCollectionModel * model in [[User shareUser] devicesArr]) {
                 if ([model.deviceCode isEqualToString:deviceCode]) {
