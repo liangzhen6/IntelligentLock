@@ -18,6 +18,8 @@ def socketClose(sock):
 			# 移除这个链接 从链接列表内
 			if sock in sock_list:
 				sock_list.remove(sock)
+			# 将sock 设置为空
+			sock = None;
 			print('关闭连接')
 
 def sendMessage(sock, typeStr, mes = None, lockLink = None, lockState = None):
@@ -35,6 +37,12 @@ def sendMessage(sock, typeStr, mes = None, lockLink = None, lockState = None):
 	code_json = crypto.encrypt(send_json)
 	if sock != None:
 		sock.send(code_json)
+
+def sendLockState():
+	global lockLink, lockedState
+	#  锁的链接状态发生变化 向所有 客户端发送锁的状态
+	for sockone in sock_list:
+		sendMessage(sockone, 'heart', lockedState, lockLink, lockedState)
 
 def createSocket(point):
 	global lockLink, lockedState
@@ -105,13 +113,21 @@ def handle_socket(sock, addr, point):
 						lockLink = 'on'
 						lockedState = data_dic['lockState']
 						# 收到 锁发来的状态信息 向所有 客户端发送锁的状态
-						for sockone in sock_list:
-							sendMessage(sockone, 'heart', lockedState, lockLink, lockedState)
+						sendLockState()
+						# for sockone in sock_list:
+						# 	sendMessage(sockone, 'heart', lockedState, lockLink, lockedState)
 						
 					else:
 						#向 lockSock 发送 指令
 						if lockLink in 'on':
 							sendMessage(lockSock, 'command', data_mes)
+						else:
+							# 网关没有链接 就直接发送给客户端开锁的情况吧（先开，延迟2s再关上）
+							lockedState = 'on'
+							sendLockState()
+							lockedState = 'off'
+							timer = threading.Timer(2.0, sendLockState)
+							timer.start()
 
 
 		except Exception as e:
@@ -122,8 +138,9 @@ def handle_socket(sock, addr, point):
 		#是 lock 的链接 设置链接状态
 		lockLink = 'off'
 		#  锁的链接状态发生变化 向所有 客户端发送锁的状态
-		for sockone in sock_list:
-			sendMessage(sockone, 'heart', lockedState, lockLink, lockedState)
+		sendLockState()
+		# for sockone in sock_list:
+		# 	sendMessage(sockone, 'heart', lockedState, lockLink, lockedState)
 	socketClose(sock)
 
 lockServer = threading.Thread(target = createSocket, args=(8000,))
