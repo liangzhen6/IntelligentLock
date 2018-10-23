@@ -15,6 +15,7 @@
 #import "AlertConreoller.h"
 #import <SVProgressHUD.h>
 #import "LockConnectManger.h"
+#import "MainCollectionModel.h"
 
 @interface LeftMenuViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *rightWidth;
@@ -151,7 +152,10 @@ static NSString *const TableViewCellSwitch = @"TableViewCellSwitch";
     if (model.modelType == SettModelTypeCloseAllDeviceSwitch) {
         // 禁用所有设备 1.发送后台数据 2.更改user的设置
         user.closeAllDevice = model.switchOn;
-        
+        // 更改设备的 被禁用状态
+        for (MainCollectionModel * devideModel in user.devicesArr) {
+            devideModel.bunAllDevice = user.closeAllDevice;
+        }
         [user writeUserMesage];
     } else {
         // 开启指纹验证

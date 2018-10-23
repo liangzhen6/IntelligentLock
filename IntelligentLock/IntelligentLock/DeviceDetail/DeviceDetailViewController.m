@@ -83,6 +83,9 @@
     self.onlineView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.onlineView.layer.borderWidth = 1;
     
+//    UIBarButtonItem * rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.onlineView];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+    
     [self setMainViewStyle];
 }
 
@@ -110,6 +113,7 @@
         [self setConnectTypeUI:self.connectState];
     }
 }
+
 // 设置不同链接方式的UI
 - (void)setConnectTypeUI:(ConnectState)state {
     if (state == ConnectStateConnectedSocket) {
@@ -118,7 +122,13 @@
         self.onlineTitle.text = @"在线";
         self.onlineTitle.textColor = [UIColor whiteColor];
         self.onlineIcon.image = [UIImage imageNamed:@"wifi-big"];
-        [self.switchConnectBtn setImage:[[UIImage imageNamed:@"switch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        if (self.deviceModel.bunAllDevice == YES) {
+            [self.switchConnectBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            [self.switchConnectBtn setImage:[[UIImage imageNamed:@"switch_glay"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        } else {
+            [self.switchConnectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.switchConnectBtn setImage:[[UIImage imageNamed:@"switch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        }
         [self.switchConnectBtn setTitle:@"开关" forState:UIControlStateNormal];
         
     } else if (state == ConnectStateConnectedBluetooth) {
@@ -127,7 +137,13 @@
         self.onlineTitle.text = @"在线";
         self.onlineTitle.textColor = [UIColor whiteColor];
         self.onlineIcon.image = [UIImage imageNamed:@"ble-big"];
-        [self.switchConnectBtn setImage:[[UIImage imageNamed:@"switch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        if (self.deviceModel.bunAllDevice == YES) {
+            [self.switchConnectBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+            [self.switchConnectBtn setImage:[[UIImage imageNamed:@"switch_glay"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        } else {
+            [self.switchConnectBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [self.switchConnectBtn setImage:[[UIImage imageNamed:@"switch"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        }
         [self.switchConnectBtn setTitle:@"开关" forState:UIControlStateNormal];
         
     } else {
@@ -142,6 +158,15 @@
         self.onlineIcon.image = [UIImage imageNamed:@"off-line-big"];
         [self.switchConnectBtn setImage:[[UIImage imageNamed:@"connect"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [self.switchConnectBtn setTitle:@"重连" forState:UIControlStateNormal];
+    }
+    
+    //设置分享按钮的样式
+    if (self.deviceModel.bunAllDevice == YES) {
+        [self.shareDeviceBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+        [self.shareDeviceBtn setImage:[[UIImage imageNamed:@"share_device_glay"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+    } else {
+        [self.shareDeviceBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.shareDeviceBtn setImage:[[UIImage imageNamed:@"share_device"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
     }
 }
 
@@ -158,9 +183,13 @@
 - (void)initVerbLockState {
     __weak typeof (self)ws = self;
     [[LockConnectManger shareLockConnectManger] setLockStateBlock:^(ConnectState connectState, BluetoothLockState lockState) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+        if (ws.connectState != connectState) {
             ws.connectState = connectState;
-            [ws setConnectTypeUI:connectState];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [ws setConnectTypeUI:connectState];
+            });
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
             [ws setLockStateUI:lockState];
         });
     }];
@@ -170,19 +199,25 @@
     switch (sender.tag) {
         case 0:
             {//开关按钮
-                if (self.deviceModel.connectState == ConnectStateUnConnect) {
-                    // 发起重新连接
-                    [[LockConnectManger shareLockConnectManger] connect];
+                if (self.deviceModel.bunAllDevice == YES) {
+                    // 设备被禁止使用
+                    [SVProgressHUD showErrorWithStatus:@"设备已禁止使用！"];
+                    [SVProgressHUD dismissWithDelay:1.5];
                 } else {
-                    // 发送开锁命令
-                    [[LockConnectManger shareLockConnectManger] openLock];
+                    if (self.deviceModel.connectState == ConnectStateUnConnect) {
+                        // 发起重新连接
+                        [[LockConnectManger shareLockConnectManger] connect];
+                    } else {
+                        // 发送开锁命令
+                        [[LockConnectManger shareLockConnectManger] openLock];
+                    }
+                    
+                    // 防止暴力点击
+                    sender.userInteractionEnabled = NO;
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        sender.userInteractionEnabled = YES;
+                    });
                 }
-                
-                // 防止暴力点击
-                sender.userInteractionEnabled = NO;
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    sender.userInteractionEnabled = YES;
-                });
             }
             break;
         case 1:
@@ -200,9 +235,15 @@
             break;
         case 2:
             {//分享按钮
-                ShareDeviceViewController * shareDeviceVC = [[ShareDeviceViewController alloc] init];
-                shareDeviceVC.deviceModel = self.deviceModel;
-                [self.navigationController pushViewController:shareDeviceVC animated:YES];
+                if (self.deviceModel.bunAllDevice == YES) {
+                    // 设备被禁止使用
+                    [SVProgressHUD showErrorWithStatus:@"设备已禁止使用！"];
+                    [SVProgressHUD dismissWithDelay:1.5];
+                } else {
+                    ShareDeviceViewController * shareDeviceVC = [[ShareDeviceViewController alloc] init];
+                    shareDeviceVC.deviceModel = self.deviceModel;
+                    [self.navigationController pushViewController:shareDeviceVC animated:YES];
+                }
             }
             break;
         default:
@@ -301,7 +342,7 @@
                     [ws initVerbLockState];
                     // 通知 home 页面要增加一个
                     if (ws.deviceBlock) {
-                        MainCollectionModel *model = [MainCollectionModel mainCollectionModelWithTitle:@"智能门禁" image:@"lock" deviceCode:deviceCode modelType:CollectionModelTypeDevice];
+                        MainCollectionModel *model = [MainCollectionModel mainCollectionModelWithTitle:@"智能门禁" image:@"lock" deviceCode:deviceCode expiredTime:expiredTime bunAllDevice:[[User shareUser] closeAllDevice] modelType:CollectionModelTypeDevice];
                         model.connectState = ws.connectState;
                         ws.deviceBlock(DeviceBackTypeAddDevice, model);
                     }

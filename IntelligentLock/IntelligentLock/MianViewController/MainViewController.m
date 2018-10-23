@@ -77,14 +77,14 @@
 
     //2.uicollectionView 背后的view
     __block UIView * backView = [[UIView alloc] initWithFrame:CGRectMake(0, MainView_InsetY, Screen_Width, Screen_Height-NavBarHeight)];
-    backView.backgroundColor = RGBColor(250.0, 249.0, 250.0);
+    backView.backgroundColor = RGBColor(245.0, 244.0, 245.0);
     [self.view addSubview:backView];
     
     //3.uicollectionView
 //    NSMutableArray * deviceDataArr = [[[User shareUser] devicesArr] mutableCopy];
     // 增加添加设备按钮
 //    [deviceDataArr addObject:[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" deviceCode:@"" modelType:CollectionModelTypeAddDevice]];
-    NSArray * deviceDataArr = @[[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" deviceCode:@"" modelType:CollectionModelTypeAddDevice]];
+    NSArray * deviceDataArr = @[[MainCollectionModel mainCollectionModelWithTitle:@"增加设备" image:@"add" deviceCode:@"" expiredTime:@"never" bunAllDevice:NO modelType:CollectionModelTypeAddDevice]];
    
     __weak typeof (self)ws = self;
     MainCollectionView * mainCollectionView = [MainCollectionView mainCollectionViewWithFrame:CGRectMake(0, 0, Screen_Width, Screen_Height-NavBarHeight) DataSource:deviceDataArr selectBlock:^(MainCollectionModel *collectionModel) {

@@ -66,7 +66,7 @@ static Socket * _socket = nil;
         if (_socketConnectState == SocketConnectStateUnConnect) {
             NSError *error = nil;
             _socketConnectState = SocketConnectStateConnecting;
-            [_asyncSocket connectToHost:_host onPort:_port withTimeout:5.0 error:&error];
+            [_asyncSocket connectToHost:_host onPort:_port withTimeout:3.0 error:&error];
             if (error) {
                 MPNLog(@"%@",error);
             }
@@ -81,7 +81,7 @@ static Socket * _socket = nil;
             if (_socketConnectState == SocketConnectStateUnConnect) {
                 NSError *error = nil;
                 _socketConnectState = SocketConnectStateConnecting;
-                [_asyncSocket connectToHost:_host onPort:_port withTimeout:5.0 error:&error];
+                [_asyncSocket connectToHost:_host onPort:_port withTimeout:3.0 error:&error];
                 if (error) {
                     MPNLog(@"%@",error);
                 }
