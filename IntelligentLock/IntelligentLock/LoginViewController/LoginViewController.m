@@ -133,18 +133,35 @@
         [self.view endEditing:YES];
         if (self.loginType ==LoginVCTypeLogin) {
             // 是登录界面 不是创建新账户 保存账户密码等信息
-            [[User shareUser] setUsername:_username.text];
-            [[User shareUser] setPassword:_password.text];
-            [[User shareUser] setLoginState:YES];
-            [[User shareUser] setUserIcon:@"liangzhen"];
-            [[User shareUser] writeUserMesage];
-            [[NSNotificationCenter defaultCenter] postNotificationName:Login_State_Key object:nil userInfo:@{@"state":@"login"}];
-        }
-        [self dismissViewControllerAnimated:YES completion:^{
-            if (self.successBlock) {
-                self.successBlock();
+            if (isFinger || (([_username.text isEqualToString:@"liangzmaster@163.com"] || [_username.text isEqualToString:@"liangzMaster@163.com"]) && [_password.text isEqualToString:@"lzh520"])) {
+                [[User shareUser] setUsername:_username.text];
+                [[User shareUser] setPassword:_password.text];
+                [[User shareUser] setLoginState:YES];
+                [[User shareUser] setUserIcon:@"liangzhen"];
+                [[User shareUser] writeUserMesage];
+                [[NSNotificationCenter defaultCenter] postNotificationName:Login_State_Key object:nil userInfo:@{@"state":@"login"}];
+                [SVProgressHUD showWithStatus:nil];
+                [SVProgressHUD dismissWithDelay:1.0];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        if (self.successBlock) {
+                            self.successBlock();
+                        }
+                    }];
+                });
+                
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"账号或者密码错误！"];
+                [SVProgressHUD dismissWithDelay:1.0];
             }
-        }];
+        } else {
+            [self dismissViewControllerAnimated:YES completion:^{
+                if (self.successBlock) {
+                    self.successBlock();
+                }
+            }];
+        }
+
 //        if ([_username.text isEqualToString:[[User shareUser] username]] && [_password.text isEqualToString:[[User shareUser] password]]) {
 //            if ([self.loginTitle isEqualToString:@"登录"]) {
 //                // 是登录界面 不是创建新账户 保存账户密码等信息
