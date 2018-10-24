@@ -17,6 +17,7 @@
 #import "SixEdgeView.h"
 #import "DeviceDetailViewController.h"
 #import "MangerViewController.h"
+#import "MessageViewController.h"
 #import "User.h"
 #import <SVProgressHUD.h>
 
@@ -61,9 +62,12 @@
     }];
     
     self.title = @"芝麻管家";
-    //设置左侧菜单
+    //设置左侧 右侧 菜单
     UIBarButtonItem * leftItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"menu"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(showLeftMenu)];
     self.navigationItem.leftBarButtonItem = leftItem;
+    
+    UIBarButtonItem * rightItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"message"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(rightMenuAction)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
     // 页面布局相关
     //1.缩放的view
@@ -232,6 +236,11 @@
 
 - (void)showLeftMenu {
     [[MangerViewController shareMangerViewController] showLeftViewAnimate:YES duration:0.3];
+}
+
+- (void)rightMenuAction {
+    MessageViewController *messageVC = [[MessageViewController alloc] init];
+    [self.navigationController pushViewController:messageVC animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
