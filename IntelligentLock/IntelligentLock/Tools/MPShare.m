@@ -12,7 +12,7 @@
 
 @implementation MPShare
 
-+ (void)shareWithText:(NSString *)textToShare image:(UIImage *)imageToshare url:(NSURL *)urlToShare {
++ (void)shareWithText:(NSString *)textToShare image:(UIImage *)imageToshare url:(NSURL *)urlToShare rootViewController:(UIViewController *)rootVC {
     NSMutableArray *activityItems = [[NSMutableArray alloc] init];
     if (textToShare) {
         [activityItems addObject:textToShare];
@@ -36,7 +36,12 @@
             MPNLog(@"%@",activityError);
         }
     }];
-    [KeyWindow.rootViewController presentViewController:activeVC animated:YES completion:nil];
+    
+    if (rootVC) {
+        [rootVC presentViewController:activeVC animated:YES completion:nil];
+    } else {
+        [KeyWindow.rootViewController presentViewController:activeVC animated:YES completion:nil];
+    }
 }
 
 @end

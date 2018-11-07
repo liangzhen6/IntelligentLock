@@ -36,19 +36,27 @@
                                      NSFontAttributeName:navFont,
                                      NSForegroundColorAttributeName:navTitleColor
                                      };
-    [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
+//    [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
+    [self.navigationBar setTitleTextAttributes:textAttributes];
+
     // 设置 nav 的背景色
+//    [[UINavigationBar appearance] setBarTintColor:RGBColor(51.0, 66.0, 212.0)];
     [self.navigationBar setBarTintColor:RGBColor(51.0, 66.0, 212.0)];
     //设置返回按钮的颜色
-    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
+//    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+//    [[UIBarButtonItem appearance] setTintColor:[UIColor whiteColor]];
+    [self.navigationBar setTintColor:[UIColor whiteColor]];
+    // 设置返回按钮的文字偏移 （使用透明导致 所有的导航栏的item文字透明）
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(-1000, 0) forBarMetrics:UIBarMetricsDefault];
+    
     //2.设置返回按钮字体颜色为透明
-    NSDictionary *attributes = @{
-                                 NSFontAttributeName:[UIFont systemFontOfSize:17],
-                                 NSForegroundColorAttributeName:[UIColor clearColor]
-                                 };
-    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateSelected];
-    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateHighlighted];
+//    NSDictionary *attributes = @{
+//                                 NSFontAttributeName:[UIFont systemFontOfSize:17],
+//                                 NSForegroundColorAttributeName:[UIColor clearColor]
+//                                 };
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateSelected];
+//    [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateHighlighted];
  
 }
 

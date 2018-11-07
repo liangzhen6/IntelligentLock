@@ -70,7 +70,7 @@
         NSString * enCodeStr = [[NSString alloc] initWithData:enCodeData encoding:NSUTF8StringEncoding];
         
         UIImage *qrCodeImage = [QRCodeTool createDefaultQRCodeWithData:enCodeStr imageViewSize:CGSizeMake(Screen_Width, Screen_Width)];
-        [MPShare shareWithText:@"门禁二维码，请不要转发他人。" image:qrCodeImage url:nil];
+        [MPShare shareWithText:@"门禁二维码，请不要转发他人。" image:qrCodeImage url:nil rootViewController:nil];
     }
 }
 

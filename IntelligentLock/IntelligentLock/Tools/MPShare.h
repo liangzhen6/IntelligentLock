@@ -17,6 +17,6 @@
  @param imageToshare 分享的图片 如果没有传nil
  @param urlToShare 分享的链接   如果没有传nil
  */
-+ (void)shareWithText:(NSString *)textToShare image:(UIImage *)imageToshare url:(NSURL *)urlToShare;
++ (void)shareWithText:(NSString *)textToShare image:(UIImage *)imageToshare url:(NSURL *)urlToShare rootViewController:(UIViewController *)rootVC;
 
 @end
