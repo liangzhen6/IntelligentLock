@@ -22,6 +22,10 @@ typedef void(^SocketConnectStateBlock)(SocketConnectState connectState);
 + (id)shareSocketWithHost:(NSString *)host port:(int)port;
 //发送消息
 - (void)sentMessage:(MesModel *)model progress:(void(^)(float progress))progressBlock;
+/**
+ 发送心跳数据
+ */
+- (void)handleHeart;
 //连接服务器
 - (void)connectServer;
 

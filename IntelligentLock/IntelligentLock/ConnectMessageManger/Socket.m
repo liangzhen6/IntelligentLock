@@ -10,6 +10,7 @@
 #import <GCDAsyncSocket.h>
 #import "MesModel.h"
 #import "Tools.h"
+#import "GCDAsyncSocket+HeartBeat.h"
 
 @interface Socket ()<GCDAsyncSocketDelegate>
 @property(nonatomic,strong)GCDAsyncSocket *asyncSocket;
@@ -18,7 +19,7 @@
 @property(nonatomic,assign)NSInteger afterTimeConnect;
 //@property(nonatomic,strong)NSMutableArray * allSendMessage;
 @property(nonatomic,copy)SocketConnectStateBlock connectStateBlock;
-@property(nonatomic,strong)NSTimer *heartTimer;
+//@property(nonatomic,strong)NSTimer *heartTimer;
 
 @end
 static Socket * _socket = nil;
@@ -129,6 +130,8 @@ static Socket * _socket = nil;
 
         NSData * base64Data = [[Tools shareTools] encryptData:jsonStr];
         [_asyncSocket writeData:base64Data withTimeout:-1 tag:(long)recordTime];
+    } else {
+        [self connectServer];
     }
 }
 
@@ -144,10 +147,11 @@ static Socket * _socket = nil;
     [_asyncSocket readDataWithTimeout:-1 tag:100];
     // 初始化 重新连接的时间
     _afterTimeConnect = 0;
-    // 开启定时器
-    if ([self.heartTimer isValid]) {
-        self.heartTimer.fireDate = [NSDate distantPast];
-    }
+    [_socket.asyncSocket startHeartBeat];
+//    // 开启定时器
+//    if ([self.heartTimer isValid]) {
+//        self.heartTimer.fireDate = [NSDate distantPast];
+//    }
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
@@ -179,9 +183,9 @@ static Socket * _socket = nil;
         self.connectStateBlock(SocketConnectStateUnConnect);
     }
     // 暂停定时器
-    if ([self.heartTimer isValid]) {
-        self.heartTimer.fireDate = [NSDate distantFuture];
-    }
+//    if ([self.heartTimer isValid]) {
+//        self.heartTimer.fireDate = [NSDate distantFuture];
+//    }
     if (_canConnect) {
         //处理 重连问题
         [self handleReConnect];
@@ -198,17 +202,17 @@ static Socket * _socket = nil;
     });
 }
 
-- (NSTimer *)heartTimer {
-    if (_heartTimer == nil) {
-        __weak typeof (self) ws = self;
-        _heartTimer = [NSTimer scheduledTimerWithTimeInterval:15.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
-            [ws handleHeart];
-        }];
-        [[NSRunLoop currentRunLoop] addTimer:_heartTimer forMode:NSRunLoopCommonModes];
-        [[NSRunLoop currentRunLoop] run];
-    }
-    return _heartTimer;
-}
+//- (NSTimer *)heartTimer {
+//    if (_heartTimer == nil) {
+//        __weak typeof (self) ws = self;
+//        _heartTimer = [NSTimer scheduledTimerWithTimeInterval:15.0 repeats:YES block:^(NSTimer * _Nonnull timer) {
+//            [ws handleHeart];
+//        }];
+//        [[NSRunLoop currentRunLoop] addTimer:_heartTimer forMode:NSRunLoopCommonModes];
+//        [[NSRunLoop currentRunLoop] run];
+//    }
+//    return _heartTimer;
+//}
 
 /**
  发送心跳数据

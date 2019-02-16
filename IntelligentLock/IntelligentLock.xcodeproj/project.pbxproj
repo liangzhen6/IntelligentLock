@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		32202C332218184F00F71CEA /* GCDAsyncSocket+HeartBeat.m in Sources */ = {isa = PBXBuildFile; fileRef = 32202C322218184F00F71CEA /* GCDAsyncSocket+HeartBeat.m */; };
 		32C21ACD21454F28002643BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C21ACC21454F28002643BD /* AppDelegate.m */; };
 		32C21AD021454F28002643BD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 32C21ACF21454F28002643BD /* ViewController.m */; };
 		32C21AD321454F28002643BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32C21AD121454F28002643BD /* Main.storyboard */; };
@@ -86,6 +87,8 @@
 		01A310639104A13C7098CD5A /* Pods-IntelligentLockUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockUITests/Pods-IntelligentLockUITests.release.xcconfig"; sourceTree = "<group>"; };
 		14C1CE2BD8DDAB9007823250 /* libPods-IntelligentLock.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-IntelligentLock.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EA6259D453EE058C542E70 /* Pods-IntelligentLockTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IntelligentLockTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-IntelligentLockTests/Pods-IntelligentLockTests.debug.xcconfig"; sourceTree = "<group>"; };
+		32202C312218184F00F71CEA /* GCDAsyncSocket+HeartBeat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GCDAsyncSocket+HeartBeat.h"; sourceTree = "<group>"; };
+		32202C322218184F00F71CEA /* GCDAsyncSocket+HeartBeat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GCDAsyncSocket+HeartBeat.m"; sourceTree = "<group>"; };
 		32C21AC821454F28002643BD /* IntelligentLock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntelligentLock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32C21ACB21454F28002643BD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		32C21ACC21454F28002643BD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -291,6 +294,8 @@
 				FA2A7A0721463CE9002337D4 /* MesModel.m */,
 				32C21AFF2145519B002643BD /* Socket.h */,
 				32C21AFE2145519B002643BD /* Socket.m */,
+				32202C312218184F00F71CEA /* GCDAsyncSocket+HeartBeat.h */,
+				32202C322218184F00F71CEA /* GCDAsyncSocket+HeartBeat.m */,
 				FA17D798215B7BFD001A4BE4 /* BluetoothCenter.h */,
 				FA17D799215B7BFE001A4BE4 /* BluetoothCenter.m */,
 				FA17D79E215B8520001A4BE4 /* LockConnectManger.h */,
@@ -746,6 +751,7 @@
 				FA36B7232175EB2600AA4A85 /* QRCodeTool.m in Sources */,
 				FAF47A7F217087480077F616 /* UIView+MSExtension.m in Sources */,
 				FA1AA3ED21704F0F0000A94D /* MainCollectionView.m in Sources */,
+				32202C332218184F00F71CEA /* GCDAsyncSocket+HeartBeat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,7 +922,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4E6298X77;
+				DEVELOPMENT_TEAM = R6M88U6UD2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IntelligentLock/SupportFile/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/IntelligentLock/SupportFile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -936,7 +942,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4E6298X77;
+				DEVELOPMENT_TEAM = R6M88U6UD2;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/IntelligentLock/SupportFile/PrefixHeader.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/IntelligentLock/SupportFile/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
