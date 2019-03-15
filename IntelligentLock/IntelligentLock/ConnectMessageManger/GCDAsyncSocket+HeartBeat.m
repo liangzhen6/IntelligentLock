@@ -40,14 +40,19 @@
 
 - (void)setHB_countdown:(NSInteger)hB_countdown {
     NSLog(@"当前时间%ld", (long)hB_countdown);
-    if (hB_countdown <= 0) {
-        [[Socket shareSocket] handleHeart];
-    } else {
-        objc_setAssociatedObject(self, "countdown", @(hB_countdown), OBJC_ASSOCIATION_ASSIGN);
-    }
+//    if (hB_countdown <= 0) {
+//        [[Socket shareSocket] handleHeart];
+//    } else {
+//        objc_setAssociatedObject(self, "countdown", @(hB_countdown), OBJC_ASSOCIATION_ASSIGN);
+//    }
+    objc_setAssociatedObject(self, "countdown", @(hB_countdown), OBJC_ASSOCIATION_ASSIGN);
 }
 
 - (NSInteger)hB_countdown {
+    NSInteger hB_countdown = [objc_getAssociatedObject(self, "countdown") integerValue];
+    if (hB_countdown <= 0) {
+        [[Socket shareSocket] handleHeart];
+    }
     return [objc_getAssociatedObject(self, "countdown") integerValue];
 }
 
